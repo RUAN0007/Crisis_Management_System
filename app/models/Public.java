@@ -14,6 +14,11 @@ public class Public extends Model {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String handPhone;
+	
+	public static Finder<String, Public> find 
+		= new Finder<String, Public>(String.class, Public.class);
+	
+	
 	private String location;
 	@Required
 	private String name;

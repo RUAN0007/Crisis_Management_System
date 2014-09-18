@@ -1,7 +1,11 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model.Finder;
@@ -22,6 +26,9 @@ public class Agency {
 	
 	@Required
 	private String email;
+	
+	@OneToMany(mappedBy="agency",cascade = CascadeType.REMOVE)
+	private List<Dispatch> dispatches;
 	
    public static Finder<Long, Agency> find = new Finder<Long, Agency>(
 		   Long.class, Agency.class
@@ -58,5 +65,7 @@ public class Agency {
 		this.email = email;
 	}
 	
-	
+	public List<Dispatch> getDispatches(){
+		return this.dispatches;
+	}
 }

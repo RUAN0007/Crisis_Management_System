@@ -1,7 +1,11 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model.Finder;
@@ -16,6 +20,9 @@ public class CallOperator {
 	private String password;
 	@Required
 	private String phone;
+	
+	@OneToMany(mappedBy = "callOperator",cascade = CascadeType.PERSIST)
+	private List<Event> events;
 	
 	public static Finder<Long, CallOperator> find 
 		= new Finder<Long, CallOperator>(Long.class, CallOperator.class);
@@ -44,4 +51,9 @@ public class CallOperator {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	public List<Event> getEvents(){
+		return this.events;
+	}
+	
 }

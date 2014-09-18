@@ -1,7 +1,11 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -20,6 +24,9 @@ public class ServiceOperator extends Model {
 		private String password;
 		@Required
 		private String phone;
+		
+		@OneToMany(mappedBy = "serviceOperator",cascade=CascadeType.PERSIST)
+		private List<Event> events;
 		
 		public static Finder<Long, ServiceOperator> find 
 			= new Finder<Long, ServiceOperator>(Long.class, ServiceOperator.class);
