@@ -2,6 +2,7 @@ package models;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,9 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import play.data.validation.Constraints.Required;
-import play.db.ebean.Model.Finder;
+import play.db.ebean.Model;
 
-public class Notification {
+@Entity
+public class Notification extends Model {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

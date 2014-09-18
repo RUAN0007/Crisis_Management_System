@@ -8,10 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import play.data.validation.Constraints.Required;
-import play.db.ebean.Model.Finder;
-@Entity
+import play.db.ebean.Model;
 
-public class CallOperator {
+@Entity
+public class CallOperator extends Model {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	private Long id;
 	@Required

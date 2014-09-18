@@ -10,10 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import play.data.validation.Constraints.Required;
-import play.db.ebean.Model.Finder;
+import play.db.ebean.Model;
 
 @Entity
-public class Dispatch {
+public class Dispatch extends Model {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

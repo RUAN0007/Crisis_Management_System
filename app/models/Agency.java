@@ -8,10 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import play.data.validation.Constraints.Required;
-import play.db.ebean.Model.Finder;
+import play.db.ebean.Model;
 
 @Entity
-public class Agency {
+public class Agency extends Model {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private Long id;
 	

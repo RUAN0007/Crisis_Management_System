@@ -6,10 +6,15 @@ import java.util.List;
 import javax.persistence.*;
 
 import play.data.validation.Constraints.Required;
-import play.db.ebean.Model.Finder;
+import play.db.ebean.Model;
 
 @Entity
-public class Event {
+public class Event extends Model {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private long id;
 	
