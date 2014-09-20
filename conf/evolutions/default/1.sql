@@ -4,10 +4,11 @@
 # --- !Ups
 
 create table account (
-  type                      varchar(255) not null,
+  id                        bigint auto_increment not null,
+  type                      varchar(255),
   account_name              varchar(255),
   password                  varchar(255),
-  constraint pk_account primary key (type))
+  constraint pk_account primary key (id))
 ;
 
 create table agency (
@@ -40,7 +41,7 @@ create table dispatch (
 
 create table event (
   id                        bigint auto_increment not null,
-  event_type                varchar(255),
+  eventType_id              bigint,
   priority                  integer,
   calling_time              datetime,
   postal_code               varchar(255),
@@ -50,6 +51,13 @@ create table event (
   callOperator_id           bigint,
   serviceOperator_id        bigint,
   constraint pk_event primary key (id))
+;
+
+create table event_type (
+  id                        bigint auto_increment not null,
+  event_type                varchar(255),
+  description               longtext,
+  constraint pk_event_type primary key (id))
 ;
 
 create table notification (
@@ -75,18 +83,30 @@ create table service_operator (
   constraint pk_service_operator primary key (id))
 ;
 
+
+create table event_type_agency (
+  event_type_id                  bigint not null,
+  agency_id                      bigint not null,
+  constraint pk_event_type_agency primary key (event_type_id, agency_id))
+;
 alter table dispatch add constraint fk_dispatch_event_1 foreign key (eventID) references event (id) on delete restrict on update restrict;
 create index ix_dispatch_event_1 on dispatch (eventID);
 alter table dispatch add constraint fk_dispatch_agency_2 foreign key (agencyID) references agency (id) on delete restrict on update restrict;
 create index ix_dispatch_agency_2 on dispatch (agencyID);
-alter table event add constraint fk_event_callOperator_3 foreign key (callOperator_id) references call_operator (id) on delete restrict on update restrict;
-create index ix_event_callOperator_3 on event (callOperator_id);
-alter table event add constraint fk_event_serviceOperator_4 foreign key (serviceOperator_id) references service_operator (id) on delete restrict on update restrict;
-create index ix_event_serviceOperator_4 on event (serviceOperator_id);
-alter table notification add constraint fk_notification_event_5 foreign key (eventID) references event (id) on delete restrict on update restrict;
-create index ix_notification_event_5 on notification (eventID);
+alter table event add constraint fk_event_eventType_3 foreign key (eventType_id) references event_type (id) on delete restrict on update restrict;
+create index ix_event_eventType_3 on event (eventType_id);
+alter table event add constraint fk_event_callOperator_4 foreign key (callOperator_id) references call_operator (id) on delete restrict on update restrict;
+create index ix_event_callOperator_4 on event (callOperator_id);
+alter table event add constraint fk_event_serviceOperator_5 foreign key (serviceOperator_id) references service_operator (id) on delete restrict on update restrict;
+create index ix_event_serviceOperator_5 on event (serviceOperator_id);
+alter table notification add constraint fk_notification_event_6 foreign key (eventID) references event (id) on delete restrict on update restrict;
+create index ix_notification_event_6 on notification (eventID);
 
 
+
+alter table event_type_agency add constraint fk_event_type_agency_event_type_01 foreign key (event_type_id) references event_type (id) on delete restrict on update restrict;
+
+alter table event_type_agency add constraint fk_event_type_agency_agency_02 foreign key (agency_id) references agency (id) on delete restrict on update restrict;
 
 # --- !Downs
 
@@ -96,11 +116,15 @@ drop table account;
 
 drop table agency;
 
+drop table event_type_agency;
+
 drop table call_operator;
 
 drop table dispatch;
 
 drop table event;
+
+drop table event_type;
 
 drop table notification;
 

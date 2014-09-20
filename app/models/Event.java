@@ -21,6 +21,8 @@ public class Event extends Model {
 	public static Finder<Long, Event> find 
 		= new Finder<Long, Event>(Long.class, Event.class);
 	
+	@ManyToOne
+	@JoinColumn(name="eventType_id")
 	private EventType eventType;
 	private int priority;
 	
