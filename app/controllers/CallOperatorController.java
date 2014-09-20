@@ -13,9 +13,9 @@ import models.*;
 import play.mvc.*;
 
 public class CallOperatorController extends Controller {
-	public static Result loginAsCallOperator(){
+	public static Result login(){
 		DynamicForm requestData = Form.form().bindFromRequest();
-		String userID = requestData.get("userID");
+		String userID = requestData.get("id");
 		String pwd = requestData.get("password");
 		Long id = null;
 		try{

@@ -12,7 +12,7 @@ public class Application extends Controller {
     	CallOperator callOperator = Ebean.find(CallOperator.class,4);
    // 		Event e = callOperator.getEvents().get(0);
     		
-    		return ok("Event Type: ");
+    		return ok("Save successful... ");
     //    return ok(index.render("Your new application is ready. Where is my DB??"));
     }
     
