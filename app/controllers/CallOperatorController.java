@@ -1,7 +1,5 @@
 package controllers;
 
-import org.h2.engine.Session;
-
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import util.HelperClass;
@@ -41,5 +39,8 @@ public class CallOperatorController extends Controller {
 		return ok(callOperatorResult);
 	}
 	
+	public static Result report(){
+		
+	}
 	
 }
