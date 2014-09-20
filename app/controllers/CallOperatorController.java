@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import util.HelperClass;
@@ -7,6 +8,7 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
+import play.mvc.Security;
 import models.*;
 import play.mvc.*;
 
@@ -39,8 +41,44 @@ public class CallOperatorController extends Controller {
 		return ok(callOperatorResult);
 	}
 	
+    @Security.Authenticated(Secured.class)
 	public static Result report(){
+		DynamicForm requestData = Form.form().bindFromRequest();
 		
+		try{
+			EventType eventType = Ebean.find(EventType.class,Long.parseLong(requestData.get("typeID")));
+			
+			CallOperator callOperator = Ebean.find(CallOperator.class,Long.parseLong(requestData.get("callOperatorID")));
+			
+			String priorityStr = requestData.get("priority");
+			
+			String postalCode = requestData.get("postalCode");
+			
+			String location = requestData.get("location");
+			
+			String callerPhone = requestData.get("callerPhone");
+
+			String description = requestData.get("description");
+
+			Event reportedEvent = new Event();
+			
+			reportedEvent.setId(HelperClass.getRandomLong());
+			reportedEvent.setEventType(eventType);
+			reportedEvent.setCallOperator(callOperator);
+			reportedEvent.setCallerPhone(callerPhone);
+			reportedEvent.setCallingTime(HelperClass.getCurrentTimestamp());
+			reportedEvent.setDescription(description);
+			reportedEvent.setLocation(location);
+			reportedEvent.setPostalCode(postalCode);
+			if(priorityStr != null){
+				reportedEvent.setPriority(Integer.parseInt(priorityStr));
+
+			}
+			reportedEvent.save();
+		}catch(Exception e){
+			return ok(HelperClass.jsonNodeForError("Uploading failed..."));
+		}
+		return ok(HelperClass.jsonNodeForSuccess("Uploading succeeded..."));
 	}
 	
 }
