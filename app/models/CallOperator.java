@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.avaje.ebean.Ebean;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -58,6 +60,15 @@ public class CallOperator extends Model {
 	
 	public List<Event> getEvents(){
 		return this.events;
+	}
+	
+	//Return null if can not find the record
+	//Return the callOperator object is found. 
+	public static CallOperator authenticate(Long id,String pwd){
+		CallOperator callOperator = Ebean.find(CallOperator.class, id);
+		if(callOperator == null) return null;
+		if(!callOperator.getPassword().equals(pwd)) return null;
+		return callOperator;
 	}
 	
 }

@@ -20,6 +20,7 @@ public class Event extends Model {
 	
 	public static Finder<Long, Event> find 
 		= new Finder<Long, Event>(Long.class, Event.class);
+	
 	private String eventType;
 	private int priority;
 	
