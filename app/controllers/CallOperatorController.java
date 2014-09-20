@@ -41,10 +41,5 @@ public class CallOperatorController extends Controller {
 		return ok(callOperatorResult);
 	}
 	
-	public static Result logout(){
-		String id = session().get("id");
-		if(id == null) return ok(HelperClass.jsonNodeForError("User is not currently logged in"));
-		session().clear();
-		return ok(HelperClass.jsonNodeForSuccess("CallOperator + " + id + " logged out successfully"));
-	}
+	
 }

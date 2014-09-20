@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import play.data.validation.Constraints.Required;
@@ -35,7 +36,16 @@ public class Agency extends Model {
 	@OneToMany(mappedBy="agency",cascade = CascadeType.REMOVE)
 	private List<Dispatch> dispatches;
 	
-   public static Finder<Long, Agency> find = new Finder<Long, Agency>(
+	@ManyToMany(mappedBy = "responsibleAgencies")
+	private List<EventType> responsibleEventTypes;
+	
+	
+	
+   public List<EventType> getResponsibleEventTypes() {
+		return responsibleEventTypes;
+	}
+
+public static Finder<Long, Agency> find = new Finder<Long, Agency>(
 		   Long.class, Agency.class
     ); 
 	
@@ -73,4 +83,6 @@ public class Agency extends Model {
 	public List<Dispatch> getDispatches(){
 		return this.dispatches;
 	}
+	
+	
 }

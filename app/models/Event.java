@@ -21,7 +21,7 @@ public class Event extends Model {
 	public static Finder<Long, Event> find 
 		= new Finder<Long, Event>(Long.class, Event.class);
 	
-	private String eventType;
+	private EventType eventType;
 	private int priority;
 	
 	@Required
@@ -57,11 +57,11 @@ public class Event extends Model {
 		this.id = id;
 	}
 
-	public String getEventType() {
+	public EventType getEventType() {
 		return eventType;
 	}
 
-	public void setEventType(String eventType) {
+	public void setEventType(EventType eventType) {
 		this.eventType = eventType;
 	}
 

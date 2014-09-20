@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import play.data.validation.Constraints.Required;
@@ -12,7 +14,12 @@ public class Account extends Model {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
+	@Required
 	private String type;
 	@Required
 	private String accountName;
@@ -20,8 +27,8 @@ public class Account extends Model {
 	private String password;
 	
 	
-	 public static Finder<String, Account> find = new Finder<String, Account>(
-			 String.class, Account.class
+	 public static Finder<Long, Account> find = new Finder<Long, Account>(
+			 Long.class, Account.class
 	    ); 
 	 
 	 public String getType() {
