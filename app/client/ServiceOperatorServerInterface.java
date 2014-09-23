@@ -179,4 +179,43 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 		//}
 		return false;
 	}
+	
+	//return a list of EventStatus if the request is successful
+	//return null if unsuccessful or an exception has been thrown
+	public List<EventStatus> getEventsStatus(){
+		//Get request without argument
+		
+		//If the request is unsuccessful,
+		//Server returns a json object with two nodes
+		//{"error": 1	 
+		//"message": *****		(The message explaning the reason)
+		//}
+		//
+		
+		
+
+		//If request is successful
+		//Server returns a json object with two nodes:
+		//{"error":0
+		// "statues":
+		//	[
+		//     {"eventID":*,
+		//      "agencyName": ***
+		//       "status":***,	(can be SENT, READ,SOLVED)
+		//		 "dispatchTime":***,  (Unix Timestamp) 
+		//		 "readTime":***, (Unix Timestamp, this entry may be empty if the status is SENT)
+		//		 "solveTime":***,(Unix Timestamp, this entry may be empty if the status is READ)
+		//	   },
+		//
+		//	     {"eventID":*,
+		//    	  "agencyName": ***
+		//       "status":***,	(can be SENT, READ,SOLVED)
+		//		 "dispatchTime":***,  (Unix Timestamp) 
+		//		 "readTime":***, (Unix Timestamp, this entry may be empty if the status is SENT)
+		//		 "solveTime":***,(Unix Timestamp, this entry may be empty if the status is READ)
+		//	   },
+		//		...
+		// 	]
+		return null;
+	}
 }

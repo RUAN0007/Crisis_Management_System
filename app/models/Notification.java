@@ -28,7 +28,7 @@ public class Notification extends Model {
 	private Event event;
 	
 	@Required
-	private String mediaType; //SMS, Facebook, Twitter
+	private String mediaType; //SMS, Facebook, Twitter,Email
 	
 	@Required
 	private Timestamp sendTime;
