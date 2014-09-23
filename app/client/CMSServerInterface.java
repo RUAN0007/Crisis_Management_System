@@ -1,7 +1,28 @@
 package client;
 
 public abstract class CMSServerInterface {
+	
+	public class CMSServerException extends Exception{
+		private int id;
+		private String message;
+		
+		public int getId() {
+			return id;
+		}
 
+		public String getMessage() {
+			return message;
+		}
+
+		public CMSServerException(int id, String message) {
+			super();
+			this.id = id;
+			this.message = message;
+		}
+		
+		
+	}
+	
 	private String serverAddress;
 	private String id;
 	private String password;

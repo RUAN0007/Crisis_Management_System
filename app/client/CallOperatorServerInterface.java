@@ -1,6 +1,9 @@
 package client;
 
+import java.util.List;
 import java.util.Map;
+
+import client.CMSServerInterface.CMSServerException;
 
 public class CallOperatorServerInterface extends CMSServerInterface {
 	public CallOperatorServerInterface(String serverAddress, String id, String password) {
@@ -10,7 +13,7 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 
 	//Return null for unsuccessful login or an exception has been thrown
     //Return CallOperator instance for successful login
-	public CallOperator login(){
+	public CallOperator login() throws CMSServerException{
 		String loginURL = getUrl("/calloperator/login");
 		//POST request with parameters id and password;
 		
@@ -28,6 +31,9 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 		//  "name": *** (callOperator Name)
 		//   "phone": *** (callOperator's phone)
 		//}
+		
+		//if error = 1 or any exception thrown during the http connection
+		//Then throw CMSServerException with (id = 2,message)
 		return null;
 	}
 	
@@ -39,7 +45,7 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 						  String postalCode,
 						  String location,
 						  String callerPhone,
-						  String description){
+						  String description) throws CMSServerException{
 		
 		String url = getUrl("/calloperator/report");
 		//POST request with above parameters in the method arguments;
@@ -49,14 +55,17 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 		//{"error": 0/1 (error = 0 if successful, 1 if not)
 		//"message": *****		(The message explaining the reason)
 		//}
+		
+		//if error = 1 or any exception thrown during the http connection
+		//Then throw CMSServerException with (id = 2,message)
 		return false;
 		
 	}
 	
 	//return a list of eventType's id and eventType's name key pair Map
 	//return null for unsuccessful request or an exception has been thrown
-	public Map<String,String> getEventTypes(){
-		String url = getUrl("/calloperator/getEventTypes");
+	public Map<String,String> getEventTypes() throws CMSServerException{
+		String url = getUrl("/getEventTypes");
 		//GET request with no parameters;
 		
 		//If the request is successful,
@@ -80,7 +89,10 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 		//}
 		//
 		
-		
+		//if error = 1 or any exception thrown during the http connection
+		//Then throw CMSServerException with (id = 2,message)
 		return null;
 	}
+	
+	
 }
