@@ -11,7 +11,6 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 	}
 	
 
-	//Return null for unsuccessful login or an exception has been thrown
     //Return CallOperator instance for successful login
 	public CallOperator login() throws CMSServerException{
 		String loginURL = getUrl("/calloperator/login");
@@ -20,7 +19,7 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 		//If login is unsuccessful,
 		//Server returns a json object with two nodes
 		//{"error": 1	 
-		//"message": *****		(The message explaning the reason)
+		//"message": *****		(The message explaining the reason)
 		//}
 		//
 		
@@ -38,10 +37,9 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 	}
 	
 	//return whether the event report to server is successful or not
-	//return false if an exception has been thrown
 	public boolean report(String eventTypeID,
-						  String callOperatorID,
 						  String priority,
+						  String callOperatorID,
 						  String postalCode,
 						  String location,
 						  String callerPhone,
@@ -49,7 +47,6 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 		
 		String url = getUrl("/calloperator/report");
 		//POST request with above parameters in the method arguments;
-		
 		//The server will return a json object with two nodes.
 		
 		//{"error": 0/1 (error = 0 if successful, 1 if not)

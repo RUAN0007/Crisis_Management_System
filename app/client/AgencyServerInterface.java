@@ -86,9 +86,6 @@ public class AgencyServerInterface extends CMSServerInterface {
 		//POST request with one argument: "agencyID"
 		String url = getUrl("/agency/readEvents");
 
-		//If encounter any connection exception
-		throw new CMSServerException(1,"Message here");
-
 		//If the request is unsuccessful,
 		//Server returns a json object with two nodes
 		//{"error": 1	 
@@ -110,7 +107,7 @@ public class AgencyServerInterface extends CMSServerInterface {
 		//		"description":***
 		//	   },
 		//
-		//	     {"id":*,
+		//	    {"id":*,
 		//       "eventType":***,	
 		//		 "priority":***,   
 		//		 "callingTime":***, 
@@ -125,6 +122,7 @@ public class AgencyServerInterface extends CMSServerInterface {
 
 		//if error = 1 or any exception thrown during the http connection
 		//Then throw CMSServerException with (id = 3,message)
+		return null;
 	}
 
 	//return a list of events assigned to this agency whose statuses are SOVLED 

@@ -48,7 +48,7 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 		//, each with their id and name.
 		//{
 		//	"error":0
-		//	"eventTypes":
+		//	"Agencies":
 		//		[
 		//			{"id":**,"name":**},
 		//			{"id":**,"name":**},
@@ -78,7 +78,7 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 
 
 		//IMPORTANT NOTES: 
-		//This method will send a POST request with JSON object as the only argument.
+		//This method will send a POST request with a JSON object as the only argument.
 		//The Json object will encapsulate all the required parameters.
 		//You need to check the online documents to learn 
 		//how to construct a json node and how to send it as the only argument in POST request
@@ -109,8 +109,8 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 		return false;
 	}
 
-	//return a list of Unhandled events
-	public List<Event> getUnhandledEvents() throws CMSServerException{
+	//return a list of unclassified events whose eventTypes are NULL
+	public List<Event> getUnclassifiedEvents() throws CMSServerException{
 		//GET request with no arguments
 		String url = getUrl("/serviceoperator/unhandledEvents");
 
@@ -201,12 +201,13 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 
 	//return a list of EventStatus if the request is successful
 	public List<EventStatus> getEventsStatus() throws CMSServerException{
+		String url = getUrl("/serviceoperator/eventsStatus");
 		//Get request without argument
 
 		//If the request is unsuccessful,
 		//Server returns a json object with two nodes
 		//{"error": 1	 
-		//"message": *****		(The message explaning the reason)
+		//"message": *****		(The message explaining the reason)
 		//}
 		//
 
@@ -236,6 +237,38 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 		//if error = 1 or any exception thrown during the http connection
 		//Then throw CMSServerException with (id = 1,message)
 
+		return null;
+	}
+	
+	//Return an Event Instance based on its eventID
+	public Event getEventFromID(String id) throws CMSServerException{
+		//Get request with one argument eventID
+		String url = getUrl("/serviceoperator/eventFromID");
+		
+		//If the request is unsuccessful,
+		//Server returns a json object with two nodes
+		//{"error": 1	 
+		//"message": *****		(The message explaining the reason)
+		//}
+		//
+
+		//If request is successful
+		//Server returns a json object with two nodes:
+		//{"error":0
+		// "event":
+		//	   {"id":*,
+		//       "eventType":***,	
+		//		 "priority":***,   
+		//		 "callingTime":***, 
+		//		 "postalCode":***,
+		//       "location":***,
+		//		 "callerPhone":***,
+		//		"description":***
+		//	   }
+		// }
+
+		//if error = 1 or any exception thrown during the http connection
+		//Then throw CMSServerException with (id = 1,message)
 		return null;
 	}
 }
