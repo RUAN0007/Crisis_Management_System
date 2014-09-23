@@ -1,6 +1,10 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import com.avaje.ebean.Ebean;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import util.HelperClass;
@@ -34,13 +38,14 @@ public class CallOperatorController extends Controller {
 		session().put("id", "C" + id); //Starting C refers to CallOperator
 
 		ObjectNode callOperatorResult = Json.newObject();
+		
+		
 		callOperatorResult.put("error", 0);
 		callOperatorResult.put("id", "" + id);
 		callOperatorResult.put("name",callOperator.getName());
 		callOperatorResult.put("phone", callOperator.getPhone());
 		return ok(callOperatorResult);
 	}
-	
     @Security.Authenticated(Secured.class)
 	public static Result report(){
 		DynamicForm requestData = Form.form().bindFromRequest();
@@ -74,6 +79,9 @@ public class CallOperatorController extends Controller {
 				reportedEvent.setPriority(Integer.parseInt(priorityStr));
 
 			}
+			//TODO
+			//EventCenter.getDefaultDispatchCenter().dispatch(reportedEvent);
+			//EventCenter.getDefaultDispatchCenter().notify(reportedEvent);
 			reportedEvent.save();
 		}catch(Exception e){
 			return ok(HelperClass.jsonNodeForError("Uploading failed..."));

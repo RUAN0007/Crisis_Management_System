@@ -1,19 +1,36 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import models.*;
+import play.libs.Json;
 import play.mvc.*;
 import util.HelperClass;
 
 public class Application extends Controller {
 
     public static Result index() {
-    	CallOperator callOperator = Ebean.find(CallOperator.class,4);
    // 		Event e = callOperator.getEvents().get(0);
-    		
-    		return ok("Save successful... ");
-    //    return ok(index.render("Your new application is ready. Where is my DB??"));
+//    		
+//    		ObjectNode testNode = Json.newObject();
+//    		testNode.put("Name", "RPC");
+//    		testNode.put("Age",20);
+//    		
+//    		ObjectNode nestedNode = Json.newObject();
+//    		nestedNode.put("Sports","Pingpong");
+//    		nestedNode.put("Music","Flute");
+//    		testNode.put("Hobby", nestedNode);
+//    		
+//    		ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
+//    		arrayNode.add(1);
+//    		arrayNode.add(2);
+//    		arrayNode.add(3);
+//    		testNode.put("Count", arrayNode);
+//    		return ok(testNode);
+        return ok("Hello World");
     }
     
     @Security.Authenticated(Secured.class)
