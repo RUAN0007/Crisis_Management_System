@@ -1,6 +1,6 @@
 package client;
 
-public class CMSServerInterface {
+public abstract class CMSServerInterface {
 
 	private String serverAddress;
 	private String id;

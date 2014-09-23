@@ -8,7 +8,7 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 	}
 	
 
-	//Return null for unsuccessful login
+	//Return null for unsuccessful login or an exception has been thrown
     //Return CallOperator instance for successful login
 	public CallOperator login(){
 		String loginURL = getUrl("/calloperator/login");
@@ -32,6 +32,7 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 	}
 	
 	//return whether the event report to server is successful or not
+	//return false if an exception has been thrown
 	public boolean report(String eventTypeID,
 						  String callOperatorID,
 						  String priority,
@@ -40,27 +41,27 @@ public class CallOperatorServerInterface extends CMSServerInterface {
 						  String callerPhone,
 						  String description){
 		
-		String loginURL = getUrl("/calloperator/report");
+		String url = getUrl("/calloperator/report");
 		//POST request with above parameters in the method arguments;
 		
 		//The server will return a json object with two nodes.
 		
 		//{"error": 0/1 (error = 0 if successful, 1 if not)
-		//"message": *****		(The message explaning the reason)
+		//"message": *****		(The message explaining the reason)
 		//}
 		return false;
 		
 	}
 	
-	//return a list of eventType id and eventType name Map
-	//return null for unsuccessful request
+	//return a list of eventType's id and eventType's name key pair Map
+	//return null for unsuccessful request or an exception has been thrown
 	public Map<String,String> getEventTypes(){
-		String loginURL = getUrl("/calloperator/getEventTypes");
+		String url = getUrl("/calloperator/getEventTypes");
 		//GET request with no parameters;
 		
 		//If the request is successful,
 		//The server will return a json object with a list of eventTypes
-		//, each with their id, name and description
+		//, each with their id and name
 		//{
 		//	"error":0
 		//	"eventTypes":
