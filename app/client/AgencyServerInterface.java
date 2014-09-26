@@ -11,7 +11,7 @@ public class AgencyServerInterface extends CMSServerInterface {
 		super(serverAddress, id, password);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	//Return Agency instance for successful login
 	public Agency login() throws CMSServerException{
 		String loginURL = getUrl("/agency/login");
@@ -54,8 +54,8 @@ public class AgencyServerInterface extends CMSServerInterface {
 		// "events":
 		//	[
 		//     {"id":*,
-		//       "eventType":***,	(Here eventType must be NULL)
-		//		 "priority":***,   (Priority node may  exist if call operator has specified)
+		//       "eventType":***,	
+		//		 "priority":***,   
 		//		 "callingTime":***, (Unix Timestamp,check online if you dont know)
 		//		 "postalCode":***,
 		//       "location":***,
@@ -64,8 +64,8 @@ public class AgencyServerInterface extends CMSServerInterface {
 		//	   },
 		//
 		//	     {"id":*,
-		//       "eventType":***,	(Here eventType must be NULL)
-		//		 "priority":***,   (Priority node may not exist if call operator has not specified)
+		//       "eventType":***,	
+		//		 "priority":***,   
 		//		 "callingTime":***, (Unix Timestamp,check online if you dont know)
 		//		 "postalCode":***,
 		//       "location":***,
@@ -189,7 +189,6 @@ public class AgencyServerInterface extends CMSServerInterface {
 	}
 
 	public boolean solveEvent(String eventID) throws CMSServerException{
-
 
 		//POST request with two arguments: "eventID" and "agencyID"
 		String url = getUrl("/agency/solveEvent");

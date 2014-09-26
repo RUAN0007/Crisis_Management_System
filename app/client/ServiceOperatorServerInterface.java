@@ -12,7 +12,7 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 			String password) {
 		super(serverAddress, id, password);
 	}
-
+		
 	//Return ServiceOperator instance for successful login
 	public ServiceOperator login() throws CMSServerException{
 		String loginURL = getUrl("/serviceoperator/login");
@@ -36,7 +36,7 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 		//Then throw CMSServerException with (id = 1,message)
 		return null;
 	}
-
+	
 	//return a list of agency's id and agency's name key pair Map
 	public Map<String,String> getAgencies() throws CMSServerException{
 
@@ -266,6 +266,8 @@ public class ServiceOperatorServerInterface extends CMSServerInterface {
 		//		"description":***
 		//	   }
 		// }
+
+		
 
 		//if error = 1 or any exception thrown during the http connection
 		//Then throw CMSServerException with (id = 1,message)

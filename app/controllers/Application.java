@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import models.*;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.*;
 import util.HelperClass;
@@ -40,4 +42,16 @@ public class Application extends Controller {
 		session().clear();
 		return ok(HelperClass.jsonNodeForSuccess("CallOperator + " + id + " logged out successfully"));
 	}
+    
+    public static Result reportBug(){
+    		return ok(views.html.ReportBug.render());
+    }
+//    
+    public static Result recordBug(){
+    		DynamicForm requestData = Form.form().bindFromRequest();
+		String subject = requestData.get("subject");
+		String description = requestData.get("description");
+		
+    		return ok("subject: " + subject + " description: " + description);
+    }
 }
