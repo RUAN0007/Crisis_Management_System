@@ -1,5 +1,12 @@
 package controllers;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.FileAttribute;
+
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -10,6 +17,8 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.*;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
 import util.HelperClass;
 
 public class Application extends Controller {
@@ -48,10 +57,39 @@ public class Application extends Controller {
     }
 //    
     public static Result recordBug(){
+		MultipartFormData body = request().body().asMultipartFormData();
+
     		DynamicForm requestData = Form.form().bindFromRequest();
 		String subject = requestData.get("subject");
 		String description = requestData.get("description");
+		FilePart screenCapture = body.getFile("screenCapture");
 		
-    		return ok("subject: " + subject + " description: " + description);
+		
+		try{
+			Path dirPath = Paths.get("bug" + File.separator + HelperClass.getFormattedCurrentTime());;
+			Files.createDirectory(dirPath);
+
+			Path reportPath = dirPath.resolve("report.txt");
+			Files.createFile(reportPath);
+			
+			//Write the report to a text file
+			BufferedWriter writer = new BufferedWriter(new FileWriter(reportPath.toFile()));
+			writer.append("Subject: " + subject + "\n");
+			writer.append("Description: " + description);
+			writer.close();
+			
+			//Save the screen capture
+			File screenCaptureFile = screenCapture.getFile();
+			String screenCaptureName = screenCapture.getFilename();
+			screenCaptureFile.renameTo(dirPath.resolve(screenCaptureName).toFile());
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return ok(views.html.failedBugReportMessage.render());
+
+		}
+		
+		
+		return ok(views.html.successfulBugReportMessage.render());
     }
 }
