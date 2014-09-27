@@ -46,7 +46,9 @@ public class CallOperatorController extends Controller {
 		callOperatorResult.put("phone", callOperator.getPhone());
 		return ok(callOperatorResult);
 	}
-    @Security.Authenticated(Secured.class)
+	
+	
+    @Security.Authenticated(CallOperatorSecured.class)
 	public static Result report(){
 		DynamicForm requestData = Form.form().bindFromRequest();
 		
