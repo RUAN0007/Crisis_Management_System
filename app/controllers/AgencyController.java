@@ -14,6 +14,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import util.HelperClass;
 
 public class AgencyController extends Controller {
 
@@ -50,22 +51,35 @@ public class AgencyController extends Controller {
 
 	@Security.Authenticated(AgencySecured.class)
 	public static Result getSentEvents(){
-		DynamicForm requestData = Form.form().bindFromRequest();
-		Long agencyID = Long.parseLong(requestData.get("id"));
-		return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SENT));
+		try{
+			DynamicForm requestData = Form.form().bindFromRequest();
+			Long agencyID = Long.parseLong(requestData.get("id"));
+			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SENT));
+		}catch(NumberFormatException e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}
 	}
 
+	@Security.Authenticated(AgencySecured.class)
 	public static Result getReadEvents(){
-		DynamicForm requestData = Form.form().bindFromRequest();
-		Long agencyID = Long.parseLong(requestData.get("id"));
-		return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_READ));
+		try{
+			DynamicForm requestData = Form.form().bindFromRequest();
+			Long agencyID = Long.parseLong(requestData.get("id"));
+			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_READ));
+		}catch(NumberFormatException e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}
 	}
 
+	@Security.Authenticated(AgencySecured.class)
 	public static Result getSolvedEvents(){
-		DynamicForm requestData = Form.form().bindFromRequest();
-		Long agencyID = Long.parseLong(requestData.get("id"));
-		
-		return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SOLVED));
+		try{
+			DynamicForm requestData = Form.form().bindFromRequest();
+			Long agencyID = Long.parseLong(requestData.get("id"));
+			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SOLVED));
+		}catch(NumberFormatException e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}
 	}
 
 	private static ObjectNode getEventsByStatusResult(Long agencyID,String status){
@@ -90,12 +104,13 @@ public class AgencyController extends Controller {
 	}
 
 	private static List<Event> getEvents(Long agencyID,String status){
-		List<Dispatch> dispatches = Dispatch.find.fetch("event")
-				.fetch("agency")
-				.where("agency.id = " + agencyID)
-				.where()
-				.eq("status", status)
-				.findList();
+		List<Dispatch> dispatches = Dispatch.find
+											.fetch("event")
+											.fetch("agency")
+											.where("agency.id = " + agencyID)
+											.where()
+											.eq("status", status)
+											.findList();
 		List<Event> events = new LinkedList<>();
 		
 		for(Dispatch	 dispatch:dispatches){
@@ -104,5 +119,119 @@ public class AgencyController extends Controller {
 		return events;
 	}
 	
+	@Security.Authenticated(AgencySecured.class)
+	public static Result readEvent(){
+		try{
+			DynamicForm requestData = Form.form().bindFromRequest();
+			Long agencyID = Long.parseLong(requestData.get("eventID"));
+			Long eventID = Long.parseLong(requestData.get("agencyID"));
+			
+			
+			Dispatch dispatch = getDispatch(agencyID,eventID);
+			if(dispatch == null){
+				return ok(ControllerUtil.
+						jsonNodeForError(
+								"Record on Event " +
+								eventID + 
+								" for Agency" + 
+								agencyID + 
+								"Does not exist..."
+								)
+						); 
+			}
+			
+			if(setDispatchStatus(dispatch, Dispatch.STATUS_READ)){
+				return ok(ControllerUtil.
+						jsonNodeForSuccess(
+								"Set Event " + eventID + "to READ succeeded..."
+								)
+						); 
+			}else{
+				return ok(ControllerUtil.
+						jsonNodeForError(
+								"Set Event " + eventID + "to READ failed..."
+								)
+						);
+			}
+		}catch(Exception e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}	
+	}
+	
+
+	@Security.Authenticated(AgencySecured.class)
+	public static Result solveEvent(){
+		try{
+			DynamicForm requestData = Form.form().bindFromRequest();
+			Long agencyID = Long.parseLong(requestData.get("eventID"));
+			Long eventID = Long.parseLong(requestData.get("agencyID"));
+			Dispatch dispatch = getDispatch(agencyID,eventID);
+			if(dispatch == null){
+				return ok(ControllerUtil.
+						jsonNodeForError(
+								"Record on Event " +
+								eventID + 
+								" for Agency" + 
+								agencyID + 
+								"Does not exist..."
+								)
+						); 
+			}
+			if(setDispatchStatus(dispatch, Dispatch.STATUS_SOLVED)){
+				return ok(ControllerUtil.
+						jsonNodeForSuccess(
+								"Set Event " + eventID + 
+								" for Agency" + agencyID +  
+								" to SOLVED succeeded..."
+								)
+						); 
+			}else{
+				return ok(ControllerUtil.
+						jsonNodeForError(
+								"Set Event " + eventID + 
+								" for Agency" + agencyID +  
+								" to SOLVED failed..."								)
+						);
+			}
+		}catch(Exception e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}	
+	}
+	
+	private static boolean setDispatchStatus(Dispatch dispatch,String status){
+		if(status.equals(Dispatch.STATUS_READ)){
+			if(dispatch.getStatus().equals(Dispatch.STATUS_SENT)){
+				dispatch.setStatus(Dispatch.STATUS_READ);
+				dispatch.setReadTime(HelperClass.getCurrentTimestamp());
+				dispatch.save();
+				return true;
+			}else{
+				return false;
+			}
+		}else if(status.equals(Dispatch.STATUS_SOLVED)){
+			dispatch.setStatus(Dispatch.STATUS_SOLVED);
+			dispatch.setSolveTime(HelperClass.getCurrentTimestamp());
+			dispatch.save();
+			return true;
+		
+		}else{
+			return false;
+		}
+	}
+	
+
+	private static Dispatch getDispatch(Long agencyID, Long eventID) {
+		Dispatch dispatch = Dispatch.find
+//							.fetch("event")
+//							.fetch("agency")
+//							.where("event.id = " + eventID)
+							.where()
+							.eq("event.id", eventID)
+//							.where("agency.id = " + agencyID)
+							.where()
+							.eq("agency.id", agencyID)
+							.findUnique();
+		return dispatch;
+	}
 	 
 }
