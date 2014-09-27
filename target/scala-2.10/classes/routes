@@ -9,6 +9,7 @@ GET   /events/:id        			  controllers.Application.getEventsBytypeID(id: Long
 GET   /agencies							controllers.Application.getAgencies()
 GET   /eventTypes						controllers.Application.getEventTypes()
 
+
 #GET 		/bug							controllers.Application.reportBug()
 #POST 	/recordBug					controllers.Application.recordBug()
 	
@@ -22,6 +23,5 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 POST		/agency/sentEvents				controllers.AgencyController.getSentEvents()
 POST		/agency/readEvents				controllers.AgencyController.getReadEvents()
 POST		/agency/solvedEvents				controllers.AgencyController.getSolvedEvents()
-#TESTING SHOULD BE POST			
-GET 		/agency/readEvent				controllers.AgencyController.readEvent()
+POST 	/agency/readEvent				controllers.AgencyController.readEvent()
 POST 	/agency/solveEvent				controllers.AgencyController.solveEvent()

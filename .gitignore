@@ -3,6 +3,7 @@ bug
 project/project
 project/target
 .target
+target
 tmp
 .history
 dist

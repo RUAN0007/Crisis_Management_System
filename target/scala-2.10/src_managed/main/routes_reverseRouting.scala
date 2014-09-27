@@ -1,6 +1,6 @@
 // @SOURCE:/Users/ruanpingcheng/Desktop/CMS/conf/routes
-// @HASH:9832bf64d8bffa2e20970afd0e55bede0416d0da
-// @DATE:Sat Sep 27 22:53:18 CST 2014
+// @HASH:f2369156cada2f277900f8ce17b416bdc0cfe5cf
+// @DATE:Sat Sep 27 23:06:45 CST 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -15,12 +15,12 @@ import Router.queryString
 
 // @LINE:27
 // @LINE:26
+// @LINE:25
 // @LINE:24
 // @LINE:23
-// @LINE:22
-// @LINE:19
+// @LINE:20
+// @LINE:18
 // @LINE:17
-// @LINE:16
 // @LINE:10
 // @LINE:9
 // @LINE:8
@@ -30,9 +30,9 @@ package controllers {
 
 // @LINE:27
 // @LINE:26
+// @LINE:25
 // @LINE:24
 // @LINE:23
-// @LINE:22
 class ReverseAgencyController {
     
 
@@ -42,7 +42,7 @@ def solveEvent(): Call = {
 }
                                                 
 
-// @LINE:24
+// @LINE:25
 def getSolvedEvents(): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "agency/solvedEvents")
 }
@@ -50,17 +50,17 @@ def getSolvedEvents(): Call = {
 
 // @LINE:26
 def readEvent(): Call = {
-   Call("GET", _prefix + { _defaultPrefix } + "agency/readEvent")
+   Call("POST", _prefix + { _defaultPrefix } + "agency/readEvent")
 }
                                                 
 
-// @LINE:22
+// @LINE:23
 def getSentEvents(): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "agency/sentEvents")
 }
                                                 
 
-// @LINE:23
+// @LINE:24
 def getReadEvents(): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "agency/readEvents")
 }
@@ -69,18 +69,18 @@ def getReadEvents(): Call = {
 }
                           
 
+// @LINE:18
 // @LINE:17
-// @LINE:16
 class ReverseCallOperatorController {
     
 
-// @LINE:17
+// @LINE:18
 def report(): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "calloperator/report")
 }
                                                 
 
-// @LINE:16
+// @LINE:17
 def login(): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "calloperator/login")
 }
@@ -89,11 +89,11 @@ def login(): Call = {
 }
                           
 
-// @LINE:19
+// @LINE:20
 class ReverseAssets {
     
 
-// @LINE:19
+// @LINE:20
 def at(file:String): Call = {
    Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[String]].unbind("file", file))
 }
@@ -148,12 +148,12 @@ def index(): Call = {
 
 // @LINE:27
 // @LINE:26
+// @LINE:25
 // @LINE:24
 // @LINE:23
-// @LINE:22
-// @LINE:19
+// @LINE:20
+// @LINE:18
 // @LINE:17
-// @LINE:16
 // @LINE:10
 // @LINE:9
 // @LINE:8
@@ -163,9 +163,9 @@ package controllers.javascript {
 
 // @LINE:27
 // @LINE:26
+// @LINE:25
 // @LINE:24
 // @LINE:23
-// @LINE:22
 class ReverseAgencyController {
     
 
@@ -180,7 +180,7 @@ def solveEvent : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:24
+// @LINE:25
 def getSolvedEvents : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.AgencyController.getSolvedEvents",
    """
@@ -196,13 +196,13 @@ def readEvent : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.AgencyController.readEvent",
    """
       function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "agency/readEvent"})
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "agency/readEvent"})
       }
    """
 )
                         
 
-// @LINE:22
+// @LINE:23
 def getSentEvents : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.AgencyController.getSentEvents",
    """
@@ -213,7 +213,7 @@ def getSentEvents : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:23
+// @LINE:24
 def getReadEvents : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.AgencyController.getReadEvents",
    """
@@ -227,12 +227,12 @@ def getReadEvents : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
+// @LINE:18
 // @LINE:17
-// @LINE:16
 class ReverseCallOperatorController {
     
 
-// @LINE:17
+// @LINE:18
 def report : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.CallOperatorController.report",
    """
@@ -243,7 +243,7 @@ def report : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:16
+// @LINE:17
 def login : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.CallOperatorController.login",
    """
@@ -257,11 +257,11 @@ def login : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
-// @LINE:19
+// @LINE:20
 class ReverseAssets {
     
 
-// @LINE:19
+// @LINE:20
 def at : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Assets.at",
    """
@@ -346,12 +346,12 @@ def index : JavascriptReverseRoute = JavascriptReverseRoute(
 
 // @LINE:27
 // @LINE:26
+// @LINE:25
 // @LINE:24
 // @LINE:23
-// @LINE:22
-// @LINE:19
+// @LINE:20
+// @LINE:18
 // @LINE:17
-// @LINE:16
 // @LINE:10
 // @LINE:9
 // @LINE:8
@@ -362,9 +362,9 @@ package controllers.ref {
 
 // @LINE:27
 // @LINE:26
+// @LINE:25
 // @LINE:24
 // @LINE:23
-// @LINE:22
 class ReverseAgencyController {
     
 
@@ -374,7 +374,7 @@ def solveEvent(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 )
                       
 
-// @LINE:24
+// @LINE:25
 def getSolvedEvents(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.AgencyController.getSolvedEvents(), HandlerDef(this, "controllers.AgencyController", "getSolvedEvents", Seq(), "POST", """""", _prefix + """agency/solvedEvents""")
 )
@@ -382,17 +382,17 @@ def getSolvedEvents(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 
 // @LINE:26
 def readEvent(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.AgencyController.readEvent(), HandlerDef(this, "controllers.AgencyController", "readEvent", Seq(), "GET", """TESTING SHOULD BE POST			""", _prefix + """agency/readEvent""")
+   controllers.AgencyController.readEvent(), HandlerDef(this, "controllers.AgencyController", "readEvent", Seq(), "POST", """""", _prefix + """agency/readEvent""")
 )
                       
 
-// @LINE:22
+// @LINE:23
 def getSentEvents(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.AgencyController.getSentEvents(), HandlerDef(this, "controllers.AgencyController", "getSentEvents", Seq(), "POST", """Agency""", _prefix + """agency/sentEvents""")
 )
                       
 
-// @LINE:23
+// @LINE:24
 def getReadEvents(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.AgencyController.getReadEvents(), HandlerDef(this, "controllers.AgencyController", "getReadEvents", Seq(), "POST", """""", _prefix + """agency/readEvents""")
 )
@@ -401,18 +401,18 @@ def getReadEvents(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 }
                           
 
+// @LINE:18
 // @LINE:17
-// @LINE:16
 class ReverseCallOperatorController {
     
 
-// @LINE:17
+// @LINE:18
 def report(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.CallOperatorController.report(), HandlerDef(this, "controllers.CallOperatorController", "report", Seq(), "POST", """""", _prefix + """calloperator/report""")
 )
                       
 
-// @LINE:16
+// @LINE:17
 def login(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.CallOperatorController.login(), HandlerDef(this, "controllers.CallOperatorController", "login", Seq(), "POST", """CallOperator""", _prefix + """calloperator/login""")
 )
@@ -421,11 +421,11 @@ def login(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 }
                           
 
-// @LINE:19
+// @LINE:20
 class ReverseAssets {
     
 
-// @LINE:19
+// @LINE:20
 def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Assets.at(path, file), HandlerDef(this, "controllers.Assets", "at", Seq(classOf[String], classOf[String]), "GET", """ Map static resources from the /public folder to the /assets URL path""", _prefix + """assets/$file<.+>""")
 )

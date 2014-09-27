@@ -1,6 +1,6 @@
 // @SOURCE:/Users/ruanpingcheng/Desktop/CMS/conf/routes
-// @HASH:9832bf64d8bffa2e20970afd0e55bede0416d0da
-// @DATE:Sat Sep 27 22:53:18 CST 2014
+// @HASH:f2369156cada2f277900f8ce17b416bdc0cfe5cf
+// @DATE:Sat Sep 27 23:06:45 CST 2014
 
 package controllers;
 
