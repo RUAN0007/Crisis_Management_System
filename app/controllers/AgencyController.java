@@ -52,35 +52,40 @@ public class AgencyController extends Controller {
 	public static Result getSentEvents(){
 		DynamicForm requestData = Form.form().bindFromRequest();
 		Long agencyID = Long.parseLong(requestData.get("id"));
-		return getEventsByStatus(agencyID,Dispatch.STATUS_SENT);
+		return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SENT));
 	}
 
 	public static Result getReadEvents(){
 		DynamicForm requestData = Form.form().bindFromRequest();
 		Long agencyID = Long.parseLong(requestData.get("id"));
-		return getEventsByStatus(agencyID,Dispatch.STATUS_READ);
+		return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_READ));
 	}
 
 	public static Result getSolvedEvents(){
 		DynamicForm requestData = Form.form().bindFromRequest();
 		Long agencyID = Long.parseLong(requestData.get("id"));
-		return getEventsByStatus(agencyID,Dispatch.STATUS_SOLVED);
+		
+		return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SOLVED));
 	}
 
-	private static Result getEventsByStatus(Long agencyID,String status){
+	private static ObjectNode getEventsByStatusResult(Long agencyID,String status){
 		try{
 		
 			List<Event> events = getEvents(agencyID,status);
 
+			if(events.size() == 0){
+				return ControllerUtil.jsonNodeForError("No qualified events...");
+			}
+			
 			ObjectNode results = Json.newObject();
 			results.put("error", 0);
 
 			ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
 			results.put("events", eventsNode);
-			return ok(results);
+			return results;
 
 		}catch(Exception e){
-			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+			return ControllerUtil.jsonNodeForError(e.getMessage());
 		}
 	}
 
@@ -92,9 +97,12 @@ public class AgencyController extends Controller {
 				.eq("status", status)
 				.findList();
 		List<Event> events = new LinkedList<>();
+		
 		for(Dispatch	 dispatch:dispatches){
 			events.add(dispatch.getEvent());
 		}
 		return events;
 	}
+	
+	 
 }
