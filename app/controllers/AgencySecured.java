@@ -18,7 +18,7 @@ public class AgencySecured extends Authenticator {
 
     @Override
     public Result onUnauthorized(Context ctx) {
-        return ok(util.HelperClass.jsonNodeForError("You have not logged in as an agency..."));
+        return ok(ControllerUtil.jsonNodeForError("You have not logged in as an agency..."));
     }
 
 }

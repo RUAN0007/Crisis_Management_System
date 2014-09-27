@@ -26,13 +26,13 @@ public class CallOperatorController extends Controller {
 			 id = Long.parseLong(userID);
 		}catch(NumberFormatException e){
 			session().clear();
-			return ok(HelperClass.jsonNodeForError("CallOperator " + userID + "  id should only consist of digits..."));
+			return ok(ControllerUtil.jsonNodeForError("CallOperator " + userID + "  id should only consist of digits..."));
 		}
 		
 		CallOperator callOperator = CallOperator.authenticate(id, pwd);
 		if(callOperator == null){
 			session().clear();
-			return ok(HelperClass.jsonNodeForError("CallOperator " + userID + "  validation failed..."));
+			return ok(ControllerUtil.jsonNodeForError("CallOperator " + userID + "  validation failed..."));
 		}
 		
 		session().put("id", "C" + id); //Starting C refers to CallOperator
@@ -86,9 +86,9 @@ public class CallOperatorController extends Controller {
 			//EventCenter.getDefaultDispatchCenter().notify(reportedEvent);
 			reportedEvent.save();
 		}catch(Exception e){
-			return ok(HelperClass.jsonNodeForError("Uploading failed..."));
+			return ok(ControllerUtil.jsonNodeForError("Uploading failed..."));
 		}
-		return ok(HelperClass.jsonNodeForSuccess("Uploading succeeded..."));
+		return ok(ControllerUtil.jsonNodeForSuccess("Uploading succeeded..."));
 	}
 	
 }

@@ -48,9 +48,9 @@ public class Application extends Controller {
 	@Security.Authenticated(Secured.class)
 	public static Result logout(){
 		String id = session().get("id");
-		if(id == null) return ok(HelperClass.jsonNodeForError("User is not currently logged in"));
+		if(id == null) return ok(ControllerUtil.jsonNodeForError("User is not currently logged in"));
 		session().clear();
-		return ok(HelperClass.jsonNodeForSuccess("User + " + id + " logged out successfully"));
+		return ok(ControllerUtil.jsonNodeForSuccess("User + " + id + " logged out successfully"));
 	}
 
 	public static Result getEventsBytypeID(Long typeID){
@@ -60,34 +60,15 @@ public class Application extends Controller {
 
 
 		if(eventType == null){
-			return ok(HelperClass.jsonNodeForError("Invalid Event Type ID..."));
+			return ok(ControllerUtil.jsonNodeForError("Invalid Event Type ID..."));
 		}
 
 		ObjectNode results = Json.newObject();
 		results.put("error", 0);
 
-		ArrayNode eventsNode = new ArrayNode(JsonNodeFactory.instance);
-
-		for(Event event:events){
-			eventsNode.add(getEventJsonNode(event));
-		}
+		ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
 		results.put("events", eventsNode);
 		return ok(results);
-	}
-
-	private static ObjectNode getEventJsonNode(Event event){
-		ObjectNode eventNode = Json.newObject();
-		String eventType = event.getEventType().getEventType();
-
-		eventNode.put("id", event.getId());
-		eventNode.put("eventType", eventType);
-		eventNode.put("priority", event.getPriority());
-		eventNode.put("callingTime",event.getCallingTime().getTime());
-		eventNode.put("postalCode", event.getPostalCode());
-		eventNode.put("location",event.getLocation());
-		eventNode.put("callerPhone",event.getCallerPhone());
-		eventNode.put("description",event.getDescription());
-		return eventNode;
 	}
 
 	private static String eventTypeByID(Long typeID){
@@ -117,7 +98,7 @@ public class Application extends Controller {
 			return ok(resultNode);
 
 		}catch(Exception e){
-			return ok(HelperClass.jsonNodeForError(e.getMessage()));
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
 	}
 
@@ -139,7 +120,7 @@ public class Application extends Controller {
 			resultNode.put("Agencies", agenciesNode);
 			return ok(resultNode);
 		}catch(Exception e){
-			return ok(HelperClass.jsonNodeForError(e.getMessage()));
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
 	}
 

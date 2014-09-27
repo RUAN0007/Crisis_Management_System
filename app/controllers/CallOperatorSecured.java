@@ -18,7 +18,7 @@ public class CallOperatorSecured extends Authenticator {
 
     @Override
     public Result onUnauthorized(Context ctx) {
-        return ok(util.HelperClass.jsonNodeForError("You have not logged in as call operator..."));
+        return ok(ControllerUtil.jsonNodeForError("You have not logged in as call operator..."));
     }
 
 }

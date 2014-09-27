@@ -17,6 +17,11 @@ public class Dispatch extends Model {
 	/**
 	 * 
 	 */
+	public static String  STATUS_SENT = "Sent";
+	public static String  STATUS_READ = "Read";
+	public static String STATUS_SOLVED = "Solved";
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -42,6 +47,7 @@ public class Dispatch extends Model {
 	private Timestamp readTime;
 	
 	private Timestamp solveTime;
+
 
 	public Event getEvent() {
 		return event;

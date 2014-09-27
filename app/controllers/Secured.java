@@ -12,6 +12,6 @@ public class Secured extends Authenticator {
 
     @Override
     public Result onUnauthorized(Context ctx) {
-        return ok(util.HelperClass.jsonNodeForError("You have not logged in..."));
+        return ok(ControllerUtil.jsonNodeForError("You have not logged in..."));
     }
  }
