@@ -9,6 +9,7 @@ GET   /events/:id        			  controllers.Application.getEventsBytypeID(id: Long
 GET   /agencies							controllers.Application.getAgencies()
 GET   /eventTypes						controllers.Application.getEventTypes()
 
+
 #GET 		/bug							controllers.Application.reportBug()
 #POST 	/recordBug					controllers.Application.recordBug()
 	

@@ -1,0 +1,27 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+GET 		/logout						controllers.Application.logout()
+GET   /events/:id        			  controllers.Application.getEventsBytypeID(id: Long)  
+GET   /agencies							controllers.Application.getAgencies()
+GET   /eventTypes						controllers.Application.getEventTypes()
+
+#GET 		/bug							controllers.Application.reportBug()
+#POST 	/recordBug					controllers.Application.recordBug()
+	
+#CallOperator
+POST     /calloperator/login				controllers.CallOperatorController.login()
+POST		/calloperator/report						controllers.CallOperatorController.report()
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#Agency
+POST		/agency/sentEvents				controllers.AgencyController.getSentEvents()
+POST		/agency/readEvents				controllers.AgencyController.getReadEvents()
+POST		/agency/solvedEvents				controllers.AgencyController.getSolvedEvents()
+#TESTING SHOULD BE POST			
+GET 		/agency/readEvent				controllers.AgencyController.readEvent()
+POST 	/agency/solveEvent				controllers.AgencyController.solveEvent()

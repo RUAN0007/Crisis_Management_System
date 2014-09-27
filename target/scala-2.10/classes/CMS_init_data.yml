@@ -1,0 +1,176 @@
+public:
+    -!! models.Public
+     handphone:            00
+     location:             SouthWest
+     name:            May
+     
+agencies:
+     -!! models.Agency
+     id:             1
+     password:            11
+     name:          SCDF
+     phone:            111
+     email:            1111@1.com
+     
+     -!! models.Agency
+     id:             2
+     password:       22
+     name:            MHA
+     phone:            222
+     email:            2222@2.com
+     
+     -!! models.Agency
+     id:             3
+     password:            33
+     name:            MOE
+     phone:            333
+     email:            3333@3.com
+     
+callOperators:
+     -!! models.CallOperator
+     id:             4
+     password:            44
+     name:            RPC
+     phone:            444
+     
+     -!! models.CallOperator
+      id:             5
+      password:            55
+      name:            GWC
+      phone:            555
+      
+       -!! models.CallOperator
+        id:             6
+	 password:            66
+	 name:            LYC
+	 phone:            666
+	 
+serviceOperators:
+      -!! models.ServiceOperator
+      id:             7
+      password:            77
+      name:            LY
+      phone:            777
+      
+       -!! models.ServiceOperator
+       id:             8
+       password:            88
+       name:            MHQ
+       phone:            888
+       
+        -!! models.ServiceOperator
+	id:             9
+	password:            99
+	name:            SRI
+	phone:            999
+
+events:
+        -!! models.Event
+	id:             11
+	eventType:            dengue
+	priority:            1
+	callingTime:!!timestamp 
+	             no time zone (Z):2014-09-19 12:00:00
+		     
+	postalCode: 11111
+	location:            SouthWest
+	callerPhone:111
+	description: Dengue here
+	callOperator: !!models.CallOperator
+	               id:            4
+		       
+	 -!! models.Event
+	  id:             22
+	  eventType:            Gas Leak
+	  priority:            2
+	  callingTime:!!timestamp 
+	               no time zone (Z):2014-09-19 13:00:00
+		       
+          postalCode: 222222
+	  location:            Central
+	  callerPhone:222
+	  description: Gas Leak here
+	  callOperator: !!models.CallOperator
+	                 id:            5 
+			 
+          serviceOperator:!!models.ServiceOperator 
+	                 id: 7    
+			 
+	 -!! models.Event
+	 id:             33
+	 eventType:            None
+	 callingTime:!!timestamp 
+	             no time zone (Z):2014-09-19 14:00:00  
+		     
+         postalCode: 333333
+	 location:            NorthEast
+	 callerPhone:333
+	 description: Riot here
+	 callOperator: !!models.CallOperator
+	               id:            6
+
+dispatches:
+          -!! models.Dispatch
+	  event:!!models.Event
+	        id:11
+		
+	  agency:!!models.Agency
+	        id:1
+		
+	  status:Sent
+	  dispatchTime:!!timestamp 
+	         no time zone (Z):2014-09-19 12:05:00
+	
+	  -!! models.Dispatch
+	  event:!!models.Event
+	         id:11
+		 
+          agency:!!models.Agency
+	         id:2
+		 
+          status:Read
+	  dispatchTime:!!timestamp 
+	     no time zone (Z):2014-09-19 13:05:00
+	     
+	  readTime:!!timestamp 
+	     no time zone (Z):2014-09-19 13:10:00
+	   
+	  -!! models.Dispatch
+	  event:!!models.Event
+	          id:22
+		  
+          agency:!!models.Agency
+	          id:3
+		  
+           status:Solved
+	   dispatchTime:!!timestamp 
+	                no time zone (Z):2014-09-19 14:05:00
+	   readTime:!!timestamp
+	                no time zone (Z):2014-09-19 14:10:00
+	   solveTime:!!timestamp 
+	                no time zone (Z):2014-09-19 14:15:00
+			
+Notifications:
+    -!!models.Notification
+    event:!!models.Event
+            id:11
+	    
+    mediaType:SMS
+    sendTime: !!timestamp 
+             no time zone (Z):2014-09-19 12:30:00
+    
+    -!!models.Notification
+    event:!!models.Event
+          id:11
+	  
+    mediaType:Facebook
+    sendTime: !!timestamp
+             no time zone (Z):2014-09-19 12:35:00
+    
+-!!models.Notification
+     event:!!models.Event
+           id:22
+     
+     mediaType:Twitter
+     sendTime: !!timestamp
+            no time zone (Z):2014-09-19 13:30:00
