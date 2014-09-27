@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.avaje.ebean.Ebean;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -82,6 +84,15 @@ public static Finder<Long, Agency> find = new Finder<Long, Agency>(
 	
 	public List<Dispatch> getDispatches(){
 		return this.dispatches;
+	}
+	
+	//Return null if can not find the record
+	//Return the callOperator object is found. 
+	public static Agency authenticate(Long id,String pwd){
+		Agency agency = Ebean.find(Agency.class, id);
+		if(agency == null) return null;
+		if(!agency.getPassword().equals(pwd)) return null;
+		return agency;
 	}
 	
 	
