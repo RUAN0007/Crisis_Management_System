@@ -16,7 +16,7 @@ import formatter.*;
 import models.*;
 public class EventCenter {
 	
-	static EventCenter defaultCenter;
+	private static EventCenter defaultCenter;
 	
 	private static String MEDIA_SMS = "SMS";
 	private static String MEDIA_FB = "FACEBOOK";
@@ -67,18 +67,17 @@ public class EventCenter {
 	
 	public void handleIncomingEvent(Event event){
 		//Dispatch to the agency
-		List<Dispatch> dispatches = dispatch(event);
-		Ebean.save(dispatches);
+		List<Agency> responsibleAgencies = event.getEventType().getResponsibleAgencies();
+		dispatch(event,responsibleAgencies);
 		
 		//Broadcast to the public
-		List<Notification> notifications = broadcast(event);
-		Ebean.save(notifications);
+		broadcast(event);
 	}
 	
-	private  List<Dispatch>  dispatch(Event event){
-		List<Agency> responsibleAgencies = event.getEventType().getResponsibleAgencies();
+	private  void  dispatch(Event event,List<Agency> agencies){
 		List<Dispatch> dispatches = new ArrayList<Dispatch>();
-		for(Agency agency:responsibleAgencies){
+
+		for(Agency agency:agencies){
 			Dispatch dispatch = new Dispatch();
 			dispatch.setAgency(agency);
 			dispatch.setEvent(event);
@@ -87,9 +86,8 @@ public class EventCenter {
 			dispatches.add(dispatch);
 			
 		}
-		
-		sendEventSMSToAgency(responsibleAgencies, event);
-		return dispatches;
+		Ebean.save(dispatches);
+		sendEventSMSToAgency(agencies, event);		
 	}
 	
 	public boolean sendEventSMSToAgency(List<Agency> agencies,Event sms){
@@ -199,7 +197,7 @@ public class EventCenter {
 		return emailSender.SendMail(destinations, subject, text, reportFilePath);
 	}
 	
-	public  List<Notification> broadcast(Event event){
+	public  void broadcast(Event event){
 		ArrayList<Notification> notifications = new ArrayList<Notification>();
 		int priority = event.getPriority();
 		if(priority <= 2){
@@ -218,7 +216,15 @@ public class EventCenter {
 			}
 			
 		}
-		return notifications;
+		Ebean.save(notifications);
+	}
+
+
+
+	public void handleClassifiedEvents(Event event, List<Agency> agencies) {
+
+		dispatch(event, agencies);
+		broadcast(event);
 	}
 	
 	
