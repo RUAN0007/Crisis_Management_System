@@ -60,9 +60,7 @@ public class Global extends GlobalSettings {
 
 			EmailSender emailSender = getEmailSender(doc);
 			SMSSender smsSender = getSMSSender(doc);
-		//	FacebookSender fbSender = getFBSender(doc);
-		//Testing
-			FacebookSender fbSender = null;
+			FacebookSender fbSender = getFBSender(doc);
 
 			TwitterSender twitterSender = getTwitterSender(doc);
 			EventFormatter eventFormatter = new EventFormatter();
