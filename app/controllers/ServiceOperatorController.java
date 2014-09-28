@@ -134,4 +134,38 @@ public class ServiceOperatorController extends Controller {
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
 	}
+	
+	@Security.Authenticated(ServiceOperatorSecured.class)
+	public static Result emailEvent(){
+		try{
+			DynamicForm requestData = Form.form().bindFromRequest();
+			Long	 eventID = Long.parseLong(requestData.get("eventID"));
+			Event event = Event.find.byId(eventID);
+			
+			if(EventCenter.getDefaultEventCenter().sendEventReport(event)){
+				return ok(ControllerUtil.jsonNodeForSuccess("Email Event " + eventID + " Succeeded..."));
+			}else{
+				return ok(ControllerUtil.jsonNodeForError("Email Event " + eventID + " Failed..."));
+			}
+			
+		}catch(Exception e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}
+	}
+	
+	@Security.Authenticated(ServiceOperatorSecured.class)
+	public static Result getEventByID(){
+		try{
+			DynamicForm requestData = Form.form().bindFromRequest();
+			Long	 eventID = Long.parseLong(requestData.get("eventID"));
+			Event event = Event.find.byId(eventID);
+			
+			ObjectNode eventResult = Json.newObject();
+			eventResult.put("error", 0);
+			eventResult.put("event", ControllerUtil.getEventJsonNode(event));
+			return ok(eventResult);
+		}catch(Exception e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}
+	}
 }
