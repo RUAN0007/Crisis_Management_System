@@ -54,22 +54,31 @@ public class Application extends Controller {
 	}
 
 	public static Result getEventsBytypeID(){
-		Long typeID = (long)1;
-		List<Event> events = Event.find.fetch("eventType").where("eventType.id=" + typeID).orderBy("callingTime desc").findList();
-		String eventType = eventTypeByID(typeID);
+		try{
+			DynamicForm requestData = Form.form().bindFromRequest();
+			Long typeID = Long.parseLong(requestData.get("typeID"));
+			int timePeriodInMin = Integer.parseInt(requestData.get("timePeriodInHour")) * 60;
 
+			String eventType = eventTypeByID(typeID);
+			if(eventType == null){
+				return ok(ControllerUtil.jsonNodeForError("Invalid Event Type ID..."));
+			}
+			
+			//List<Event> events = Event.find.fetch("eventType").where("eventType.id=" + typeID).orderBy("callingTime desc").findList();
+			List<Event> events = EventCenter.getDefaultEventCenter().getEventsWithinMin(timePeriodInMin, typeID);
+			
 
+			ObjectNode results = Json.newObject();
+			results.put("error", 0);
 
-		if(eventType == null){
-			return ok(ControllerUtil.jsonNodeForError("Invalid Event Type ID..."));
+			ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
+			results.put("events", eventsNode);
+			return ok(results);
+
+		}catch(Exception e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
-
-		ObjectNode results = Json.newObject();
-		results.put("error", 0);
-
-		ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
-		results.put("events", eventsNode);
-		return ok(results);
+	
 	}
 
 	private static String eventTypeByID(Long typeID){
