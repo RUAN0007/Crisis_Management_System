@@ -194,8 +194,12 @@ public class ServiceOperatorController extends Controller {
 				dispatchNode.put("agencyName",dispatch.getAgency().getName());
 				dispatchNode.put("status",dispatch.getStatus());
 				dispatchNode.put("dispatchTime",dispatch.getDispatchTime().getTime());
-				dispatchNode.put("readTime",dispatch.getReadTime().getTime());
-				dispatchNode.put("solveTime",dispatch.getSolveTime().getTime());
+				if(!dispatch.getStatus().equals(Dispatch.STATUS_SENT)){
+					dispatchNode.put("readTime",dispatch.getReadTime().getTime());
+				}
+				if(dispatch.getStatus().equals(Dispatch.STATUS_SOLVED)){
+					dispatchNode.put("solveTime",dispatch.getSolveTime().getTime());
+				}
 
 				dispatchesNode.add(dispatchNode);
 			}
