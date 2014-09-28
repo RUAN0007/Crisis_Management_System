@@ -54,7 +54,8 @@ public class AgencyController extends Controller {
 		try{
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long agencyID = Long.parseLong(requestData.get("id"));
-			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SENT));
+			//Return all the sent events
+			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SENT,Integer.MAX_VALUE));
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
@@ -65,7 +66,8 @@ public class AgencyController extends Controller {
 		try{
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long agencyID = Long.parseLong(requestData.get("id"));
-			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_READ));
+			//Return all the read events
+			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_READ,Integer.MAX_VALUE));
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
@@ -76,21 +78,22 @@ public class AgencyController extends Controller {
 		try{
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long agencyID = Long.parseLong(requestData.get("id"));
-			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SOLVED));
+			//Return the solved events on that day
+			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SOLVED,1));
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
 	}
 
-	private static ObjectNode getEventsByStatusResult(Long agencyID,String status){
+	private static ObjectNode getEventsByStatusResult(Long agencyID,String status,int withInDay){
 		try{
-		
-			List<Event> events = getEvents(agencyID,status);
+
+			List<Event> events = getEvents(agencyID,status,withInDay);
 
 			if(events.size() == 0){
 				return ControllerUtil.jsonNodeForError("No qualified events...");
 			}
-			
+
 			ObjectNode results = Json.newObject();
 			results.put("error", 0);
 
@@ -103,43 +106,48 @@ public class AgencyController extends Controller {
 		}
 	}
 
-	private static List<Event> getEvents(Long agencyID,String status){
+	//TODO 
+	//Testing this method
+	private static List<Event> getEvents(Long agencyID,String status,int withInDay){
+		long lowerTimerBound = System.currentTimeMillis() - withInDay * 24 * 60 * 60 * 1000;
+
 		List<Dispatch> dispatches = Dispatch.find
-											.fetch("event")
-											.fetch("agency")
-											.where("agency.id = " + agencyID)
-											.where()
-											.eq("status", status)
-											.findList();
+				.fetch("event")
+				.fetch("agency")
+				.where("agency.id = " + agencyID)
+				.where()
+				.eq("status", status)
+				.gt("dispatchTime", lowerTimerBound)
+				.findList();
 		List<Event> events = new LinkedList<>();
-		
+
 		for(Dispatch	 dispatch:dispatches){
 			events.add(dispatch.getEvent());
 		}
 		return events;
 	}
-	
+
 	@Security.Authenticated(AgencySecured.class)
 	public static Result readEvent(){
 		try{
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long agencyID = Long.parseLong(requestData.get("eventID"));
 			Long eventID = Long.parseLong(requestData.get("agencyID"));
-			
-			
+
+
 			Dispatch dispatch = getDispatch(agencyID,eventID);
 			if(dispatch == null){
 				return ok(ControllerUtil.
 						jsonNodeForError(
 								"Record on Event " +
-								eventID + 
-								" for Agency" + 
-								agencyID + 
-								"Does not exist..."
+										eventID + 
+										" for Agency" + 
+										agencyID + 
+										"Does not exist..."
 								)
 						); 
 			}
-			
+
 			if(setDispatchStatus(dispatch, Dispatch.STATUS_READ)){
 				return ok(ControllerUtil.
 						jsonNodeForSuccess(
@@ -157,7 +165,7 @@ public class AgencyController extends Controller {
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}	
 	}
-	
+
 
 	@Security.Authenticated(AgencySecured.class)
 	public static Result solveEvent(){
@@ -170,10 +178,10 @@ public class AgencyController extends Controller {
 				return ok(ControllerUtil.
 						jsonNodeForError(
 								"Record on Event " +
-								eventID + 
-								" for Agency" + 
-								agencyID + 
-								"Does not exist..."
+										eventID + 
+										" for Agency" + 
+										agencyID + 
+										"Does not exist..."
 								)
 						); 
 			}
@@ -197,7 +205,7 @@ public class AgencyController extends Controller {
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}	
 	}
-	
+
 	private static boolean setDispatchStatus(Dispatch dispatch,String status){
 		if(status.equals(Dispatch.STATUS_READ)){
 			if(dispatch.getStatus().equals(Dispatch.STATUS_SENT)){
@@ -213,25 +221,25 @@ public class AgencyController extends Controller {
 			dispatch.setSolveTime(HelperClass.getCurrentTimestamp());
 			dispatch.save();
 			return true;
-		
+
 		}else{
 			return false;
 		}
 	}
-	
+
 
 	private static Dispatch getDispatch(Long agencyID, Long eventID) {
 		Dispatch dispatch = Dispatch.find
-//							.fetch("event")
-//							.fetch("agency")
-//							.where("event.id = " + eventID)
-							.where()
-							.eq("event.id", eventID)
-//							.where("agency.id = " + agencyID)
-							.where()
-							.eq("agency.id", agencyID)
-							.findUnique();
+				//							.fetch("event")
+				//							.fetch("agency")
+				//							.where("event.id = " + eventID)
+				.where()
+				.eq("event.id", eventID)
+				//							.where("agency.id = " + agencyID)
+				.where()
+				.eq("agency.id", agencyID)
+				.findUnique();
 		return dispatch;
 	}
-	 
+
 }
