@@ -6,6 +6,8 @@ import java.util.List;
 import models.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import play.data.DynamicForm;
@@ -168,4 +170,43 @@ public class ServiceOperatorController extends Controller {
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
 	}
+	
+	@Security.Authenticated(ServiceOperatorSecured.class)
+	public static Result getEventsStatus(){
+		try{
+			long lowerTimeBound = System.currentTimeMillis() - 24 * 60 * 60 * 1000;
+			
+			List<Dispatch> dispatches = Dispatch.find
+					//TODO Uncomment the following two lines to onyl retrieve dispatches within one day
+//												.where()
+//												.gt("dispatchTime",lowerTimeBound)
+												.findList();
+			ObjectNode statuesResult = Json.newObject();
+			statuesResult.put("error", 0);
+			
+			ArrayNode dispatchesNode = new ArrayNode(JsonNodeFactory.instance);
+			
+			for(Dispatch dispatch:dispatches){
+				//TODO 
+				//May have a bug here as some entry may be null
+				ObjectNode dispatchNode = Json.newObject();
+				dispatchNode.put("eventID",dispatch.getEvent().getId());
+				dispatchNode.put("agencyName",dispatch.getAgency().getName());
+				dispatchNode.put("status",dispatch.getStatus());
+				dispatchNode.put("dispatchTime",dispatch.getDispatchTime().getTime());
+				dispatchNode.put("readTime",dispatch.getReadTime().getTime());
+				dispatchNode.put("solveTime",dispatch.getSolveTime().getTime());
+
+				dispatchesNode.add(dispatchNode);
+			}
+			statuesResult.put("statues",dispatchesNode);
+			return ok(statuesResult);
+		}catch(Exception e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}
+		
+		
+		
+	}
+	
 }
