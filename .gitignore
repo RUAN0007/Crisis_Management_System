@@ -4,6 +4,8 @@ project/project
 project/target
 .target
 target
+report/emergency/*
+report/summary/*
 tmp
 .history
 dist
