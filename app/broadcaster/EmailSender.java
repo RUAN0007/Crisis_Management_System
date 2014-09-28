@@ -78,7 +78,7 @@ public class EmailSender {
 				System.out.println("Done");
 
 			} catch (MessagingException e) {
-				
+				return false;
 			} catch (RuntimeException e) {
 				return false;
 			}

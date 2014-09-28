@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<broadcaster>
+	<facebook>
+		<accessToken>CAACEdEose0cBAJAF4uyDSVCyxPbtbG4zBTC1BHHS56Y6eLZCCcq9QEFoCgxBeWyvU0cIZAkdg86C8nVUMmqvHG9ZAR7GgSvAnx9qQWnn1FWAf0dVKSJvOzZBJbvZAViiMqUqYxf6CZATVEqkH8yK3GZAVyNL3ZAtW1ZABFqPMyrqNIvLTCzV4mJn7SK3Wer0MEEq45vYtMCvZBctSHZBysFFQf4</accessToken>
+		<accessTokenSecret>334271166733427</accessTokenSecret>
+	</facebook>
+	<twitter>
+		<consumerKey>p3tp1TVDxnycinDoEpP7J2kbD</consumerKey>
+		<consumerSecret>5INoSTtKaLSP12ECMgzi1hXlo8b9SXC8HrZZK4qp7T4IY9dJrE</consumerSecret>
+		<accessToken>2812584068-kq5h83buw9aXWxWGEh14cKKFo1cqTvkw84i4wtw</accessToken>
+		<accessTokenSecret>U8tJaurorbck1Eo1Mje3XA85Pv2EHIkXEjbmIZcEMNQaj</accessTokenSecret>
+	</twitter>
+	<email>
+		<account>cmsalert2@gmail.com</account>
+		<password>cmsalert</password>
+		<emergency>report/emergency</emergency>
+		<summary>report/summary</summary>
+	</email>
+	<sms>
+		<sid>AC48a7e73848fc1196696514a9dab0c65e</sid>
+		<token>2257118ecf6cb2e4da4c46d603a9552c</token>
+	</sms>
+</broadcaster>

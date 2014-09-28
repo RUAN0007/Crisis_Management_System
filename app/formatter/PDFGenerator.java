@@ -12,7 +12,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
-
 import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,16 +21,33 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
+
 import models.*;
 public class PDFGenerator {
 
-    private String directoryPath;
-    
-    public PDFGenerator(String dir) {
-        this.directoryPath = dir;
-    }
+   
 
-    public File generateReport(List<Event> event,String reportName) {
+	private String emergyReportDirectory;
+    private String summaryReportDirectory;
+	
+  
+    
+    private PDFGenerator(String emergyReportDirectory,
+			String summaryReportDirectory) {
+		super();
+		this.emergyReportDirectory = emergyReportDirectory;
+		this.summaryReportDirectory = summaryReportDirectory;
+	}
+
+	public String getEmergyReportDirectory() {
+		return emergyReportDirectory;
+	}
+
+	public String getSummaryReportDirectory() {
+		return summaryReportDirectory;
+	}
+
+	public File generateReport(List<Event> event,String reportName) {
     		File file = null;
         Document document = new Document();
 
@@ -41,7 +57,7 @@ public class PDFGenerator {
 
         try {
             PdfWriter.getInstance(document,
-                    new FileOutputStream(directoryPath + reportName));
+                    new FileOutputStream(emergyReportDirectory + File.separator + reportName));
 
             if (Config.debugOn) {
                 System.out.println("Opening Document to prepare for writing");
@@ -96,7 +112,7 @@ public class PDFGenerator {
         if (Config.dirDebug) {
             file = new File(Config.repDir);
         } else {
-            file = new File(directoryPath + "Report.pdf");
+            file = new File(emergyReportDirectory + "Report.pdf");
         }
 
         if (Config.debugOn) {
@@ -116,7 +132,7 @@ public class PDFGenerator {
 
         try {
             PdfWriter.getInstance(document,
-                    new FileOutputStream(directoryPath + reportName));
+                    new FileOutputStream(summaryReportDirectory + File.separator + reportName));
 
             if (Config.debugOn) {
                 System.out.println("Opening Document to prepare for writing");
@@ -170,7 +186,7 @@ public class PDFGenerator {
         if (Config.dirDebug) {
             file = new File(Config.emergencyRepDir);
         } else {
-            file = new File(directoryPath + "EmergencyReport.pdf");
+            file = new File(emergyReportDirectory + "EmergencyReport.pdf");
         }
 
         if (Config.debugOn) {

@@ -1,6 +1,9 @@
 
 
+import java.io.File;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.avaje.ebean.Ebean;
@@ -102,12 +105,62 @@ public class EventCenter {
 		return fbSender.postMessage(message) && twitterSender.postMessage(message);
 	}
 	
-	public boolean sendEventReport(Event event){
-		return true;
+	private String getPMEmail(){
+		Agency primeMinster = Agency.find.byId((long)0);
+		return primeMinster.getEmail();
 	}
 	
-	public boolean sendPeriodicReport(int periodInMin){
-		return true;
+	public boolean sendEventReport(Event event){
+		String reportName = "EmergencyReportOnEvent" + event.getId() + ".pdf";
+		File report = pdfGenerator.generateEmergencyReport(event,reportName);
+		String file = pdfGenerator.getEmergyReportDirectory() + File.separator + report.getName();
+		
+		String subject = "Emergency Report";
+		String text = "Dear Prime Minister, \nThere is an emergent event on " + event.getLocation() 
+						+ ". Refer to the attachment for details."; 
+		List<String> destinations = new ArrayList<String>();
+		destinations.add(getPMEmail());
+		return emailSender.SendMail(destinations, subject, text, file);
+	}
+	
+	public List<Event> getEventsWithinMin(int periodInMin){
+		long lowerTimeBound = System.currentTimeMillis() - periodInMin * 60 * 1000;
+		List<Event> events = Event.find.where()
+									   .gt("callingTime", lowerTimeBound)
+									   .orderBy("callingTime desc")
+
+									   .findList();
+		return events;
+	}
+	
+	public List<Event> getEventsWithinMin(int periodInMin,Long typeID){
+		long lowerTimeBound = System.currentTimeMillis() - periodInMin * 60 * 1000;
+		List<Event> events = Event.find.where()
+									   .gt("callingTime", lowerTimeBound)
+									   .eq("eventType.id", typeID)
+									   .orderBy("callingTime desc")
+									   .findList();
+		return events;
+	}
+	
+	public boolean sendSummaryReport(int periodInMin){
+		List<Event> events = getEventsWithinMin(periodInMin);
+				
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy_hh:mm",Locale.US);
+		Date date = new Date();
+		String time = dateFormat.format(date);
+		
+		String subject = "Summary Report";
+		String text = "Dear Prime Minister, \nThis is a summary event at " + time 
+				+ ". Refer to the attachment for details."; 
+		String reportName = "SummaryReportAt" + time;
+		
+		File report = pdfGenerator.generateReport(events, reportName);
+		String reportFilePath = pdfGenerator.getSummaryReportDirectory() + File.separator + report.getName();
+		
+		List<String> destinations = new ArrayList<String>();
+		destinations.add(getPMEmail());
+		return emailSender.SendMail(destinations, subject, text, reportFilePath);
 	}
 	
 	public  List<Notification> notify(Event event){
