@@ -32,7 +32,7 @@ public class PDFGenerator {
 	
   
     
-    private PDFGenerator(String emergyReportDirectory,
+    public PDFGenerator(String emergyReportDirectory,
 			String summaryReportDirectory) {
 		super();
 		this.emergyReportDirectory = emergyReportDirectory;
