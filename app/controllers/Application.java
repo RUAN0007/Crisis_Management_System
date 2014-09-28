@@ -71,8 +71,13 @@ public class Application extends Controller {
 			}
 			
 			//List<Event> events = Event.find.fetch("eventType").where("eventType.id=" + typeID).orderBy("callingTime desc").findList();
-			List<Event> events = EventCenter.getDefaultEventCenter().getEventsWithinMin(timePeriodInMin, typeID);
-			
+			//List<Event> events = EventCenter.getDefaultEventCenter().getEventsWithinMin(timePeriodInMin, typeID);
+			long lowerTimeBound = System.currentTimeMillis() - timePeriodInMin * 60 * 1000;
+			List<Event> events = Event.find.where()
+										   .gt("callingTime", lowerTimeBound)
+										   .eq("eventType.id", typeID)
+										   .orderBy("callingTime desc")
+										   .findList();
 
 			ObjectNode results = Json.newObject();
 			results.put("error", 0);

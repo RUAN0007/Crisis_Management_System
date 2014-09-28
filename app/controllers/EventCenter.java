@@ -159,7 +159,7 @@ public class EventCenter {
 		return emailSender.SendMail(destinations, subject, text, file);
 	}
 	
-	public List<Event> getEventsWithinMin(int periodInMin){
+	private List<Event> getEventsWithinMin(int periodInMin){
 		long lowerTimeBound = System.currentTimeMillis() - periodInMin * 60 * 1000;
 		List<Event> events = Event.find.where()
 									   .gt("callingTime", lowerTimeBound)
@@ -169,15 +169,15 @@ public class EventCenter {
 		return events;
 	}
 	
-	public List<Event> getEventsWithinMin(int periodInMin,Long typeID){
-		long lowerTimeBound = System.currentTimeMillis() - periodInMin * 60 * 1000;
-		List<Event> events = Event.find.where()
-									   .gt("callingTime", lowerTimeBound)
-									   .eq("eventType.id", typeID)
-									   .orderBy("callingTime desc")
-									   .findList();
-		return events;
-	}
+//	public List<Event> getEventsWithinMin(int periodInMin,Long typeID){
+//		long lowerTimeBound = System.currentTimeMillis() - periodInMin * 60 * 1000;
+//		List<Event> events = Event.find.where()
+//									   .gt("callingTime", lowerTimeBound)
+//									   .eq("eventType.id", typeID)
+//									   .orderBy("callingTime desc")
+//									   .findList();
+//		return events;
+//	}
 	
 	public boolean sendSummaryReport(int periodInMin){
 		List<Event> events = getEventsWithinMin(periodInMin);
