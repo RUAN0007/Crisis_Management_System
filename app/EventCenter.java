@@ -81,11 +81,25 @@ public class EventCenter {
 	
 	//Only the citizen in related region will be notified
 	public boolean broadcastSMSToPublic(Event event){
-		return true;
+		String location = event.getLocation();
+		List<Public> citizens = Public.find
+								.where()
+								.eq("location =", location)
+								.findList();
+		
+		List<String> phones = new ArrayList<>();
+		for(Public citizen:citizens){
+			phones.add(citizen.getHandPhone());
+		}
+		
+		String message = eventFormatter.formatSMS(event);
+		return smsSender.SendSMS(message, phones);
 	}
 	
+	//Broadcast both on facebook and twitter
 	public boolean broadcastEventOnSocialMedia(Event event){
-		return true;
+		String message = eventFormatter.formatSocialMedia(event);
+		return fbSender.postMessage(message) && twitterSender.postMessage(message);
 	}
 	
 	public boolean sendEventReport(Event event){
