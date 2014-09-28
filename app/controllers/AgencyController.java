@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,8 +55,28 @@ public class AgencyController extends Controller {
 		try{
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long agencyID = Long.parseLong(requestData.get("id"));
-			//Return all the sent events
-			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SENT,Integer.MAX_VALUE));
+			
+			List<Dispatch> dispatches = Dispatch.find
+					.fetch("event")
+					.fetch("agency")
+					.where("agency.id = " + agencyID)
+					.where()
+					.eq("status", Dispatch.STATUS_SENT)
+					.orderBy("dispatchTime asc")
+					.findList();
+			List<Event> events = new LinkedList<>();
+
+			for(Dispatch	 dispatch:dispatches){
+				events.add(dispatch.getEvent());
+			}
+			
+			ObjectNode results = Json.newObject();
+			results.put("error", 0);
+
+			ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
+			results.put("events", eventsNode);
+			return ok(eventsNode);
+			
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
@@ -66,8 +87,28 @@ public class AgencyController extends Controller {
 		try{
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long agencyID = Long.parseLong(requestData.get("id"));
-			//Return all the read events
-			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_READ,Integer.MAX_VALUE));
+			
+			List<Dispatch> dispatches = Dispatch.find
+					.fetch("event")
+					.fetch("agency")
+					.where("agency.id = " + agencyID)
+					.where()
+					.eq("status", Dispatch.STATUS_READ)
+					.orderBy("readTime asc")
+					.findList();
+			List<Event> events = new LinkedList<>();
+
+			for(Dispatch	 dispatch:dispatches){
+				events.add(dispatch.getEvent());
+			}
+			
+			ObjectNode results = Json.newObject();
+			results.put("error", 0);
+
+			ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
+			results.put("events", eventsNode);
+			return ok(eventsNode);
+			
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
@@ -76,56 +117,81 @@ public class AgencyController extends Controller {
 	@Security.Authenticated(AgencySecured.class)
 	public static Result getSolvedEvents(){
 		try{
+			int withInDay = 1;
+			Timestamp lowerTimerBound = new Timestamp(System.currentTimeMillis() 
+														- withInDay * 24 * 60 * 60 * 1000);
+
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long agencyID = Long.parseLong(requestData.get("id"));
-			//Return the solved events on that day
-			return ok(getEventsByStatusResult(agencyID,Dispatch.STATUS_SOLVED,1));
-		}catch(NumberFormatException e){
-			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
-		}
-	}
+			
+			//Get the solved events within 1 day
+			List<Dispatch> dispatches = Dispatch.find
+					.fetch("event")
+					.fetch("agency")
+					.where("agency.id = " + agencyID)
+					.where()
+					.eq("status", Dispatch.STATUS_SOLVED)
+					.gt("solveTime",lowerTimerBound)
+					.orderBy("solveTime asc")
+					.findList();
+			List<Event> events = new LinkedList<>();
 
-	private static ObjectNode getEventsByStatusResult(Long agencyID,String status,int withInDay){
-		try{
-
-			List<Event> events = getEvents(agencyID,status,withInDay);
-
-			if(events.size() == 0){
-				return ControllerUtil.jsonNodeForError("No qualified events...");
+			for(Dispatch	 dispatch:dispatches){
+				events.add(dispatch.getEvent());
 			}
-
+			
 			ObjectNode results = Json.newObject();
 			results.put("error", 0);
 
 			ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
 			results.put("events", eventsNode);
-			return results;
-
-		}catch(Exception e){
-			return ControllerUtil.jsonNodeForError(e.getMessage());
+			return ok(eventsNode);
+			
+		}catch(NumberFormatException e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
 	}
 
-	//TODO 
+//	private static ObjectNode getEventsByStatusResult(Long agencyID,String status,int withInDay){
+//		try{
+//
+//			List<Event> events = getEvents(agencyID,status,withInDay);
+//
+//			if(events.size() == 0){
+//				return ControllerUtil.jsonNodeForError("No qualified events...");
+//			}
+//
+//			ObjectNode results = Json.newObject();
+//			results.put("error", 0);
+//
+//			ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
+//			results.put("events", eventsNode);
+//			return results;
+//
+//		}catch(Exception e){
+//			return ControllerUtil.jsonNodeForError(e.getMessage());
+//		}
+//	}
+
 	//Testing this method
-	private static List<Event> getEvents(Long agencyID,String status,int withInDay){
-		long lowerTimerBound = System.currentTimeMillis() - withInDay * 24 * 60 * 60 * 1000;
-
-		List<Dispatch> dispatches = Dispatch.find
-				.fetch("event")
-				.fetch("agency")
-				.where("agency.id = " + agencyID)
-				.where()
-				.eq("status", status)
-				.gt("dispatchTime", lowerTimerBound)
-				.findList();
-		List<Event> events = new LinkedList<>();
-
-		for(Dispatch	 dispatch:dispatches){
-			events.add(dispatch.getEvent());
-		}
-		return events;
-	}
+//	private static List<Event> getEvents(Long agencyID,String status,int withInDay){
+//		long lowerTimerBound = System.currentTimeMillis() - withInDay * 24 * 60 * 60 * 1000;
+//
+//		List<Dispatch> dispatches = Dispatch.find
+//				.fetch("event")
+//				.fetch("agency")
+//				.where("agency.id = " + agencyID)
+//				.where()
+//				.eq("status", status)
+//				.gt("dispatchTime", lowerTimerBound)
+//				.findList();
+//		List<Event> events = new LinkedList<>();
+//
+//		for(Dispatch	 dispatch:dispatches){
+//			events.add(dispatch.getEvent());
+//		}
+//		return events;
+//	}
 
 	@Security.Authenticated(AgencySecured.class)
 	public static Result readEvent(){
