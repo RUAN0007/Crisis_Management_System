@@ -53,7 +53,8 @@ public class Application extends Controller {
 		return ok(ControllerUtil.jsonNodeForSuccess("User + " + id + " logged out successfully"));
 	}
 
-	public static Result getEventsBytypeID(Long typeID){
+	public static Result getEventsBytypeID(){
+		Long typeID = (long)1;
 		List<Event> events = Event.find.fetch("eventType").where("eventType.id=" + typeID).orderBy("callingTime desc").findList();
 		String eventType = eventTypeByID(typeID);
 

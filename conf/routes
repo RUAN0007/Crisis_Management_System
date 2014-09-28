@@ -5,7 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET 		/logout						controllers.Application.logout()
-GET   /events/:id        			  controllers.Application.getEventsBytypeID(id: Long)  
+POST   /events       			  controllers.Application.getEventsBytypeID()
+#POST PARAMETERS: typeID   timePeriodInHour  
+
 GET   /agencies							controllers.Application.getAgencies()
 GET   /eventTypes						controllers.Application.getEventTypes()
 

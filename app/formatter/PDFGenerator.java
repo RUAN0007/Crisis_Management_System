@@ -26,12 +26,12 @@ import models.*;
 public class PDFGenerator {
 
     private String directoryPath;
-
+    
     public PDFGenerator(String dir) {
         this.directoryPath = dir;
     }
 
-    public File generateReport(List<Event> event) {
+    public File generateReport(List<Event> event,String reportName) {
     		File file = null;
         Document document = new Document();
 
@@ -41,7 +41,7 @@ public class PDFGenerator {
 
         try {
             PdfWriter.getInstance(document,
-                    new FileOutputStream(directoryPath + "Report.pdf"));
+                    new FileOutputStream(directoryPath + reportName));
 
             if (Config.debugOn) {
                 System.out.println("Opening Document to prepare for writing");
@@ -105,7 +105,7 @@ public class PDFGenerator {
         return file;
     }
 
-    public File generateEmergencyReport(Event event) {
+    public File generateEmergencyReport(Event event,String reportName) {
 		File file = null;
 
         Document document = new Document();
@@ -116,7 +116,7 @@ public class PDFGenerator {
 
         try {
             PdfWriter.getInstance(document,
-                    new FileOutputStream(directoryPath + "EmergencyReport.pdf"));
+                    new FileOutputStream(directoryPath + reportName));
 
             if (Config.debugOn) {
                 System.out.println("Opening Document to prepare for writing");

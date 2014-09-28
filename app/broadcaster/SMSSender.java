@@ -31,20 +31,25 @@ public class SMSSender {
 
 
 
-	public void SendSMS(String msg, List<String> ListPhonenum) throws TwilioRestException{
+	public boolean SendSMS(String msg, List<String> ListPhonenum){
+		try{
+			TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
-		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
-
-		for (int i=0; i<ListPhonenum.size(); i++){
-			String PhoneNumber = ListPhonenum.get(i);
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("Body", msg));
-			params.add(new BasicNameValuePair("To", "+"+ PhoneNumber));
-			params.add(new BasicNameValuePair("From", "+14842407107"));
-			MessageFactory messageFactory = client.getAccount().getMessageFactory();
-			Message message = messageFactory.create(params);
-			System.out.println(message.getSid());
+			for (int i=0; i<ListPhonenum.size(); i++){
+				String PhoneNumber = ListPhonenum.get(i);
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("Body", msg));
+				params.add(new BasicNameValuePair("To", "+"+ PhoneNumber));
+				params.add(new BasicNameValuePair("From", "+14842407107"));
+				MessageFactory messageFactory = client.getAccount().getMessageFactory();
+				Message message = messageFactory.create(params);
+				System.out.println(message.getSid());
+			}
+			return true;
+		}catch(Exception e){
+			return false;
 		}
+		
 
 	}
 }

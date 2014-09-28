@@ -19,11 +19,11 @@ public class Global extends GlobalSettings {
 	 public void onStart(Application app) {
 		//System.out.println("I hate YAML!!");
 
-		File file = new File("broadcaster.xml");
-		  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		  DocumentBuilder db = dbf.newDocumentBuilder();
-		  Document doc = db.parse(file);
-		  
+//		File file = new File("broadcaster.xml");
+//		  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//		  DocumentBuilder db = dbf.newDocumentBuilder();
+//		  Document doc = db.parse(file);
+//		  
 	}
 	
 	
