@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.avaje.ebean.Ebean;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -56,5 +58,13 @@ public class ServiceOperator extends Model {
 			this.phone = phone;
 		}
 		
+		//Return null if can not find the record
+		//Return the ServiceOperator object is found. 
+		public static ServiceOperator authenticate(Long id,String pwd){
+			ServiceOperator serviceOperator = Ebean.find(ServiceOperator.class, id);
+			if(serviceOperator == null) return null;
+			if(!serviceOperator.getPassword().equals(pwd)) return null;
+			return serviceOperator;
+		}
 		
 }
