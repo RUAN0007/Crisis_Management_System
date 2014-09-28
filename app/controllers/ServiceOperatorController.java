@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import models.*;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -42,6 +44,23 @@ public class ServiceOperatorController extends Controller {
 		serviceOperatorResult.put("phone", serviceOperator.getPhone());
 		return ok(serviceOperatorResult);
 	}
+	
+	public static Result getUnclassifiedEvents(){
+		try{
+			List<Event> unclassfiedEvents = Event.find
+					.where()
+					.eq("eventType.id", 0)
+					.findList();
+			ObjectNode result = Json.newObject();
+			result.put("error", 0);
+			result.put("events", ControllerUtil.getEventsArrayNode(unclassfiedEvents));
+			return ok(result);
+		}catch(Exception e){
+			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}
+	
+	}
+	
 	
 
 }
