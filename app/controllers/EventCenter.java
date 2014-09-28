@@ -16,7 +16,7 @@ import formatter.*;
 import models.*;
 public class EventCenter {
 	
-	static EventCenter defaultCenter = new EventCenter();
+	static EventCenter defaultCenter;
 	
 	private static String MEDIA_SMS = "SMS";
 	private static String MEDIA_FB = "FACEBOOK";

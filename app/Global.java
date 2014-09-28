@@ -52,7 +52,7 @@ public class Global extends GlobalSettings {
 
 	private static EventCenter getEventCenter(){
 		try{
-			File file = new File("paras.xml");
+			File file = new File("conf" + File.separator + "paras.xml");
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.parse(file);
@@ -60,7 +60,10 @@ public class Global extends GlobalSettings {
 
 			EmailSender emailSender = getEmailSender(doc);
 			SMSSender smsSender = getSMSSender(doc);
-			FacebookSender fbSender = getFBSender(doc);
+		//	FacebookSender fbSender = getFBSender(doc);
+		//Testing
+			FacebookSender fbSender = null;
+
 			TwitterSender twitterSender = getTwitterSender(doc);
 			EventFormatter eventFormatter = new EventFormatter();
 			PDFGenerator pdfGenerator = getReportGenerator(doc);

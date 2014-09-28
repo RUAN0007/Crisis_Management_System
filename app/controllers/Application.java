@@ -42,7 +42,13 @@ public class Application extends Controller {
 		//    		arrayNode.add(3);
 		//    		testNode.put("Count", arrayNode);
 		//    		return ok(testNode);
-		return ok("Hello World");
+		if(EventCenter.getDefaultEventCenter() != null){
+			return ok("Default EventCenter exists...");
+
+		}else{
+			return ok("Default EventCenter not exists...");
+
+		}
 	}
 
 	@Security.Authenticated(Secured.class)
