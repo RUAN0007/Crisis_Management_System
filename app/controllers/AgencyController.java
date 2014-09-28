@@ -131,7 +131,8 @@ public class AgencyController extends Controller {
 					.where("agency.id = " + agencyID)
 					.where()
 					.eq("status", Dispatch.STATUS_SOLVED)
-					.gt("solveTime",lowerTimerBound)
+					//TODO Temporally comment it out for testing
+	//				.gt("solveTime",lowerTimerBound)
 					.orderBy("solveTime asc")
 					.findList();
 			List<Event> events = new LinkedList<>();

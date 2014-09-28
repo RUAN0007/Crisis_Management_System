@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class ServiceOperatorController extends Controller {
 					.where()
 					.eq("eventType.id", 0)
 					.isNull("serviceOperator")
+					.orderBy("callingTime asc")
 					.findList();
 
 			ObjectNode result = Json.newObject();
@@ -104,10 +106,17 @@ public class ServiceOperatorController extends Controller {
 
 	@Security.Authenticated(ServiceOperatorSecured.class)
 	public static Result getPriorityOneEvents(){
+		int withInDay = 1;
+		//Get Event of Priority One event on that day
+		Timestamp lowerTimeBound = new Timestamp(System.currentTimeMillis()
+													-withInDay * 24 * 60 * 60 * 1000);
 		try{
 			List<Event> priorityOneEvent = Event.find
 					.where()
 					.eq("priority", 1)
+			//TODO Temporally comment it out for testing
+			//		.gt("callingTime", lowerTimeBound)
+					.orderBy("callingTime asc")
 					.findList();
 
 			ObjectNode result = Json.newObject();
@@ -174,12 +183,15 @@ public class ServiceOperatorController extends Controller {
 	@Security.Authenticated(ServiceOperatorSecured.class)
 	public static Result getEventsStatus(){
 		try{
-			long lowerTimeBound = System.currentTimeMillis() - 24 * 60 * 60 * 1000;
+			int withInDay = 1;
+			Timestamp lowerTimeBound = new Timestamp(System.currentTimeMillis()
+														- withInDay * 24 * 60 * 60 * 1000);
 			
 			List<Dispatch> dispatches = Dispatch.find
-					//TODO Uncomment the following two lines to onyl retrieve dispatches within one day
+			//TODO Uncomment the following two lines to only retrieve dispatches within one day
 //												.where()
 //												.gt("dispatchTime",lowerTimeBound)
+												.orderBy("dispatchTime asc")
 												.findList();
 			ObjectNode statuesResult = Json.newObject();
 			statuesResult.put("error", 0);
@@ -187,8 +199,7 @@ public class ServiceOperatorController extends Controller {
 			ArrayNode dispatchesNode = new ArrayNode(JsonNodeFactory.instance);
 			
 			for(Dispatch dispatch:dispatches){
-				//TODO 
-				//May have a bug here as some entry may be null
+				
 				ObjectNode dispatchNode = Json.newObject();
 				dispatchNode.put("eventID",dispatch.getEvent().getId());
 				dispatchNode.put("agencyName",dispatch.getAgency().getName());

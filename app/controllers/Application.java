@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.FileAttribute;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.avaje.ebean.Ebean;
@@ -25,30 +26,13 @@ import util.HelperClass;
 public class Application extends Controller {
 
 	public static Result index() {
-		// 		Event e = callOperator.getEvents().get(0);
-		//    		
-		//    		ObjectNode testNode = Json.newObject();
-		//    		testNode.put("Name", "RPC");
-		//    		testNode.put("Age",20);
-		//    		
-		//    		ObjectNode nestedNode = Json.newObject();
-		//    		nestedNode.put("Sports","Pingpong");
-		//    		nestedNode.put("Music","Flute");
-		//    		testNode.put("Hobby", nestedNode);
-		//    		
-		//    		ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
-		//    		arrayNode.add(1);
-		//    		arrayNode.add(2);
-		//    		arrayNode.add(3);
-		//    		testNode.put("Count", arrayNode);
-		//    		return ok(testNode);
-		if(EventCenter.getDefaultEventCenter() != null){
-			return ok("Default EventCenter exists...");
-
-		}else{
-			return ok("Default EventCenter not exists...");
-
-		}
+		long lowerTimeBound = System.currentTimeMillis() - 30 * 60 * 1000;
+		List<Event> events = Event.find.where().lt("callingTime", new Timestamp(lowerTimeBound)).
+				orderBy("callingTime asc")
+				.findList();
+		
+		return ok(ControllerUtil.getEventsArrayNode(events));
+//		return ok("Yes, we can!!");
 	}
 
 	@Security.Authenticated(Secured.class)

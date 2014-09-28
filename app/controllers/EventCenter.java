@@ -158,7 +158,7 @@ public class EventCenter {
 	}
 	
 	private List<Event> getEventsWithinMin(int periodInMin){
-		long lowerTimeBound = System.currentTimeMillis() - periodInMin * 60 * 1000;
+		Timestamp lowerTimeBound = new Timestamp(System.currentTimeMillis() - periodInMin * 60 * 1000);
 		List<Event> events = Event.find.where()
 									   .gt("callingTime", lowerTimeBound)
 									   .orderBy("callingTime desc")

@@ -6,24 +6,36 @@
 GET     /                           controllers.Application.index()
 GET 		/logout						controllers.Application.logout()
 POST   /events       			  controllers.Application.getEventsBytypeID()
-#POST PARAMETERS: typeID   timePeriodInHour  
+GET   /getAgencies					controllers.Application.getAgencies()
+GET   /getEventTypes						controllers.Application.getEventTypes()
 
-GET   /agencies							controllers.Application.getAgencies()
-GET   /eventTypes						controllers.Application.getEventTypes()
-
-
+#For Bug Report
 #GET 		/bug							controllers.Application.reportBug()
 #POST 	/recordBug					controllers.Application.recordBug()
 	
 #CallOperator
 POST     /calloperator/login				controllers.CallOperatorController.login()
 POST		/calloperator/report						controllers.CallOperatorController.report()
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#ServiceOperator
+POST 	/serviceoperator/login			controllers.ServiceOperatorController.login()
+POST    /serviceoperator/updateEvent		controllers.ServiceOperatorController.updateEvent()
+GET 	/serviceoperator/unhandledEvents		controllers.ServiceOperatorController.getUnclassifiedEvents()
+GET		/serviceoperator/priorityOneEvents controllers.ServiceOperatorController.getPriorityOneEvents()
+GET    /serviceoperator/broadcastSMS		controllers.ServiceOperatorController.smsEvent()
+GET    /serviceoperator/sendReport		controllers.ServiceOperatorController.emailEvent()
+GET		/serviceoperator/eventsStatus	controllers.ServiceOperatorController.getEventsStatus()
+GET		/serviceoperator/eventFromID		controllers.ServiceOperatorController.getEventByID()
+
 
 #Agency
+POST 	/agency/login					controllers.AgencyController.login()
 POST		/agency/sentEvents				controllers.AgencyController.getSentEvents()
 POST		/agency/readEvents				controllers.AgencyController.getReadEvents()
 POST		/agency/solvedEvents				controllers.AgencyController.getSolvedEvents()
 POST 	/agency/readEvent				controllers.AgencyController.readEvent()
 POST 	/agency/solveEvent				controllers.AgencyController.solveEvent()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
