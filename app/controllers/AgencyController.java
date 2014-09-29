@@ -110,7 +110,7 @@ public class AgencyController extends Controller {
 
 			ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
 			results.put("events", eventsNode);
-			return ok(eventsNode);
+			return ok(results);
 			
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
@@ -152,7 +152,7 @@ public class AgencyController extends Controller {
 
 			ArrayNode eventsNode = ControllerUtil.getEventsArrayNode(events);
 			results.put("events", eventsNode);
-			return ok(eventsNode);
+			return ok(results);
 			
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
