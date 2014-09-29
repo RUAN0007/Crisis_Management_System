@@ -78,35 +78,35 @@ public class CallOperatorTesting{
 //		});
 //	}
 	
-	@Test
-	public void testReportPrority3Event(){
-
-		running(fakeApplication(), new Runnable() {
-			public void run() {
-				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/report");
-				Map<String,String> paras = new HashMap<>();
-				paras.put("eventTypeID", "1");
-				paras.put("callOperatorID", "4");
-				paras.put("priority", "3");
-				paras.put("location", "Central");
-				paras.put("postalCode", "666666");
-				paras.put("callerPhone", "98989898");
-				paras.put("description", "Hello World");
-
-				Result result = Helpers.routeAndCall(fakeLogOutRequest.withSession("id", "C4")
-														.withFormUrlEncodedBody(paras));
-
-				String content = contentAsString(result);
-				JsonNode json = Json.parse(content);
-				System.out.println("Result = " + json.toString());
-				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
-				
-				Event event = Event.find.where().eq("postalCode", "666666").findUnique();
-				assertThat(event).isNotNull();
-				event.delete();
-			}
-		});
-	}
+//	@Test
+//	public void testReportPrority3Event(){
+//
+//		running(fakeApplication(), new Runnable() {
+//			public void run() {
+//				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/report");
+//				Map<String,String> paras = new HashMap<>();
+//				paras.put("eventTypeID", "1");
+//				paras.put("callOperatorID", "4");
+//				paras.put("priority", "3");
+//				paras.put("location", "Central");
+//				paras.put("postalCode", "666666");
+//				paras.put("callerPhone", "98989898");
+//				paras.put("description", "Hello World");
+//
+//				Result result = Helpers.routeAndCall(fakeLogOutRequest.withSession("id", "C4")
+//														.withFormUrlEncodedBody(paras));
+//
+//				String content = contentAsString(result);
+//				JsonNode json = Json.parse(content);
+//				System.out.println("Result = " + json.toString());
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
+//				
+//				Event event = Event.find.where().eq("postalCode", "666666").findUnique();
+//				assertThat(event).isNotNull();
+//				event.delete();
+//			}
+//		});
+//	}
 	
 	//Test the following method when the facebook api token is ready
 //	
