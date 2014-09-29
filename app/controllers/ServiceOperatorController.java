@@ -78,7 +78,7 @@ public class ServiceOperatorController extends Controller {
 
 			Long eventID = Long.parseLong(paras.get("eventID").toString());
 			Long serviceOperatorID = Long.parseLong(paras.get("serviceOperatorID").toString());
-			int priority = Integer.parseInt(paras.get("serviceOperatorID").toString());
+			int priority = Integer.parseInt(paras.get("priority").toString());
 
 			Event event = Event.find.byId(eventID);
 			ServiceOperator serviceOperator = ServiceOperator.find.byId(serviceOperatorID);
@@ -170,7 +170,9 @@ public class ServiceOperatorController extends Controller {
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long	 eventID = Long.parseLong(requestData.get("eventID"));
 			Event event = Event.find.byId(eventID);
-			
+			if(event == null)  {
+				return ok(ControllerUtil.jsonNodeForError("Invalid Event ID " + eventID)); 
+			}
 			ObjectNode eventResult = Json.newObject();
 			eventResult.put("error", 0);
 			eventResult.put("event", ControllerUtil.getEventJsonNode(event));
