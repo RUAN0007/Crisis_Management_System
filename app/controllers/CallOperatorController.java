@@ -79,14 +79,16 @@ public class CallOperatorController extends Controller {
 			reportedEvent.setPostalCode(postalCode);
 			reportedEvent.setPriority(Integer.parseInt(priorityStr));
 
-			
+			reportedEvent.save();
+
 			if(eventType.getId() != 0){
 				EventCenter.getDefaultEventCenter().handleIncomingEvent(reportedEvent);
 			}
 
-			reportedEvent.save();
 		}catch(Exception e){
-			return ok(ControllerUtil.jsonNodeForError("Uploading failed..."));
+				e.printStackTrace();
+				return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+			//	return ok(ControllerUtil.jsonNodeForError("Uploading failed..."));
 		}
 		return ok(ControllerUtil.jsonNodeForSuccess("Uploading succeeded..."));
 	}
