@@ -79,6 +79,9 @@ public class AgencyController extends Controller {
 			
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}catch(Exception e){
+			e.printStackTrace();
+			return ok(ControllerUtil.jsonNodeForError("An exception has occured in the server"));
 		}
 	}
 
@@ -111,6 +114,9 @@ public class AgencyController extends Controller {
 			
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}catch(Exception e){
+			e.printStackTrace();
+			return ok(ControllerUtil.jsonNodeForError("An exception has occured in the server"));
 		}
 	}
 
@@ -150,6 +156,9 @@ public class AgencyController extends Controller {
 			
 		}catch(NumberFormatException e){
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+		}catch(Exception e){
+			e.printStackTrace();
+			return ok(ControllerUtil.jsonNodeForError("An exception has occured in the server"));
 		}
 	}
 
