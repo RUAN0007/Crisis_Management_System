@@ -192,43 +192,43 @@ public class AgencyOperatorTesting {
 //		});
 //	}
 	
-	@Test
-	public void testSolveEvent(){
-		running(fakeApplication(), new Runnable() {
-			public void run() {
-				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/agency/solveEvent");
-				Map<String,String> paras = new HashMap<>();
-				
-				int testEventID = 11;
-				int testAgencyID = 2;
-				
-				paras.put("eventID","" + testEventID);
-				paras.put("agencyID","" + testAgencyID);
-
-				Result result = Helpers.routeAndCall(fakeLogOutRequest
-														.withSession("id", "A1")
-														.withFormUrlEncodedBody(paras));
-
-				String content = contentAsString(result);
-				JsonNode json = Json.parse(content);
-				System.out.println("Content = " + content);
-				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
-
-				Dispatch dispatch = Dispatch.find
-										.where()
-										.eq("event.id",testEventID)
-										.eq("agency.id", testAgencyID)
-										.findUnique();
-				
-				assertThat(dispatch).isNotNull();
-				assertThat(dispatch.getStatus()).isEqualTo(Dispatch.STATUS_SOLVED);
-				assertThat(dispatch.getSolveTime()).isNotNull();
-				
-				dispatch.setStatus(Dispatch.STATUS_READ);
-				dispatch.setSolveTime(null);
-				dispatch.save();
-			}
-		});
-	}
+//	@Test
+//	public void testSolveEvent(){
+//		running(fakeApplication(), new Runnable() {
+//			public void run() {
+//				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/agency/solveEvent");
+//				Map<String,String> paras = new HashMap<>();
+//				
+//				int testEventID = 11;
+//				int testAgencyID = 2;
+//				
+//				paras.put("eventID","" + testEventID);
+//				paras.put("agencyID","" + testAgencyID);
+//
+//				Result result = Helpers.routeAndCall(fakeLogOutRequest
+//														.withSession("id", "A1")
+//														.withFormUrlEncodedBody(paras));
+//
+//				String content = contentAsString(result);
+//				JsonNode json = Json.parse(content);
+//				System.out.println("Content = " + content);
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
+//
+//				Dispatch dispatch = Dispatch.find
+//										.where()
+//										.eq("event.id",testEventID)
+//										.eq("agency.id", testAgencyID)
+//										.findUnique();
+//				
+//				assertThat(dispatch).isNotNull();
+//				assertThat(dispatch.getStatus()).isEqualTo(Dispatch.STATUS_SOLVED);
+//				assertThat(dispatch.getSolveTime()).isNotNull();
+//				
+//				dispatch.setStatus(Dispatch.STATUS_READ);
+//				dispatch.setSolveTime(null);
+//				dispatch.save();
+//			}
+//		});
+//	}
 
 }
