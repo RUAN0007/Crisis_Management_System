@@ -80,6 +80,7 @@ public class EventCenter {
 		for(Agency agency:agencies){
 			Dispatch dispatch = new Dispatch();
 			dispatch.setAgency(agency);
+			dispatch.setStatus(Dispatch.STATUS_SENT);
 			dispatch.setEvent(event);
 			dispatch.setDispatchTime(new Timestamp(System.currentTimeMillis()));
 		
