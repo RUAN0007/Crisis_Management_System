@@ -134,7 +134,12 @@ public class ServiceOperatorController extends Controller {
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long	 eventID = Long.parseLong(requestData.get("eventID"));
 			Event event = Event.find.byId(eventID);
-			
+			if(event == null){
+				return ok(ControllerUtil.jsonNodeForError("The EventID " + eventID + " is invalid..."));
+			}
+			if(event.getPriority() != 1){
+				return ok(ControllerUtil.jsonNodeForError("The EventID " + eventID + " is qualified for broadcasting sms..."));
+			}
 			if(EventCenter.getDefaultEventCenter().broadcastSMSToPublic(event)){
 				return ok(ControllerUtil.jsonNodeForSuccess("SMS Event " + eventID + " Succeeded..."));
 			}else{
@@ -152,7 +157,12 @@ public class ServiceOperatorController extends Controller {
 			DynamicForm requestData = Form.form().bindFromRequest();
 			Long	 eventID = Long.parseLong(requestData.get("eventID"));
 			Event event = Event.find.byId(eventID);
-			
+			if(event == null){
+				return ok(ControllerUtil.jsonNodeForError("The EventID " + eventID + " is invalid..."));
+			}
+			if(event.getPriority() != 1){
+				return ok(ControllerUtil.jsonNodeForError("The EventID " + eventID + " is qualified for emergent report..."));
+			}
 			if(EventCenter.getDefaultEventCenter().sendEventReport(event)){
 				return ok(ControllerUtil.jsonNodeForSuccess("Email Event " + eventID + " Succeeded..."));
 			}else{
