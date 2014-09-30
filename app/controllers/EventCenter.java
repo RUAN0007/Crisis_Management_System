@@ -106,7 +106,7 @@ public class EventCenter {
 		String location = event.getLocation();
 		List<Public> citizens = Public.find
 								.where()
-								.eq("location =", location)
+								.eq("location", location)
 								.findList();
 		
 		List<String> phones = new ArrayList<>();
