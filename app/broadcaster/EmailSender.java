@@ -32,7 +32,7 @@ public class EmailSender {
 	public EmailSender() {
 	}
 
-	public boolean SendMail(List<String> destinations, String subject,
+	public boolean sendMail(List<String> destinations, String subject,
 			String text, String file) {
 
 		Properties props = new Properties();
