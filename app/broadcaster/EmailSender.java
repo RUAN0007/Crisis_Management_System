@@ -78,8 +78,10 @@ public class EmailSender {
 				System.out.println("Done");
 
 			} catch (MessagingException e) {
+				e.printStackTrace();
 				return false;
 			} catch (RuntimeException e) {
+				e.printStackTrace();
 				return false;
 			}
 		}
