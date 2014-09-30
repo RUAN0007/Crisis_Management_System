@@ -97,17 +97,16 @@ public class Global extends GlobalSettings {
 		XPathExpression expr = xpath.compile("/paras/twitter/consumerKey");
 		String consumerKey = (String) expr.evaluate(doc,XPathConstants.STRING);
 	
-		expr = xpath.compile("/paras/facebook/consumerSecret");
+		expr = xpath.compile("/paras/twitter/consumerSecret");
 		String consumerSecret = (String) expr.evaluate(doc,XPathConstants.STRING);
 		
-		expr = xpath.compile("/paras/facebook/accessToken");
+		expr = xpath.compile("/paras/twitter/accessToken");
 		String accessToken = (String) expr.evaluate(doc,XPathConstants.STRING);
 		
-		expr = xpath.compile("/paras/facebook/accessTokenSecret");
+		expr = xpath.compile("/paras/twitter/accessTokenSecret");
 		String accessTokenSecret = (String) expr.evaluate(doc,XPathConstants.STRING);
 		
 		return new TwitterSender(consumerKey,consumerSecret,accessToken, accessTokenSecret);
-	
 	}
 	
 	private static EmailSender getEmailSender(Document doc) throws XPathExpressionException {
