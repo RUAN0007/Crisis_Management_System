@@ -109,11 +109,11 @@ public class PDFGenerator {
             e.printStackTrace();
         }
 //
-//        if (Config.dirDebug) {
-//            file = new File(Config.repDir);
-//        } else {
-//            file = new File(emergentReportDirectory + "Report.pdf");
-//        }
+        if (Config.dirDebug) {
+            file = new File(Config.repDir);
+        } else {
+            file = new File(summaryReportDirectory + File.separator + reportName);
+        }
 
         if (Config.debugOn) {
             System.out.println("Saving to : " + file.getAbsolutePath());
@@ -183,11 +183,11 @@ public class PDFGenerator {
             e.printStackTrace();
         }
 
-//        if (Config.dirDebug) {
-//            file = new File(Config.emergencyRepDir);
-//        } else {
-//            file = new File(emergentReportDirectory + "EmergencyReport.pdf");
-//        }
+        if (Config.dirDebug) {
+            file = new File(Config.emergencyRepDir);
+        } else {
+            file = new File(emergentReportDirectory + File.separator + reportName);
+        }
 
         if (Config.debugOn) {
             System.out.println("Saving to : " + file.getAbsolutePath());
