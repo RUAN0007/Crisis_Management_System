@@ -1,5 +1,7 @@
+import models.CallOperator;
 import models.Dispatch;
 import models.Event;
+import models.EventType;
 
 import org.junit.*;
 
@@ -13,6 +15,7 @@ import static org.fest.assertions.Assertions.*;
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 import controllers.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -244,12 +247,53 @@ public class ServiceOperatorTesting {
 //				String content = contentAsString(result);
 //				System.out.println("Content = " + content);
 //				JsonNode json = Json.parse(content);
-//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(1);
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
 //
 //			}
 //		});
 //	}
-
+	
+//	@Test
+//	public void testSMSEvent(){
+//
+//		running(fakeApplication(), new Runnable() {
+//			public void run() {
+//				FakeRequest fakeLogOutRequest = new FakeRequest("GET","/serviceoperator/broadcastSMS");
+//				Map<String,String> paras = new HashMap<>();
+//				paras.put("eventID","11");
+//				Result result = Helpers.routeAndCall(fakeLogOutRequest
+//												.withSession("id", "S1")
+//												.withFormUrlEncodedBody(paras));
+//				String content = contentAsString(result);
+//				System.out.println("Content = " + content);
+//				JsonNode json = Json.parse(content);
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
+//
+//			}
+//		});
+//	}
+	
+//	@Test
+//	public void testEmailEvent(){
+//
+//		running(fakeApplication(), new Runnable() {
+//			public void run() {
+//				FakeRequest fakeLogOutRequest = new FakeRequest("GET","/serviceoperator/sendReport");
+//				Map<String,String> paras = new HashMap<>();
+//				paras.put("eventID","44");
+//				Result result = Helpers.routeAndCall(fakeLogOutRequest
+//												.withSession("id", "S1")
+//												.withFormUrlEncodedBody(paras));
+//				String content = contentAsString(result);
+//			//	System.out.println("Content = " + content);
+//				JsonNode json = Json.parse(content);
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
+//
+//			}
+//		});
+//	}
+	
+	
 
 
 }

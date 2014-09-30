@@ -170,6 +170,7 @@ public class ServiceOperatorController extends Controller {
 			}
 			
 		}catch(Exception e){
+			e.printStackTrace();
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
 	}

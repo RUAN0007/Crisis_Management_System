@@ -1,17 +1,10 @@
 [0m[[0mdebug[0m] [0m[34mTest run started[0m[0m
-[0m[[0mdebug[0m] [0mTest [33mApplicationTest[0m.[36msimpleCheck[0m started[0m
-[0m[[0mdebug[0m] [0mTest [33mApplicationTest[0m.[36msimpleCheck[0m finished[0m
-[0m[[0mdebug[0m] [0mTest [33mApplicationTest[0m.[36mrenderTemplate[0m started[0m
-[0m[[0mdebug[0m] [0mTest [33mApplicationTest[0m.[36mrenderTemplate[0m finished[0m
-[0m[[0mdebug[0m] [0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 2 total, 0.454s[0m[0m
-[0m[[0mdebug[0m] [0m[34mTest run started[0m[0m
-[0m[[0mdebug[0m] [0mTest [33mIntegrationTest[0m.[36mtestCallOperatorReport[0m started[0m
-[0m[[0mdebug[0m] [0mTest [33mIntegrationTest[0m.[36mtestCallOperatorReport[0m finished[0m
-[0m[[0mdebug[0m] [0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 3.726s[0m[0m
+[0m[[0mdebug[0m] [0mTest [33mCallOperatorTesting[0m.[36mtestReportPrority2Event[0m started[0m
+[0m[[0mdebug[0m] [0mTest [33mCallOperatorTesting[0m.[36mtestReportPrority2Event[0m finished[0m
+[0m[[0mdebug[0m] [0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 10.299s[0m[0m
 [0m[[0mdebug[0m] [0mFramework implementation 'org.specs2.runner.Specs2Framework' not present.[0m
 [0m[[0mdebug[0m] [0mSummary for JUnit not available.[0m
 [0m[[0mdebug[0m] [0mSummary for specs2 not available.[0m
-[0m[[0minfo[0m] [0mPassed: Total 3, Failed 0, Errors 0, Passed 3[0m
+[0m[[0minfo[0m] [0mPassed: Total 1, Failed 0, Errors 0, Passed 1[0m
 [0m[[0mdebug[0m] [0mPassed tests:[0m
-[0m[[0mdebug[0m] [0m	ApplicationTest[0m
-[0m[[0mdebug[0m] [0m	IntegrationTest[0m
+[0m[[0mdebug[0m] [0m	CallOperatorTesting[0m

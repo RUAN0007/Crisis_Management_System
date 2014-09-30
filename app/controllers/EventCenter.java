@@ -97,7 +97,7 @@ public class EventCenter {
 			phones.add(agency.getPhone());
 		}
 		
-		return	smsSender.SendSMS("You have an incomg event", phones);
+		return	smsSender.SendSMS("You have an incoming event", phones);
 		
 	}
 	
@@ -137,7 +137,9 @@ public class EventCenter {
 	//Broadcast both on facebook and twitter
 	public boolean broadcastEventOnSocialMedia(Event event){
 		String message = eventFormatter.formatSocialMedia(event);
-		return fbSender.postMessage(message) && twitterSender.postMessage(message);
+		return 
+				//fbSender.postMessage(message) &&
+				twitterSender.postMessage(message);
 	}
 	
 	private String getPMEmail(){
@@ -148,14 +150,14 @@ public class EventCenter {
 	public boolean sendEventReport(Event event){
 		String reportName = "EmergencyReportOnEvent" + event.getId() + ".pdf";
 		File report = pdfGenerator.generateEmergencyReport(event,reportName);
-		String file = pdfGenerator.getEmergyReportDirectory() + File.separator + report.getName();
+		String file = pdfGenerator.getEmergentReportDirectory() + File.separator + report.getName();
 		
 		String subject = "Emergency Report";
 		String text = "Dear Prime Minister, \nThere is an emergent event on " + event.getLocation() 
 						+ ". Refer to the attachment for details."; 
 		List<String> destinations = new ArrayList<String>();
 		destinations.add(getPMEmail());
-		return emailSender.SendMail(destinations, subject, text, file);
+		return emailSender.sendMail(destinations, subject, text, file);
 	}
 	
 	private List<Event> getEventsWithinMin(int periodInMin){
@@ -181,21 +183,21 @@ public class EventCenter {
 	public boolean sendSummaryReport(int periodInMin){
 		List<Event> events = getEventsWithinMin(periodInMin);
 				
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy_hh:mm",Locale.US);
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy_hh:mm",Locale.US);
 		Date date = new Date();
 		String time = dateFormat.format(date);
 		
 		String subject = "Summary Report";
 		String text = "Dear Prime Minister, \nThis is a summary event at " + time 
 				+ ". Refer to the attachment for details."; 
-		String reportName = "SummaryReportAt" + time;
+		String reportName = "SummaryReportAt" + time + ".pdf";
 		
 		File report = pdfGenerator.generateReport(events, reportName);
 		String reportFilePath = pdfGenerator.getSummaryReportDirectory() + File.separator + report.getName();
 		
 		List<String> destinations = new ArrayList<String>();
 		destinations.add(getPMEmail());
-		return emailSender.SendMail(destinations, subject, text, reportFilePath);
+		return emailSender.sendMail(destinations, subject, text, reportFilePath);
 	}
 	
 	public  void broadcast(Event event){
@@ -203,6 +205,8 @@ public class EventCenter {
 		int priority = event.getPriority();
 		if(priority <= 2){
 			if(broadcastEventOnSocialMedia(event)){
+				//TODO
+				//
 				Notification fbNtfc = new Notification();
 				fbNtfc.setEvent(event);
 				fbNtfc.setSendTime(new Timestamp(System.currentTimeMillis()));
