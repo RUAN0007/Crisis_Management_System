@@ -85,7 +85,7 @@ public class PDFGenerator {
                 document.add(Chunk.NEWLINE);
                 document.add(new Chunk("Time             : " + event.get(i).getCallingTime().toString().substring(11, 16)));
                 document.add(Chunk.NEWLINE);
-                document.add(new Chunk("Event Type   : " + event.get(i).getEventType()));
+                document.add(new Chunk("Event Type   : " + event.get(i).getEventType().getEventType()));
                 document.add(Chunk.NEWLINE);
                 document.add(new Chunk("Description   : " + event.get(i).getDescription()));
                 document.add(Chunk.NEWLINE);
@@ -158,7 +158,7 @@ public class PDFGenerator {
             document.add(Chunk.NEWLINE);
             document.add(new Chunk("Time             : " + event.getCallingTime().toString().substring(11, 16)));
             document.add(Chunk.NEWLINE);
-            document.add(new Chunk("Event Type   : " + event.getEventType()));
+            document.add(new Chunk("Event Type   : " + event.getEventType().getEventType()));
             document.add(Chunk.NEWLINE);
             document.add(new Chunk("Description   : " + event.getDescription()));
             document.add(Chunk.NEWLINE);
