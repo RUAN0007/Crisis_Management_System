@@ -27,20 +27,20 @@ public class PDFGenerator {
 
    
 
-	private String emergyReportDirectory;
+	private String emergentReportDirectory;
     private String summaryReportDirectory;
 	
   
     
-    public PDFGenerator(String emergyReportDirectory,
+    public PDFGenerator(String emergentReportDirectory,
 			String summaryReportDirectory) {
 		super();
-		this.emergyReportDirectory = emergyReportDirectory;
+		this.emergentReportDirectory = emergentReportDirectory;
 		this.summaryReportDirectory = summaryReportDirectory;
 	}
 
-	public String getEmergyReportDirectory() {
-		return emergyReportDirectory;
+	public String getEmergentReportDirectory() {
+		return emergentReportDirectory;
 	}
 
 	public String getSummaryReportDirectory() {
@@ -57,7 +57,7 @@ public class PDFGenerator {
 
         try {
             PdfWriter.getInstance(document,
-                    new FileOutputStream(emergyReportDirectory + File.separator + reportName));
+                    new FileOutputStream(summaryReportDirectory + File.separator + reportName));
 
             if (Config.debugOn) {
                 System.out.println("Opening Document to prepare for writing");
@@ -108,12 +108,12 @@ public class PDFGenerator {
         } catch (DocumentException | FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        if (Config.dirDebug) {
-            file = new File(Config.repDir);
-        } else {
-            file = new File(emergyReportDirectory + "Report.pdf");
-        }
+//
+//        if (Config.dirDebug) {
+//            file = new File(Config.repDir);
+//        } else {
+//            file = new File(emergentReportDirectory + "Report.pdf");
+//        }
 
         if (Config.debugOn) {
             System.out.println("Saving to : " + file.getAbsolutePath());
@@ -132,7 +132,7 @@ public class PDFGenerator {
 
         try {
             PdfWriter.getInstance(document,
-                    new FileOutputStream(summaryReportDirectory + File.separator + reportName));
+                    new FileOutputStream(emergentReportDirectory + File.separator + reportName));
 
             if (Config.debugOn) {
                 System.out.println("Opening Document to prepare for writing");
@@ -183,11 +183,11 @@ public class PDFGenerator {
             e.printStackTrace();
         }
 
-        if (Config.dirDebug) {
-            file = new File(Config.emergencyRepDir);
-        } else {
-            file = new File(emergyReportDirectory + "EmergencyReport.pdf");
-        }
+//        if (Config.dirDebug) {
+//            file = new File(Config.emergencyRepDir);
+//        } else {
+//            file = new File(emergentReportDirectory + "EmergencyReport.pdf");
+//        }
 
         if (Config.debugOn) {
             System.out.println("Saving to : " + file.getAbsolutePath());
