@@ -67,7 +67,7 @@ public class PDFGenerator {
             Font font = new Font(FontFamily.HELVETICA, 18, Font.BOLDITALIC, new BaseColor(0, 0, 255));
             Font endTextFont = new Font(FontFamily.HELVETICA, 16, Font.BOLDITALIC, new BaseColor(100, 50, 50));
 
-            Paragraph title = new Paragraph("Incidents Report for PMO", font);
+            Paragraph title = new Paragraph("Routine Summary Report for PMO", font);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
             document.add(new Chunk("=========================================================================="));
