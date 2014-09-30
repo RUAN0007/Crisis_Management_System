@@ -39,15 +39,18 @@ public class Global extends GlobalSettings {
 		}
 
 		//TODO
-		//Waiting for testing
-//		int periodInMin = this.periodForSummaryReportInMin * 60 * 1000;
+		//Finish testing
+		//Comment it out 
+//		int periodInMs = this.periodForSummaryReportInMin * 60 * 1000;
 //		summaryTimer.scheduleAtFixedRate(new TimerTask() {
 //
 //			@Override
 //			public void run() {
-//				EventCenter.getDefaultEventCenter().sendSummaryReport(periodInMin);
+//				System.out.println("Sending Report...");
+//				EventCenter.getDefaultEventCenter()
+//					.sendSummaryReport(periodForSummaryReportInMin);
 //			}
-//		}, periodInMin,periodInMin);
+//		}, 0,periodInMs);
 	}
 
 	private static EventCenter getEventCenter(){
@@ -82,8 +85,10 @@ public class Global extends GlobalSettings {
 	
 		expr = xpath.compile("/paras/facebook/accessTokenSecret");
 		String accessTokenSecret = (String) expr.evaluate(doc,XPathConstants.STRING);
-		
-		return new FacebookSender(accessToken, accessTokenSecret);
+		//TODO Testing
+	//	return new FacebookSender(accessToken, accessTokenSecret);
+		return null;
+	
 	}
 	
 	private static TwitterSender getTwitterSender(Document doc) throws XPathExpressionException {
