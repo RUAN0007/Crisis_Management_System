@@ -19,7 +19,11 @@ public class HelperClass {
 	
 	public static Long getRandomLong(){
 		Random rand =new Random(System.currentTimeMillis());
-		return rand.nextLong();
+		long value = rand.nextLong();
+		while(value < 0){
+			value = rand.nextLong();
+		}
+		return value;
 	}
 	
 	public static Timestamp getCurrentTimestamp(){
