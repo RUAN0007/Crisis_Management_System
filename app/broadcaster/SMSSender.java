@@ -43,7 +43,7 @@ public class SMSSender {
 				params.add(new BasicNameValuePair("From", "+14842407107"));
 				MessageFactory messageFactory = client.getAccount().getMessageFactory();
 				Message message = messageFactory.create(params);
-				System.out.println(message.getSid());
+				//System.out.println(message.getSid());
 			}
 			return true;
 		}catch(Exception e){
