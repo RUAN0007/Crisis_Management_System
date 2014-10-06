@@ -78,7 +78,7 @@ public class AgencyController extends Controller {
 			return ok(results);
 
 		}catch(NumberFormatException e){
-			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
+			return ok(ControllerUtil.jsonNodeForError("Has error on Number Format"));
 		}catch(Exception e){
 			e.printStackTrace();
 			return ok(ControllerUtil.jsonNodeForError("An exception has occured in the server"));

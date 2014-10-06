@@ -1,6 +1,6 @@
 // @SOURCE:/Users/ruanpingcheng/Desktop/CMS/conf/routes
-// @HASH:9224972e5878cd6fa89ef4483ff967093593817e
-// @DATE:Sun Sep 28 21:19:29 CST 2014
+// @HASH:477c8b32a9324ed3f49a0dbe6f255e0cde1fcd52
+// @DATE:Mon Oct 06 12:58:10 CST 2014
 
 
 import play.core._
@@ -73,11 +73,11 @@ private[this] lazy val controllers_ServiceOperatorController_getPriorityOneEvent
         
 
 // @LINE:25
-private[this] lazy val controllers_ServiceOperatorController_smsEvent11 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("serviceoperator/broadcastSMS"))))
+private[this] lazy val controllers_ServiceOperatorController_smsEvent11 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("serviceoperator/broadcastSMS"))))
         
 
 // @LINE:26
-private[this] lazy val controllers_ServiceOperatorController_emailEvent12 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("serviceoperator/sendReport"))))
+private[this] lazy val controllers_ServiceOperatorController_emailEvent12 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("serviceoperator/sendReport"))))
         
 
 // @LINE:27
@@ -85,7 +85,7 @@ private[this] lazy val controllers_ServiceOperatorController_getEventsStatus13 =
         
 
 // @LINE:28
-private[this] lazy val controllers_ServiceOperatorController_getEventByID14 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("serviceoperator/eventFromID"))))
+private[this] lazy val controllers_ServiceOperatorController_getEventByID14 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("serviceoperator/eventFromID"))))
         
 
 // @LINE:32
@@ -115,7 +115,7 @@ private[this] lazy val controllers_AgencyController_solveEvent20 = Route("POST",
 // @LINE:40
 private[this] lazy val controllers_Assets_at21 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("assets/"),DynamicPart("file", """.+""",false))))
         
-def documentation = List(("""GET""", prefix,"""controllers.Application.index()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """logout""","""controllers.Application.logout()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """events""","""controllers.Application.getEventsBytypeID()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """getAgencies""","""controllers.Application.getAgencies()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """getEventTypes""","""controllers.Application.getEventTypes()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """calloperator/login""","""controllers.CallOperatorController.login()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """calloperator/report""","""controllers.CallOperatorController.report()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/login""","""controllers.ServiceOperatorController.login()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/updateEvent""","""controllers.ServiceOperatorController.updateEvent()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/unhandledEvents""","""controllers.ServiceOperatorController.getUnclassifiedEvents()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/priorityOneEvents""","""controllers.ServiceOperatorController.getPriorityOneEvents()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/broadcastSMS""","""controllers.ServiceOperatorController.smsEvent()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/sendReport""","""controllers.ServiceOperatorController.emailEvent()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/eventsStatus""","""controllers.ServiceOperatorController.getEventsStatus()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/eventFromID""","""controllers.ServiceOperatorController.getEventByID()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/login""","""controllers.AgencyController.login()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/sentEvents""","""controllers.AgencyController.getSentEvents()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/readEvents""","""controllers.AgencyController.getReadEvents()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/solvedEvents""","""controllers.AgencyController.getSolvedEvents()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/readEvent""","""controllers.AgencyController.readEvent()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/solveEvent""","""controllers.AgencyController.solveEvent()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
+def documentation = List(("""GET""", prefix,"""controllers.Application.index()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """logout""","""controllers.Application.logout()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """events""","""controllers.Application.getEventsBytypeID()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """getAgencies""","""controllers.Application.getAgencies()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """getEventTypes""","""controllers.Application.getEventTypes()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """calloperator/login""","""controllers.CallOperatorController.login()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """calloperator/report""","""controllers.CallOperatorController.report()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/login""","""controllers.ServiceOperatorController.login()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/updateEvent""","""controllers.ServiceOperatorController.updateEvent()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/unhandledEvents""","""controllers.ServiceOperatorController.getUnclassifiedEvents()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/priorityOneEvents""","""controllers.ServiceOperatorController.getPriorityOneEvents()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/broadcastSMS""","""controllers.ServiceOperatorController.smsEvent()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/sendReport""","""controllers.ServiceOperatorController.emailEvent()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/eventsStatus""","""controllers.ServiceOperatorController.getEventsStatus()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """serviceoperator/eventFromID""","""controllers.ServiceOperatorController.getEventByID()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/login""","""controllers.AgencyController.login()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/sentEvents""","""controllers.AgencyController.getSentEvents()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/readEvents""","""controllers.AgencyController.getReadEvents()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/solvedEvents""","""controllers.AgencyController.getSolvedEvents()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/readEvent""","""controllers.AgencyController.readEvent()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agency/solveEvent""","""controllers.AgencyController.solveEvent()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
   case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
   case l => s ++ l.asInstanceOf[List[(String,String,String)]] 
 }}
@@ -214,7 +214,7 @@ case controllers_ServiceOperatorController_getPriorityOneEvents10(params) => {
 // @LINE:25
 case controllers_ServiceOperatorController_smsEvent11(params) => {
    call { 
-        invokeHandler(controllers.ServiceOperatorController.smsEvent(), HandlerDef(this, "controllers.ServiceOperatorController", "smsEvent", Nil,"GET", """""", Routes.prefix + """serviceoperator/broadcastSMS"""))
+        invokeHandler(controllers.ServiceOperatorController.smsEvent(), HandlerDef(this, "controllers.ServiceOperatorController", "smsEvent", Nil,"POST", """""", Routes.prefix + """serviceoperator/broadcastSMS"""))
    }
 }
         
@@ -222,7 +222,7 @@ case controllers_ServiceOperatorController_smsEvent11(params) => {
 // @LINE:26
 case controllers_ServiceOperatorController_emailEvent12(params) => {
    call { 
-        invokeHandler(controllers.ServiceOperatorController.emailEvent(), HandlerDef(this, "controllers.ServiceOperatorController", "emailEvent", Nil,"GET", """""", Routes.prefix + """serviceoperator/sendReport"""))
+        invokeHandler(controllers.ServiceOperatorController.emailEvent(), HandlerDef(this, "controllers.ServiceOperatorController", "emailEvent", Nil,"POST", """""", Routes.prefix + """serviceoperator/sendReport"""))
    }
 }
         
@@ -238,7 +238,7 @@ case controllers_ServiceOperatorController_getEventsStatus13(params) => {
 // @LINE:28
 case controllers_ServiceOperatorController_getEventByID14(params) => {
    call { 
-        invokeHandler(controllers.ServiceOperatorController.getEventByID(), HandlerDef(this, "controllers.ServiceOperatorController", "getEventByID", Nil,"GET", """""", Routes.prefix + """serviceoperator/eventFromID"""))
+        invokeHandler(controllers.ServiceOperatorController.getEventByID(), HandlerDef(this, "controllers.ServiceOperatorController", "getEventByID", Nil,"POST", """""", Routes.prefix + """serviceoperator/eventFromID"""))
    }
 }
         

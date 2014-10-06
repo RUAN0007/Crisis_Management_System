@@ -22,10 +22,10 @@ POST 	/serviceoperator/login			controllers.ServiceOperatorController.login()
 POST    /serviceoperator/updateEvent		controllers.ServiceOperatorController.updateEvent()
 GET 	/serviceoperator/unhandledEvents		controllers.ServiceOperatorController.getUnclassifiedEvents()
 GET		/serviceoperator/priorityOneEvents controllers.ServiceOperatorController.getPriorityOneEvents()
-GET    /serviceoperator/broadcastSMS		controllers.ServiceOperatorController.smsEvent()
-GET    /serviceoperator/sendReport		controllers.ServiceOperatorController.emailEvent()
+POST    /serviceoperator/broadcastSMS		controllers.ServiceOperatorController.smsEvent()
+POST    /serviceoperator/sendReport		controllers.ServiceOperatorController.emailEvent()
 GET		/serviceoperator/eventsStatus	controllers.ServiceOperatorController.getEventsStatus()
-GET		/serviceoperator/eventFromID		controllers.ServiceOperatorController.getEventByID()
+POST		/serviceoperator/eventFromID		controllers.ServiceOperatorController.getEventByID()
 
 
 #Agency

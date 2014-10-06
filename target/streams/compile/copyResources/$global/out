@@ -1,7 +1,7 @@
 [0m[[0mdebug[0m] [0mCopy resource mappings: [0m
 [0m[[0mdebug[0m] [0m	(/Users/ruanpingcheng/Desktop/CMS/conf/application.conf,/Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/application.conf)[0m
-[0m[[0mdebug[0m] [0m	(/Users/ruanpingcheng/Desktop/CMS/conf/CMS.sql,/Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/CMS.sql)[0m
 [0m[[0mdebug[0m] [0m	(/Users/ruanpingcheng/Desktop/CMS/conf/CMS_init_data.yml,/Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/CMS_init_data.yml)[0m
+[0m[[0mdebug[0m] [0m	(/Users/ruanpingcheng/Desktop/CMS/conf/DB_Script_For_Testing.sql,/Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/DB_Script_For_Testing.sql)[0m
 [0m[[0mdebug[0m] [0m	(/Users/ruanpingcheng/Desktop/CMS/conf/evolutions,/Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/evolutions)[0m
 [0m[[0mdebug[0m] [0m	(/Users/ruanpingcheng/Desktop/CMS/conf/paras.xml,/Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/paras.xml)[0m
 [0m[[0mdebug[0m] [0m	(/Users/ruanpingcheng/Desktop/CMS/conf/routes,/Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/routes)[0m

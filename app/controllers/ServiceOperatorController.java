@@ -74,8 +74,8 @@ public class ServiceOperatorController extends Controller {
 	@Security.Authenticated(ServiceOperatorSecured.class)
 	public static Result updateEvent(){
 		try{
+			
 			JsonNode paras = request().body().asJson();
-
 			Long eventID = Long.parseLong(paras.get("eventID").toString());
 			Long serviceOperatorID = Long.parseLong(paras.get("serviceOperatorID").toString());
 			int priority = Integer.parseInt(paras.get("priority").toString());
@@ -100,6 +100,7 @@ public class ServiceOperatorController extends Controller {
 
 			return ok(ControllerUtil.jsonNodeForSuccess("Update for Event " + eventID + " successfully..."));
 		}catch(Exception e){
+			e.printStackTrace();
 			return ok(ControllerUtil.jsonNodeForError(e.getMessage()));
 		}
 	}

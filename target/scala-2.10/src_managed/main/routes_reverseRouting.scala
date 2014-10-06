@@ -1,6 +1,6 @@
 // @SOURCE:/Users/ruanpingcheng/Desktop/CMS/conf/routes
-// @HASH:9224972e5878cd6fa89ef4483ff967093593817e
-// @DATE:Sun Sep 28 21:19:29 CST 2014
+// @HASH:477c8b32a9324ed3f49a0dbe6f255e0cde1fcd52
+// @DATE:Mon Oct 06 12:58:10 CST 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -75,13 +75,13 @@ def getUnclassifiedEvents(): Call = {
 
 // @LINE:28
 def getEventByID(): Call = {
-   Call("GET", _prefix + { _defaultPrefix } + "serviceoperator/eventFromID")
+   Call("POST", _prefix + { _defaultPrefix } + "serviceoperator/eventFromID")
 }
                                                 
 
 // @LINE:25
 def smsEvent(): Call = {
-   Call("GET", _prefix + { _defaultPrefix } + "serviceoperator/broadcastSMS")
+   Call("POST", _prefix + { _defaultPrefix } + "serviceoperator/broadcastSMS")
 }
                                                 
 
@@ -99,7 +99,7 @@ def updateEvent(): Call = {
 
 // @LINE:26
 def emailEvent(): Call = {
-   Call("GET", _prefix + { _defaultPrefix } + "serviceoperator/sendReport")
+   Call("POST", _prefix + { _defaultPrefix } + "serviceoperator/sendReport")
 }
                                                 
 
@@ -304,7 +304,7 @@ def getEventByID : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.ServiceOperatorController.getEventByID",
    """
       function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "serviceoperator/eventFromID"})
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "serviceoperator/eventFromID"})
       }
    """
 )
@@ -315,7 +315,7 @@ def smsEvent : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.ServiceOperatorController.smsEvent",
    """
       function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "serviceoperator/broadcastSMS"})
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "serviceoperator/broadcastSMS"})
       }
    """
 )
@@ -348,7 +348,7 @@ def emailEvent : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.ServiceOperatorController.emailEvent",
    """
       function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "serviceoperator/sendReport"})
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "serviceoperator/sendReport"})
       }
    """
 )
@@ -608,13 +608,13 @@ def getUnclassifiedEvents(): play.api.mvc.HandlerRef[_] = new play.api.mvc.Handl
 
 // @LINE:28
 def getEventByID(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.ServiceOperatorController.getEventByID(), HandlerDef(this, "controllers.ServiceOperatorController", "getEventByID", Seq(), "GET", """""", _prefix + """serviceoperator/eventFromID""")
+   controllers.ServiceOperatorController.getEventByID(), HandlerDef(this, "controllers.ServiceOperatorController", "getEventByID", Seq(), "POST", """""", _prefix + """serviceoperator/eventFromID""")
 )
                       
 
 // @LINE:25
 def smsEvent(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.ServiceOperatorController.smsEvent(), HandlerDef(this, "controllers.ServiceOperatorController", "smsEvent", Seq(), "GET", """""", _prefix + """serviceoperator/broadcastSMS""")
+   controllers.ServiceOperatorController.smsEvent(), HandlerDef(this, "controllers.ServiceOperatorController", "smsEvent", Seq(), "POST", """""", _prefix + """serviceoperator/broadcastSMS""")
 )
                       
 
@@ -632,7 +632,7 @@ def updateEvent(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 
 // @LINE:26
 def emailEvent(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.ServiceOperatorController.emailEvent(), HandlerDef(this, "controllers.ServiceOperatorController", "emailEvent", Seq(), "GET", """""", _prefix + """serviceoperator/sendReport""")
+   controllers.ServiceOperatorController.emailEvent(), HandlerDef(this, "controllers.ServiceOperatorController", "emailEvent", Seq(), "POST", """""", _prefix + """serviceoperator/sendReport""")
 )
                       
 
