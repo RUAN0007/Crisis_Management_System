@@ -15,10 +15,6 @@ public class SMSSender {
 	private   String ACCOUNT_SID = "AC48a7e73848fc1196696514a9dab0c65e";
 	private   String AUTH_TOKEN = "2257118ecf6cb2e4da4c46d603a9552c";
 
-	public SMSSender(){
-
-	}
-
 
 
 

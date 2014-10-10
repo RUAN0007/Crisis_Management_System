@@ -79,10 +79,9 @@ public class CallOperatorController extends Controller {
 			reportedEvent.setPostalCode(postalCode);
 			reportedEvent.setPriority(Integer.parseInt(priorityStr));
 
-			reportedEvent.save();
 
 			if(eventType.getId() != 0){
-				EventCenter.getDefaultEventCenter().handleIncomingEvent(reportedEvent);
+				IncomingEventHandlerPool.getDefault().handleIncomingEvent(reportedEvent);
 			}
 
 		}catch(Exception e){

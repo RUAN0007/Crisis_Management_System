@@ -46,8 +46,8 @@ public class Global extends GlobalSettings {
 		//TODO
 		//Finish testing
 		//Comment it out 
-		int periodInMs = this.periodForSummaryReportInMin * 60 * 1000;
-		summaryTimer.scheduleAtFixedRate(new RoutineEmailTask(periodForSummaryReportInMin), 0,periodInMs);
+//		int periodInMs = this.periodForSummaryReportInMin * 60 * 1000;
+//		summaryTimer.scheduleAtFixedRate(new RoutineEmailTask(periodForSummaryReportInMin), 0,periodInMs);
 	}
 
 	

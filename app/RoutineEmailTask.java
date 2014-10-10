@@ -11,7 +11,8 @@ import java.util.TimerTask;
 import models.Agency;
 import models.Event;
 import broadcaster.EmailSender;
-import formatter.PDFGenerator;
+import broadcaster.PDFGenerator;
+import broadcaster.ResourceGenerator;
 
 
 public class RoutineEmailTask extends TimerTask {

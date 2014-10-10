@@ -96,7 +96,7 @@ public class ServiceOperatorController extends Controller {
 				Agency agency = Agency.find.byId(agencyID);
 				agencies.add(agency);
 			}
-			EventCenter.getDefaultEventCenter().handleClassifiedEvents(event,agencies);
+			UpdatedEventHandler.getDefault().dispatch(event,agencies);
 
 			return ok(ControllerUtil.jsonNodeForSuccess("Update for Event " + eventID + " successfully..."));
 		}catch(Exception e){
@@ -141,7 +141,7 @@ public class ServiceOperatorController extends Controller {
 			if(event.getPriority() != 1){
 				return ok(ControllerUtil.jsonNodeForError("The EventID " + eventID + " is qualified for broadcasting sms..."));
 			}
-			if(EventCenter.getDefaultEventCenter().broadcastSMSToPublic(event)){
+			if(UpdatedEventHandler.getDefault().broadcastSMSToPublic(event)){
 				return ok(ControllerUtil.jsonNodeForSuccess("SMS Event " + eventID + " Succeeded..."));
 			}else{
 				return ok(ControllerUtil.jsonNodeForError("SMS Event " + eventID + " Failed..."));
@@ -164,7 +164,7 @@ public class ServiceOperatorController extends Controller {
 			if(event.getPriority() != 1){
 				return ok(ControllerUtil.jsonNodeForError("The EventID " + eventID + " is qualified for emergent report..."));
 			}
-			if(EventCenter.getDefaultEventCenter().sendEventReport(event)){
+			if(UpdatedEventHandler.getDefault().sendEventReport(event)){
 				return ok(ControllerUtil.jsonNodeForSuccess("Email Event " + eventID + " Succeeded..."));
 			}else{
 				return ok(ControllerUtil.jsonNodeForError("Email Event " + eventID + " Failed..."));
