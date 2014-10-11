@@ -10,20 +10,18 @@ public class IncomingEventHandlerPool {
 
 	public static IncomingEventHandlerPool defaultIncomingEventHandlerPool = null;
 
-	public static IncomingEventHandlerPool getDefault(){
+	public synchronized static IncomingEventHandlerPool getDefault(){
 		if(defaultIncomingEventHandlerPool == null){
-			defaultIncomingEventHandlerPool = new IncomingEventHandlerPool(10,1);
+			defaultIncomingEventHandlerPool = new IncomingEventHandlerPool(1);
 		}
 		return defaultIncomingEventHandlerPool;
 	}
 
 	private  ArrayList<IncomingEventHandler> incomingEventHandlers;
 
-	private int maxEventCountInQueue;
 	
-	private IncomingEventHandlerPool(int maxEventCountInQueue,int eventHandlerCount){
+	private IncomingEventHandlerPool(int eventHandlerCount){
 
-		this.maxEventCountInQueue = maxEventCountInQueue;
 		
 		this.incomingEventHandlers = new ArrayList<>();
 		ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
@@ -44,9 +42,16 @@ public class IncomingEventHandlerPool {
 
 	}
 
-	public void handleIncomingEvent(Event incomingEvent) {
+	public void  handleIncomingEvent(Event incomingEvent) {
 		IncomingEventHandler eventHandler = getEventHanlderWithMinQueueLength();
 		eventHandler.enqueueEvent(incomingEvent);
+	}
+	
+	public boolean isIdle(){
+		for(IncomingEventHandler eventHandler:this.incomingEventHandlers){
+			if(eventHandler.getQueueSize() > 0) return false;
+		}
+		return true;
 	}
 	
 	private IncomingEventHandler getEventHanlderWithMinQueueLength(){
