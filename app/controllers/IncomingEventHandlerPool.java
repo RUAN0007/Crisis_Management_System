@@ -20,11 +20,12 @@ public class IncomingEventHandlerPool {
 	private  ArrayList<IncomingEventHandler> incomingEventHandlers;
 
 	private int maxEventCountInQueue;
+	
 	private IncomingEventHandlerPool(int maxEventCountInQueue,int eventHandlerCount){
 
 		this.maxEventCountInQueue = maxEventCountInQueue;
 		
-		ArrayList<IncomingEventHandler> incomingEventHandlers = new ArrayList<>();
+		this.incomingEventHandlers = new ArrayList<>();
 		ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
 
 		for(int eventHanderID = 0;eventHanderID < eventHandlerCount;eventHanderID++){
@@ -37,7 +38,7 @@ public class IncomingEventHandlerPool {
 																		);
 			
 			eventHandler.start();
-			incomingEventHandlers.add(eventHandler);	
+			this.incomingEventHandlers.add(eventHandler);	
 		}
 		
 
