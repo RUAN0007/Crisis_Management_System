@@ -20,7 +20,11 @@ import broadcaster.SMSSender;
 import broadcaster.TwitterSender;
 
 import com.avaje.ebean.Ebean;
-
+/**
+ * This class provides high level service for service operator
+ * @author ruanpingcheng
+ *
+ */
 public class UpdatedEventHandler {
 	private static UpdatedEventHandler defaultUpdatedEventHandler = null;
 	public static UpdatedEventHandler getDefault(){
@@ -60,6 +64,11 @@ public class UpdatedEventHandler {
 		this.pdfGenerator = pdfGenerator;
 	}
 
+	/**
+	 * This method dispatches the event to the list of selected agencies from service operators
+	 * @param event the updated event to be dispatched
+	 * @param agencies the selected agencies to dispatch by service operator
+	 */
 	public void  dispatch(Event event,List<Agency> agencies){
 		List<Dispatch> dispatches = new ArrayList<Dispatch>();
 
@@ -77,7 +86,13 @@ public class UpdatedEventHandler {
 		sendEventSMSToAgency(agencies, event);		
 	}
 
-	public boolean sendEventSMSToAgency(List<Agency> agencies,Event sms){
+	/**
+	 * This method sends sms to agencies to notify them of a new event
+	 * @param agencies The list of selected agencies
+	 * @param sms the event to be smsed. 
+	 * @return the boolean value indication whether the operation is successful or not
+	 */
+	private boolean sendEventSMSToAgency(List<Agency> agencies,Event sms){
 		List<String> phones = new ArrayList<>();
 		for(Agency agency:agencies){
 			phones.add(agency.getPhone());
@@ -86,8 +101,11 @@ public class UpdatedEventHandler {
 		return	smsSender.SendSMS("You have an incoming event", phones);
 
 	}
-
-	//Only the citizen in related region will be notified
+	/**
+	 * This method broadcast Event to the residents in the same region
+	 * @param event Event to be broadcasted 
+	 * @return the boolean indicating whether the operation is succesful or not
+	 */
 	public boolean broadcastSMSToPublic(Event event){
 		String location = event.getLocation();
 		List<Public> citizens = Public.find
@@ -116,7 +134,11 @@ public class UpdatedEventHandler {
 		}
 
 	}
-
+	/**
+	 * This method email a report for Event to the Prime Minster Office
+	 * @param event Event to be emailed 
+	 * @return the boolean indicating whether the operation is succesful or not
+	 */
 	public boolean sendEventReport(Event event){
 		String reportName = "EmergencyReportOnEvent" + event.getId() + ".pdf";
 		File report = pdfGenerator.generateEmergencyReport(event,reportName);
@@ -130,6 +152,10 @@ public class UpdatedEventHandler {
 		return emailSender.sendMail(destinations, subject, text, file);
 	}	
 
+	/**
+	 * This method retrieves the email address of Prime Minister Office from database
+	 * @return The email address of Prime Minister Office
+	 */
 	private String getPMEmail(){
 		Agency primeMinster = Agency.find.byId((long)0);
 		return primeMinster.getEmail();

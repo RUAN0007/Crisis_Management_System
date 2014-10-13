@@ -15,7 +15,11 @@ import play.mvc.Controller;
 import play.mvc.Security;
 import models.*;
 import play.mvc.*;
-
+/**
+ * The class to response the request from call operator
+ * @author ruanpingcheng
+ *
+ */
 public class CallOperatorController extends Controller {
 	public static Result login(){
 		DynamicForm requestData = Form.form().bindFromRequest();

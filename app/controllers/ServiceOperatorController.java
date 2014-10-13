@@ -18,7 +18,11 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
-
+/**
+ * The class to response the request from service operator
+ * @author ruanpingcheng
+ *
+ */
 
 public class ServiceOperatorController extends Controller {
 	public static Result login(){

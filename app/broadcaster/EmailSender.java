@@ -17,24 +17,39 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
+/**
+ * This clas is intended for sending email
+ */
 public class EmailSender {
 
 	private String account = "cmsalert2@gmail.com";
 	private String pwd = "cmsalert";
-
+/**
+ * Construct an EmailSender
+ * @param account the Gmail Address
+ * @param pwd the password
+ */
 	public EmailSender(String account, String pwd) {
 		super();
 		this.account = account;
 		this.pwd = pwd;
 	}
-
+/*
+ * A default contructor
+ */
 	public EmailSender() {
 	}
 
+	/**
+	 * This method sends an email from gmail account
+	 * @param destinations A list of destination addresses
+	 * @param subject Subject of the email
+	 * @param text Content of the email
+	 * @param file Local path of the file attached to the email
+	 * @return the boolean indicating whether the operation is successful or not
+	 */
 	public boolean sendMail(List<String> destinations, String subject,
 			String text, String file) {
-
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");

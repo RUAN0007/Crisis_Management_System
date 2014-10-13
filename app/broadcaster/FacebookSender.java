@@ -4,7 +4,10 @@ import com.restfb.*;
 import com.restfb.types.FacebookType;
 import com.restfb.types.User;
 import static java.lang.System.out;
-
+/**
+ * An concrete class of SocialMediaSender
+ * Can post message to a specific facebook account
+ */
 public class FacebookSender extends SocialMediaSender {
 	
 	private  FacebookClient fbClient;
@@ -20,7 +23,11 @@ public class FacebookSender extends SocialMediaSender {
 	
 	
 	
-	
+	/**
+	 * This method will post the message into facebook account
+	 * @param message The content to be posted
+	 * @return boolean whether the operation is successful or not
+	 */
 	@Override
 	public boolean postMessage(String message){
 		FacebookType publishMessageResponse =

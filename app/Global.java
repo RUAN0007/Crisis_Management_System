@@ -36,7 +36,10 @@ import formatter.*;
 
 public class Global extends GlobalSettings {
 	private class RoutineEmailSender{
-				
+		/**
+		 * This method starst the RoutineEmailSender to send the summary email in a speficied frequency
+		 * @param frequencyInMin The frequenct in minute
+		 */
 		public  void start(int frequencyInMin){
 			//TODO
 			//Finish testing
@@ -48,7 +51,7 @@ public class Global extends GlobalSettings {
 	}
 	private  int periodForSummaryReportInMin = 30 ;
 	private Timer summaryTimer = new Timer();
-
+	
 	@Override
 	public void onStart(Application app) {
 		//System.out.println("I hate YAML!!");

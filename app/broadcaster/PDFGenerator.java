@@ -23,6 +23,10 @@ import java.util.List;
 
 
 import models.*;
+/**
+ * This class generates the pdf file. 
+ *
+ */
 public class PDFGenerator {
 
    
@@ -31,22 +35,39 @@ public class PDFGenerator {
     private String summaryReportDirectory;
 	
   
-    
+    /**
+     * Contructor for PDFGenerator
+     * @param emergentReportDirectory the local path of directory storing the emergent reports
+     * @param summaryReportDirectory  the local path of directory storing the summary reports
+     */
     public PDFGenerator(String emergentReportDirectory,
 			String summaryReportDirectory) {
 		super();
 		this.emergentReportDirectory = emergentReportDirectory;
 		this.summaryReportDirectory = summaryReportDirectory;
 	}
-
+/**
+ * The getter of attribute emergentReportDirectory
+ * @return the path of directory storing the emergent report
+ */
 	public String getEmergentReportDirectory() {
 		return emergentReportDirectory;
 	}
-
+	
+	/**
+	 * The getter of attribute getSummaryReportDirectory
+	 * @return the path of directory storing the summary report
+	 */
 	public String getSummaryReportDirectory() {
 		return summaryReportDirectory;
 	}
 
+	/**
+	 * This method generate a summary pdf report from a list of events.
+	 * @param event A list event for summary report
+	 * @param reportName: the report name
+	 * @return File of pdf report
+	 */
 	public File generateReport(List<Event> event,String reportName) {
     		File file = null;
         Document document = new Document();
@@ -121,6 +142,12 @@ public class PDFGenerator {
         return file;
     }
 
+	/**
+	 * This method generate a pdf report for an emergent event.
+	 * @param event The event for  report
+	 * @param reportName: the report name
+	 * @return File of pdf report
+	 */
     public File generateEmergencyReport(Event event,String reportName) {
 		File file = null;
 

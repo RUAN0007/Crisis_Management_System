@@ -16,7 +16,11 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import util.HelperClass;
-
+/**
+ * The class to response the request from agency
+ * @author ruanpingcheng
+ *
+ */
 public class AgencyController extends Controller {
 
 

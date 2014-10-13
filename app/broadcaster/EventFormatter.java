@@ -6,6 +6,10 @@ import java.util.Locale;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import models.*;
+/**
+ * This class is to convert the event to a string, 
+ * which can sent via sms or social media. 
+ */
 public class EventFormatter {
 //	private String message;
 	private static EventFormatter formatter = new EventFormatter();
@@ -13,7 +17,11 @@ public class EventFormatter {
 	public static EventFormatter getDefaultFormatter(){
 		return formatter;
 	}
-	
+	/**
+	 * Format the event to String, intended for sms sendng
+	 * @param e Event to be formatted
+	 * @return formatted String
+	 */
 	public String formatSMS(Event e){
 		/*EXAMPLE:
 		 *  URGENT-National Crisis Management Centre 20/09/14 6:34 AM
@@ -31,7 +39,11 @@ public class EventFormatter {
 		return message;
 	}
 	
-	
+	/**
+	 * Format the event to String, intended for social media broadcasting
+	 * @param e Event to be formatted
+	 * @return formatted String
+	 */
 	public String formatSocialMedia(Event e){
 		/*EXAMPLE:
 		 *  EMERGENCY WARNING

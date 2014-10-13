@@ -14,7 +14,12 @@ import broadcaster.EmailSender;
 import broadcaster.PDFGenerator;
 import broadcaster.ResourceGenerator;
 
-
+/**
+ * RoutineEmailTask is a timertask that groups recent events, 
+ * generate summary report and email to Prime Minister Office. 
+ * @author ruanpingcheng
+ *
+ */
 public class RoutineEmailTask extends TimerTask {
 	private EmailSender emailSender = ResourceGenerator
 			.getDefaultResourceGenerator()

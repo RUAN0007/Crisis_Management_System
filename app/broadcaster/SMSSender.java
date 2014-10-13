@@ -10,7 +10,9 @@ import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.MessageFactory;
 import com.twilio.sdk.resource.instance.Message;
-
+/**
+ * This is class to uses Twillo gate to send SMS
+ */
 public class SMSSender {
 	private   String ACCOUNT_SID = "AC48a7e73848fc1196696514a9dab0c65e";
 	private   String AUTH_TOKEN = "2257118ecf6cb2e4da4c46d603a9552c";
@@ -24,7 +26,12 @@ public class SMSSender {
 		AUTH_TOKEN = aUTH_TOKEN;
 	}
 
-
+/**
+ * This method can send SMS.
+ * @param msg The message to be sent via sms
+ * @param listPhonenum The destinations phone number
+ * @return the boolean indicating whehter the operation is successful or not. 
+ */
 
 
 	public boolean SendSMS(String msg, List<String> ListPhonenum){

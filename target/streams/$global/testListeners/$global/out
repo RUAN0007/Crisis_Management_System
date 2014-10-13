@@ -1,7 +1,7 @@
-[0m[[0minfo[0m] [0mApplicationControllerTest[0m
-[0m[[0minfo[0m] [0m[32m+[0m testLogOut[0m
+[0m[[0minfo[0m] [0mPerformanceTest[0m
+[0m[[0minfo[0m] [0m[32m+[0m test[0m
 [0m[[0minfo[0m] [0m[0m
 [0m[[0minfo[0m] [0m[0m
-[0m[[0minfo[0m] [0mTotal for test ApplicationControllerTest[0m
-[0m[[0minfo[0m] [0m[34mFinished in 0.022 seconds[0m[0m
+[0m[[0minfo[0m] [0mTotal for test PerformanceTest[0m
+[0m[[0minfo[0m] [0m[34mFinished in 0.033 seconds[0m[0m
 [0m[[0minfo[0m] [0m[34m1 tests, 0 failures, 0 errors[0m[0m

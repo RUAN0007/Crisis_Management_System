@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import models.Event;
 import broadcaster.EventFormatter;
 import broadcaster.ResourceGenerator;
-
+/**
+ * IncomingEventHandlerPool holds multiple IncomingEventHandlers. 
+ * It has the mechanism to dispatch a new event to a incomingEventHandlers
+ * @author ruanpingcheng
+ *
+ */
 public class IncomingEventHandlerPool {
 
 	public static IncomingEventHandlerPool defaultIncomingEventHandlerPool = null;
@@ -19,7 +24,10 @@ public class IncomingEventHandlerPool {
 
 	private  ArrayList<IncomingEventHandler> incomingEventHandlers;
 
-	
+	/**
+	 * Conctructor IncomingEventHandlerPool
+	 * @param eventHandlerCount the number of initial eventHandler
+	 */
 	private IncomingEventHandlerPool(int eventHandlerCount){
 
 		
@@ -42,11 +50,21 @@ public class IncomingEventHandlerPool {
 
 	}
 
+	/**
+	 * This method handles the incoming event
+	 * It will enqueue the event to the idlest event handler
+	 * @param incomingEvent the newly reported event
+	 */
 	public void  handleIncomingEvent(Event incomingEvent) {
 		IncomingEventHandler eventHandler = getEventHanlderWithMinQueueLength();
 		eventHandler.enqueueEvent(incomingEvent);
 	}
 	
+	/**
+	 * 
+	 * @return whether the event queue is empty
+	 */
+	//For performance testing
 	public boolean isIdle(){
 		for(IncomingEventHandler eventHandler:this.incomingEventHandlers){
 			if(eventHandler.getQueueSize() > 0) return false;
@@ -54,6 +72,10 @@ public class IncomingEventHandlerPool {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @return the IncomingEventHandler with the shortest queue
+	 */
 	private IncomingEventHandler getEventHanlderWithMinQueueLength(){
 		IncomingEventHandler eventHanlderWithMinQueueLength = null;
 		int minEventInQueueCount = Integer.MAX_VALUE;
