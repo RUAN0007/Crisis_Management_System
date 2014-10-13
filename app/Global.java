@@ -55,7 +55,7 @@ public class Global extends GlobalSettings {
 	@Override
 	public void onStart(Application app) {
 		//System.out.println("I hate YAML!!");
-		new RoutineEmailSender().start(periodForSummaryReportInMin);
+	//	new RoutineEmailSender().start(periodForSummaryReportInMin);
 	}
 
 	

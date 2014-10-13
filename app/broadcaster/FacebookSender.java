@@ -7,6 +7,7 @@ import static java.lang.System.out;
 /**
  * An concrete class of SocialMediaSender
  * Can post message to a specific facebook account
+ * @author Lu You
  */
 public class FacebookSender extends SocialMediaSender {
 	
