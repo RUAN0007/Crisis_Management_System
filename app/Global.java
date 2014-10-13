@@ -1,6 +1,5 @@
 import com.avaje.ebean.Ebean;
 
-import controllers.EventCenter;
 import models.Agency;
 import models.Event;
 
@@ -36,18 +35,24 @@ import broadcaster.*;
 import formatter.*;
 
 public class Global extends GlobalSettings {
+	private class RoutineEmailSender{
+				
+		public  void start(int frequencyInMin){
+			//TODO
+			//Finish testing
+			//Comment it out 
+			int periodInMs = frequencyInMin * 60 * 1000;
+			summaryTimer.scheduleAtFixedRate(new RoutineEmailTask(frequencyInMin), 0,periodInMs);
+
+		}
+	}
 	private  int periodForSummaryReportInMin = 30 ;
 	private Timer summaryTimer = new Timer();
 
 	@Override
 	public void onStart(Application app) {
 		//System.out.println("I hate YAML!!");
-
-		//TODO
-		//Finish testing
-		//Comment it out 
-//		int periodInMs = this.periodForSummaryReportInMin * 60 * 1000;
-//		summaryTimer.scheduleAtFixedRate(new RoutineEmailTask(periodForSummaryReportInMin), 0,periodInMs);
+		new RoutineEmailSender().start(periodForSummaryReportInMin);
 	}
 
 	
