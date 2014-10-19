@@ -99,7 +99,7 @@ public class Application extends Controller {
 
 		try{
 			ObjectNode resultNode = Json.newObject();
-			List<EventType> eventTypes = EventType.find.where("id != 0").findList();
+			List<EventType> eventTypes = EventType.find.findList();
 			resultNode.put("error", 0);
 			ArrayNode eventTypesNode = new ArrayNode(JsonNodeFactory.instance);
 
@@ -222,8 +222,12 @@ public class Application extends Controller {
 		if(message == null) {
 			message = "Welcome to CMS!";
 		}
-
-		return ok(views.html.index.render(message));
+		if(session("id") != null){
+			return ok(views.html.index.render(message));
+		}else{
+			flash("message","You have already as admin logged in...");
+			return redirect("/main");
+		}
 	}
 
 	public static Result validateAdmin(){
@@ -308,26 +312,32 @@ public class Application extends Controller {
 		String pwd = requestData.get("password");
 		String type = requestData.get("type");
 		String message = null;
-		if(type.equals("call operator")){
-			CallOperator co = CallOperator.authenticate(id, pwd);
-			String name = co.getName();
-			co.delete();
-			message = "A record for Call Operator " + name + " has been deleted...\n";
-		}else if(type.equals("service operator")){
-			ServiceOperator so = ServiceOperator.authenticate(id, pwd);
-			String name = so.getName();
-			so.delete();
-			message = "A record for Service Operator " + name + " has been deleted...\n";
-		}else if(type.equals("agency")){
-			Agency agency = Agency.authenticate(id, pwd);
-			String name = agency.getName();
-			agency.delete();
-			message = "A record for Agency " + name + " has been deleted...\n";
+		
+		try{
+			if(type.equals("call operator")){
+				CallOperator co = CallOperator.authenticate(id, pwd);
+				String name = co.getName();
+				co.delete();
+				message = "A record for Call Operator " + name + " has been deleted...\n";
+			}else if(type.equals("service operator")){
+				ServiceOperator so = ServiceOperator.authenticate(id, pwd);
+				String name = so.getName();
+				so.delete();
+				message = "A record for Service Operator " + name + " has been deleted...\n";
+			}else if(type.equals("agency")){
+				Agency agency = Agency.authenticate(id, pwd);
+				String name = agency.getName();
+				agency.delete();
+				message = "A record for Agency " + name + " has been deleted...\n";
 
-		}else{
-			message = "Invalid User Type";
+			}else{
+				message = "Invalid User Type";
+			}
+		}catch(NullPointerException e){
+			message = "The entry does not exist";
 		}
-
+		
+		flash("message",message);
 		return redirect("/main");
 	}
 

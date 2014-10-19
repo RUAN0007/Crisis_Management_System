@@ -17,7 +17,7 @@ public class IncomingEventHandlerPool {
 
 	public synchronized static IncomingEventHandlerPool getDefault(){
 		if(defaultIncomingEventHandlerPool == null){
-			defaultIncomingEventHandlerPool = new IncomingEventHandlerPool(1);
+			defaultIncomingEventHandlerPool = new IncomingEventHandlerPool(10);
 		}
 		return defaultIncomingEventHandlerPool;
 	}
@@ -28,7 +28,7 @@ public class IncomingEventHandlerPool {
 	 * Constructor IncomingEventHandlerPool
 	 * @param eventHandlerCount the number of initial eventHandler
 	 */
-	private IncomingEventHandlerPool(int eventHandlerCount){
+	public IncomingEventHandlerPool(int eventHandlerCount){
 
 		
 		this.incomingEventHandlers = new ArrayList<>();

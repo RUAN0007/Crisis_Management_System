@@ -39,20 +39,89 @@ import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
 
 public class PerformanceTest {
-	
-	@Test
-	public void test() {
-		
 
+	/**
+	 * Performance-1
+	 */
+	@Test
+	public void Performance1Test(){
+		test(100,1,1000);
+	}
+	
+	/**
+	 * Performance-2
+	 */
+	@Test
+	public void Performance2Test(){
+		test(100,5,500);
+	}
+	
+	/**
+	 * Performance-3
+	 */
+	@Test
+	public void Performance3Test(){
+		test(100,10,250);
+	}
+	
+	/**
+	 * Performance-4
+	 */
+	@Test
+	public void Performance4Test(){
+		test(1000,1,3000);
+	}
+	
+	/**
+	 * Performance-5
+	 */
+	@Test
+	public void Performance5Test(){
+		test(1000,5,1500);
+	}
+	
+	/**
+	 * Performance-6
+	 */
+	@Test
+	public void Performance6Test(){
+		test(1000,10,1000);
+	}
+	
+	/**
+	 * Performance-7
+	 */
+	@Test
+	public void Performance7Test(){
+		test(10000,1,20_000);
+	}
+	
+	/**
+	 * Performance-8
+	 */
+	@Test
+	public void Performance8Test(){
+		test(10000,5,10_000);
+	}
+	
+	/**
+	 * Performance-9
+	 */
+	@Test
+	public void Performance9Test(){
+		test(10000,10,10_000);
+	}
+	
+	public void test(int eventCount,int eventHandlerCount,int timeLimitInMs) {
+		
+		
 	
 		running(fakeApplication(), new Runnable() {
 
 			@Override
 			public void run() {
-				IncomingEventHandlerPool handlersPool = IncomingEventHandlerPool.getDefault();
-			
-				int eventCount = 10000;
-				
+				IncomingEventHandlerPool handlersPool = new IncomingEventHandlerPool(eventHandlerCount);
+							
 				List<Event> incomingEvents = new ArrayList<Event>();
 				for(int i = 0;i < eventCount;i++){
 					Event newEvent = new Event();
@@ -84,6 +153,7 @@ public class PerformanceTest {
 				for(Event event:testEvents){
 					event.delete();
 				}
+				assert((after - before) < timeLimitInMs);
 			}
 		});
 			
