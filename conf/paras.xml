@@ -5,10 +5,10 @@
 		<accessTokenSecret>334271166733427</accessTokenSecret>
 	</facebook>
 	<twitter>
-		<consumerKey>p3tp1TVDxnycinDoEpP7J2kbD</consumerKey>
-		<consumerSecret>5INoSTtKaLSP12ECMgzi1hXlo8b9SXC8HrZZK4qp7T4IY9dJrE</consumerSecret>
-		<accessToken>2812584068-kq5h83buw9aXWxWGEh14cKKFo1cqTvkw84i4wtw</accessToken>
-		<accessTokenSecret>U8tJaurorbck1Eo1Mje3XA85Pv2EHIkXEjbmIZcEMNQaj</accessTokenSecret>
+		<consumerKey>1DXnFIfMjs34jx3SCAVQ8UNc3</consumerKey>
+		<consumerSecret>2nwnQNXxzmUvWhDuYTQr0CsfFAn6V7MvYzsuaQLSEcsZT82hhv</consumerSecret>
+		<accessToken>2812584068-iYoysqijWmqoqV3hxO7lLUUw5Gu1LvmWncqEEuL</accessToken>
+		<accessTokenSecret>M4kfj6k8wyNnl4DWQfzyqzOROW6AkgCfNolVkxdoFNkzc</accessTokenSecret>
 	</twitter>
 	<email>
 		<account>cmsalert2@gmail.com</account>
