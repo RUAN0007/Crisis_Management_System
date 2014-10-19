@@ -33,7 +33,7 @@ Seq[Any](format.raw/*1.1*/("""<h1>Bug Report for Crisis Management System</h1>
   <textarea rows="4" cols="50" name="description" 	form="bugReport">
 Enter detailed bug Descrption here...
   </textarea><br/>
-  <input type="submit">
+  <input type="submit"/>
 </form>
 """))}
     }
@@ -47,9 +47,9 @@ Enter detailed bug Descrption here...
 }
                 /*
                     -- GENERATED --
-                    DATE: Fri Sep 26 21:50:15 CST 2014
+                    DATE: Sun Oct 19 18:48:20 CST 2014
                     SOURCE: /Users/ruanpingcheng/Desktop/CMS/app/views/ReportBug.scala.html
-                    HASH: e91e41b364deafe0a1eb821bcb6412db42a9f99c
+                    HASH: 8d005a69e78e27b227477dcf890ac53197228486
                     MATRIX: 859->0
                     LINES: 29->1
                     -- GENERATED --

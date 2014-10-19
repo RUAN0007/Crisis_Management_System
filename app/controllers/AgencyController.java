@@ -17,7 +17,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import util.HelperClass;
 /**
- * The class to response the request from agency
+ * The class to respond the request from agency
  * @author ruanpingcheng
  *
  */

@@ -3,12 +3,11 @@
 
 # --- !Ups
 
-create table account (
+create table admin (
   id                        bigint auto_increment not null,
-  type                      varchar(255),
-  account_name              varchar(255),
+  name                      varchar(255),
   password                  varchar(255),
-  constraint pk_account primary key (id))
+  constraint pk_admin primary key (id))
 ;
 
 create table agency (
@@ -112,7 +111,7 @@ alter table event_type_agency add constraint fk_event_type_agency_agency_02 fore
 
 SET FOREIGN_KEY_CHECKS=0;
 
-drop table account;
+drop table admin;
 
 drop table agency;
 

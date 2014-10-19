@@ -17,7 +17,7 @@ import models.Dispatch;
 import models.Event;
 import models.Notification;
 /**
- * This class processes events from call operators
+ * This class processes events reported from call operators
  * @author ruanpingcheng
  *
  */
@@ -117,9 +117,9 @@ public class IncomingEventHandler extends Thread{
 	}
 	
 	/**
-	 * This method dispatched the events to its corresponding agencies
+	 * This method dispatches the events to its corresponding agencies
 	 * @param event the newly reported event
-	 * @param agencies the repsonsible agencies
+	 * @param agencies the responsible agencies
 	 */
 	private  void  dispatch(Event event,List<Agency> agencies){
 		List<Dispatch> dispatches = new ArrayList<Dispatch>();

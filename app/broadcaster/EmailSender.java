@@ -18,7 +18,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 /**
- * This clas is intended for sending email
+ * This class is intended for sending email
  */
 public class EmailSender {
 
@@ -27,16 +27,14 @@ public class EmailSender {
 /**
  * Construct an EmailSender
  * @param account the Gmail Address
- * @param pwd the password
+ * @param pwd  password for this Gmail account
  */
 	public EmailSender(String account, String pwd) {
 		super();
 		this.account = account;
 		this.pwd = pwd;
 	}
-/*
- * A default contructor
- */
+
 	public EmailSender() {
 	}
 

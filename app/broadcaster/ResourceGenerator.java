@@ -11,7 +11,12 @@ import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 
-
+/**
+ * ResourceGenerator consists of many service providers,
+ * through which building blocks can be assessed. 
+ * @author ruanpingcheng
+ *
+ */
 public class ResourceGenerator {
 	private static ResourceGenerator defaultResourceGenerator = null;
 	public static ResourceGenerator getDefaultResourceGenerator(){

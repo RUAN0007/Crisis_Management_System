@@ -16,7 +16,7 @@ import play.mvc.Security;
 import models.*;
 import play.mvc.*;
 /**
- * The class to response the request from call operator
+ * The class to respond the request from call operator
  * @author ruanpingcheng
  *
  */

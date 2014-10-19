@@ -1,0 +1,25 @@
+@(types: List[models.EventType])
+
+<h1>Enter the name and description of a new event type: </h1>
+<form action="addEventType" method="post">
+
+<p>Name: </p>
+<input type="textfield" name="name"/>
+<p>Descriptions: </p>
+<textarea rows="4" cols="50" name="description">Enter detailed  Descrption here...
+  </textarea>
+</br>
+<input type="submit"/>
+</form>
+
+</br></br>
+<h1>Delete Event Type</h1>
+<form action="deleteUser" method="post">
+<select name="type">
+  @for(t <- types){
+	  <option value="@t.getId()">@t.getEventType()</option>  
+  }
+</select>
+
+<input type="submit"/>
+</form>

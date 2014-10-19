@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import models.*;
 /**
  * This class is to convert the event to a string, 
- * which can sent via sms or social media. 
+ * which can be sent via sms or social media. 
  */
 public class EventFormatter {
 //	private String message;

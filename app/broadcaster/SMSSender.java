@@ -17,9 +17,6 @@ public class SMSSender {
 	private   String ACCOUNT_SID = "AC48a7e73848fc1196696514a9dab0c65e";
 	private   String AUTH_TOKEN = "2257118ecf6cb2e4da4c46d603a9552c";
 
-
-
-
 	public SMSSender(String aCCOUNT_SID, String aUTH_TOKEN) {
 		super();
 		ACCOUNT_SID = aCCOUNT_SID;
@@ -30,7 +27,7 @@ public class SMSSender {
  * This method can send SMS.
  * @param msg The message to be sent via sms
  * @param listPhonenum The destinations phone number
- * @return the boolean indicating whehter the operation is successful or not. 
+ * @return the boolean indicating whether the operation is successful or not. 
  */
 
 

@@ -1,15 +1,25 @@
-@(title: String)(content: Html)
-
+@(message: String)
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
+        <title>CMS Admin Page</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
     <body>
-        @content
+	    <h1>@message</h1>
+	    <a href = "/manageUser">Manage User Class</a>
+  	  </br>
+	    <a href = "/manageEventType">Manage Event Type</a>
+	    </br>
+	    <a href = "/relationship">Manage Agency-EventType Relationship</a>
+	    </br>
+	    <a href = "/bug">Report the bug</a>   
+    	 </br>
+
+	    <a href = "/logout">Logout</a>
+	    
     </body>
 </html>

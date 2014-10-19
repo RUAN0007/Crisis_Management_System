@@ -25,7 +25,7 @@ public class IncomingEventHandlerPool {
 	private  ArrayList<IncomingEventHandler> incomingEventHandlers;
 
 	/**
-	 * Conctructor IncomingEventHandlerPool
+	 * Constructor IncomingEventHandlerPool
 	 * @param eventHandlerCount the number of initial eventHandler
 	 */
 	private IncomingEventHandlerPool(int eventHandlerCount){

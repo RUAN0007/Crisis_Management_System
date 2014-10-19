@@ -2,6 +2,7 @@ package models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,6 +43,18 @@ public class EventType extends Model {
 
 	public String getEventType() {
 		return eventType;
+	}
+
+	public void setEventType(String eventType) {
+		this.eventType = eventType;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setResponsibleAgencies(List<Agency> responsibleAgencies) {
+		this.responsibleAgencies = responsibleAgencies;
 	}
 
 	public String getDescription() {

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class ControllerUtil {
 	/**
-	 * Construct a json indicating a succesful request
+	 * Construct a json indicating a successful request
 	 * @param message the message displayed to the client
 	 * @return a json node
 	 */
@@ -24,7 +24,7 @@ public class ControllerUtil {
 		return jsonNodeForMsg(0, message);
 	}
 	/**
-	 * Construct a json indicating a unsuccesful request
+	 * Construct a json indicating a unsuccessful request
 	 * @param message the message displayed to the client
 	 * @return a json node
 	 */
@@ -46,7 +46,7 @@ public class ControllerUtil {
 
 	/**
 	 * This method converts events to a json array node. 
-	 * @param events a list of events to be converted
+	 * @param events a list of events to be converted to json
 	 * @return a json array node
 	 */
 	static ArrayNode getEventsArrayNode(List<Event> events) {
@@ -58,7 +58,7 @@ public class ControllerUtil {
 		return eventsNode;
 	}
 	/**
-	 * This method converts event to a json  node. 
+	 * This method converts one event to a json  node. 
 	 * @param event an event to be converted
 	 * @return a json  node
 	 */

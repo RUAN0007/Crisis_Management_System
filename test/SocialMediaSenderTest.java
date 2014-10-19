@@ -11,9 +11,5 @@ public class SocialMediaSenderTest {
 		assert(false);
 	}
 
-	@Test
-	public void test2() {
-	//	FacebookSender sender;
-		assert(true);
-	}
+
 }

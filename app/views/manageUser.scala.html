@@ -1,0 +1,34 @@
+@(types: List[String])
+
+<h1>Select user class, input name and phone to add a new user</h1>
+<form action="addUser" method="post">
+<select name="type">
+  @for(t <- types){
+	  <option value="@t">@t</option>  
+  }
+</select>
+</br>
+<p>Name: </p>
+<input type="textfield" name="name"/>
+<p>Phone: </p>
+<input type="textfield" name="phone"/>
+</br>
+<input type="submit"/>
+</form>
+
+</br></br>
+<h1>Delete user by type, id and password</h1>
+<form action="deleteUser" method="post">
+<select name="type">
+  @for(t <- types){
+	  <option value="@t">@t</option>  
+  }
+</select>
+</br>
+<p>UserID: </p>
+<input type="textfield" name="userID"/>
+<p>Password: </p>
+<input type="textfield" name="password"/>
+</br>
+<input type="submit"/>
+</form>

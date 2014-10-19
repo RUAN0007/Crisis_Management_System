@@ -15,14 +15,18 @@ import play.libs.Time;
 public class HelperClass {
 	
 	
+	public static Long getRandomPersonnelID(){
+		Random rand =new Random(System.currentTimeMillis());
+		long value = rand.nextInt(1_000);
+
+		return value;
+	}
 	
 	
 	public static Long getRandomLong(){
 		Random rand =new Random(System.currentTimeMillis());
-		long value = rand.nextLong();
-		while(value < 0){
-			value = rand.nextLong();
-		}
+		long value = rand.nextInt(1_000_000);
+
 		return value;
 	}
 	
