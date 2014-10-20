@@ -1,7 +1,9 @@
 @(types: List[String])
-
-<h1>Select user class, input name and phone to add a new user</h1>
-<form action="addUser" method="post">
+<h1>Manage users </h1>
+<form action="addUser" method="post" style="text-align:center">
+	<fieldset>
+	<legend><h2>Add a new user:</h2></legend>
+	<p>Type: </p>
 <select name="type">
   @for(t <- types){
 	  <option value="@t">@t</option>  
@@ -13,12 +15,18 @@
 <p>Phone: </p>
 <input type="textfield" name="phone"/>
 </br>
+</br>
+
 <input type="submit" value="Add"/>
+</fieldset>
+
 </form>
 
 </br></br>
-<h1>Delete user by type, id and password</h1>
-<form action="deleteUser" method="post">
+<form action="deleteUser" method="post" style="text-align:center">
+	<fieldset>
+	<legend><h2>Delete an existing user:</h2></legend>
+<p>Type: </p>
 <select name="type">
   @for(t <- types){
 	  <option value="@t">@t</option>  
@@ -28,7 +36,11 @@
 <p>UserID: </p>
 <input type="textfield" name="userID"/>
 <p>Password: </p>
-<input type="textfield" name="password"/>
+<input type="password" name="password"/>
 </br>
+</br>
+
 <input type="submit" value="Delete"/>
+</fieldset>
+
 </form>

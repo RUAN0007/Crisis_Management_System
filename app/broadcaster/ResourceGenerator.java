@@ -52,8 +52,8 @@ public class ResourceGenerator {
 			expr = xpath.compile("/paras/facebook/accessTokenSecret");
 			String accessTokenSecret = (String) expr.evaluate(doc,XPathConstants.STRING);
 			//TODO Testing
-			//	return new FacebookSender(accessToken, accessTokenSecret);
-			return null;
+			return new FacebookSender(accessToken, accessTokenSecret);
+		//	return null;
 		}catch(XPathExpressionException e){
 			e.printStackTrace();		
 			return null;

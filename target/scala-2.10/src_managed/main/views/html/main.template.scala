@@ -38,17 +38,28 @@ Seq[Any](format.raw/*1.19*/("""
     </head>
     <body>
 	    <h1>"""),_display_(Seq[Any](/*12.11*/message)),format.raw/*12.18*/("""</h1>
+    	<fieldset>
+    	<legend><h2>Select the following links for service:</h2></legend>
+	    <ul>
+		    <li>
 	    <a href = "/manageUser">Manage User Class</a>
-  	  </br>
+    		</li>
+    		<li>
 	    <a href = "/manageEventType">Manage Event Type</a>
-	    </br>
+		</li>
+    		<li>
 	    <a href = "/relationship">Manage Agency-EventType Relationship</a>
-	    </br>
+    		</li>
+    		<li>
 	    <a href = "/bug">Report the bug</a>   
-    	 </br>
-
-	    <a href = "/logout">Logout</a>
+    		</li>
+    		<li>
+	    <a href = "/logout">Log out</a>
+		</li>
 	    
+  	  </ul>
+	  </fieldset>
+	  
     </body>
 </html>
 """))}
@@ -63,9 +74,9 @@ Seq[Any](format.raw/*1.19*/("""
 }
                 /*
                     -- GENERATED --
-                    DATE: Sun Oct 19 18:58:59 CST 2014
+                    DATE: Mon Oct 20 14:39:10 CST 2014
                     SOURCE: /Users/ruanpingcheng/Desktop/CMS/app/views/main.scala.html
-                    HASH: 3af80d4fdd969075bf0dcbf52ca230678244ecf6
+                    HASH: 0cfc395207c60109740386e93b7100c9fb2e5e95
                     MATRIX: 773->1|884->18|1046->145|1060->151|1115->185|1211->246|1225->252|1278->284|1338->309|1352->315|1418->360|1522->428|1551->435
                     LINES: 26->1|29->1|35->7|35->7|35->7|36->8|36->8|36->8|37->9|37->9|37->9|40->12|40->12
                     -- GENERATED --

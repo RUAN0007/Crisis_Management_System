@@ -30,6 +30,10 @@ import util.HelperClass;
  */
 public class Application extends Controller {
 
+	private static final String AGENCY = "Agency";
+	private static final String SERVICE_OPERATOR = "Service Operator";
+	private static final String CALL_OPERATOR = "Call Operator";
+
 	public static Result test() {
 		long lowerTimeBound = System.currentTimeMillis() - 30 * 60 * 1000;
 		List<Event> events = Event.find.where().lt("callingTime", new Timestamp(lowerTimeBound)).
@@ -45,6 +49,11 @@ public class Application extends Controller {
 		String id = session().get("id");
 		if(id == null) return ok(ControllerUtil.jsonNodeForError("User is not currently logged in"));
 		session().clear();
+		if(id.startsWith("M")){
+			//Previously logged as administrator
+			//redirect to index page
+			return redirect("/");
+		}
 		return ok(ControllerUtil.jsonNodeForSuccess("User + " + id + " logged out successfully"));
 	}
 
@@ -222,10 +231,10 @@ public class Application extends Controller {
 		if(message == null) {
 			message = "Welcome to CMS!";
 		}
-		if(session("id") != null){
+		if(session("id") == null){
 			return ok(views.html.index.render(message));
 		}else{
-			flash("message","You have already as admin logged in...");
+			flash("message","You have already logged in as admin ...");
 			return redirect("/main");
 		}
 	}
@@ -250,9 +259,9 @@ public class Application extends Controller {
 	@Security.Authenticated(AdminSecured.class)
 	public static Result renderManageUserView(){
 		List<String> types = new ArrayList<String>();
-		types.add("call operator");
-		types.add("service operator");
-		types.add("agency");
+		types.add(CALL_OPERATOR);
+		types.add(SERVICE_OPERATOR);
+		types.add(AGENCY);
 
 		return ok(views.html.manageUser.render(types));
 	}
@@ -267,7 +276,7 @@ public class Application extends Controller {
 		Long id = HelperClass.getRandomPersonnelID();
 		String pwd  = "000000";
 		String message;
-		if(type.equals("call operator")){
+		if(type.equals(CALL_OPERATOR)){
 			CallOperator co = new CallOperator();
 			co.setID(id);
 			co.setName(name);
@@ -276,7 +285,7 @@ public class Application extends Controller {
 			co.save();
 			message = "A record for Call Operator " + name + " has been generated...\n";
 			message += "Its auto-generated UserID is " + id + " and password is " + pwd;
-		}else if(type.equals("service operator")){
+		}else if(type.equals(SERVICE_OPERATOR)){
 			ServiceOperator so = new ServiceOperator();
 			so.setId(id);
 			so.setName(name);
@@ -285,7 +294,7 @@ public class Application extends Controller {
 			so.save();
 			message = "A record for Service Operator " + name + " has been generated...\n";
 			message += "Its auto-generated UserID is " + id + " and password is " + pwd;
-		}else if(type.equals("agency")){
+		}else if(type.equals(AGENCY)){
 			Agency agency = new Agency();
 			agency.setID(id);
 			agency.setName(name);
@@ -314,17 +323,17 @@ public class Application extends Controller {
 		String message = null;
 		
 		try{
-			if(type.equals("call operator")){
+			if(type.equals(CALL_OPERATOR)){
 				CallOperator co = CallOperator.authenticate(id, pwd);
 				String name = co.getName();
 				co.delete();
 				message = "A record for Call Operator " + name + " has been deleted...\n";
-			}else if(type.equals("service operator")){
+			}else if(type.equals(SERVICE_OPERATOR)){
 				ServiceOperator so = ServiceOperator.authenticate(id, pwd);
 				String name = so.getName();
 				so.delete();
 				message = "A record for Service Operator " + name + " has been deleted...\n";
-			}else if(type.equals("agency")){
+			}else if(type.equals(AGENCY)){
 				Agency agency = Agency.authenticate(id, pwd);
 				String name = agency.getName();
 				agency.delete();

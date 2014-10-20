@@ -26,14 +26,16 @@ object ReportBug extends BaseScalaTemplate[play.api.templates.HtmlFormat.Appenda
     def apply():play.api.templates.HtmlFormat.Appendable = {
         _display_ {
 
-Seq[Any](format.raw/*1.1*/("""<h1>Bug Report for Crisis Management System</h1>
-<form method="post" action="recordBug" id="bugReport" enctype="multipart/form-data">
-  Subject: <input type="text" name="subject" /><br/>
-  Screen Capture:<input type="file" name="screenCapture"/><br/>
+Seq[Any](format.raw/*1.1*/("""<form method="post" action="recordBug" id="bugReport" enctype="multipart/form-data" style="text-align:center">
+	<fieldset>
+	<legend><h2>Report Bug:</h2></legend>
+  Subject: <input type="text" name="subject" /><br/><br/>
+  Screen Capture:<input type="file" name="screenCapture"/><br/><br/>
   <textarea rows="4" cols="50" name="description" 	form="bugReport">
 Enter detailed bug Descrption here...
-  </textarea><br/>
+  </textarea><br/><br/>
   <input type="submit" value="Submit"/>
+<.fieldset>
 </form>
 """))}
     }
@@ -47,9 +49,9 @@ Enter detailed bug Descrption here...
 }
                 /*
                     -- GENERATED --
-                    DATE: Sun Oct 19 22:04:32 CST 2014
+                    DATE: Mon Oct 20 14:39:10 CST 2014
                     SOURCE: /Users/ruanpingcheng/Desktop/CMS/app/views/ReportBug.scala.html
-                    HASH: 3f08e5f6a5af0f69584e91599bac5e16e6f2cf1f
+                    HASH: 263d9f59adf53084d0783c169d493616a53e29e3
                     MATRIX: 859->0
                     LINES: 29->1
                     -- GENERATED --

@@ -1,9 +1,11 @@
-<h1>Bug Report for Crisis Management System</h1>
-<form method="post" action="recordBug" id="bugReport" enctype="multipart/form-data">
-  Subject: <input type="text" name="subject" /><br/>
-  Screen Capture:<input type="file" name="screenCapture"/><br/>
+<form method="post" action="recordBug" id="bugReport" enctype="multipart/form-data" style="text-align:center">
+	<fieldset>
+	<legend><h2>Report Bug:</h2></legend>
+  Subject: <input type="text" name="subject" /><br/><br/>
+  Screen Capture:<input type="file" name="screenCapture"/><br/><br/>
   <textarea rows="4" cols="50" name="description" 	form="bugReport">
 Enter detailed bug Descrption here...
-  </textarea><br/>
+  </textarea><br/><br/>
   <input type="submit" value="Submit"/>
+<.fieldset>
 </form>

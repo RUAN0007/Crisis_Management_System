@@ -1,25 +1,30 @@
 @(types: List[models.EventType])
+<h1>Manage Event Types in CMS</h1>
 
-<h1>Enter the name and description of a new event type: </h1>
-<form action="addEventType" method="post">
-
+<form style="text-align:center" action="addEventType" method="post">
+	<fieldset>
+	<legend><h2>Add a new event type:</h2></legend>
 <p>Name: </p>
 <input type="textfield" name="name"/>
 <p>Descriptions: </p>
-<textarea rows="4" cols="50" name="description">Enter detailed  Descrption here...
+<textarea rows="4" cols="50" name="description">Enter detailed  Description here...
   </textarea>
-</br>
+</br></br>
 <input type="submit" value="Create"/>
+</fieldset>
+
 </form>
 
 </br></br>
-<h1>Delete Event Type</h1>
-<form action="deleteEventType" method="post">
+<form action="deleteEventType" style="text-align:center" method="post">
+	<fieldset>
+	<legend><h2>Delete an existing event type:</h2></legend>
 <select name="type">
   @for(t <- types){
 	  <option value="@t.getId()">@t.getEventType()</option>  
   }
 </select>
-
+</br></br>
 <input type="submit" value="Delete"/>
+</fieldset>
 </form>

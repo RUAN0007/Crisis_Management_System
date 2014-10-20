@@ -19,18 +19,18 @@
     </head>
     <body>
 	  <h1>Manage Event Type and Agency Relationship here</h1>  
-        <form action= "manageRelationShip" method="post">
-		<table border="border">
+        <form style="text-align:center" action= "manageRelationShip" method="post">
+		<table border="5" align="center" style="text-align:center" style="border-collapse: collapse">
 			<tr>
 				<th></th>
 				@for( t <- types) {
-				  <th>@t.getEventType() </th>
+				  <th><b>@t.getEventType()</b> </th>
 				}
 				
 			</tr>
 			@for(a <- agencies){
 				<tr>
-					<td>@a.getName()</td>
+					<td><b>@a.getName()</b></td>
 					
 					@for( t <- types) {
 						<td>
@@ -41,7 +41,8 @@
 				</tr>
 			}
 		</table>
-		<input type="submit" value="submit">
+		</br>
+		<input type="submit" value="Update">
 	</form>
     </body>
 </html>

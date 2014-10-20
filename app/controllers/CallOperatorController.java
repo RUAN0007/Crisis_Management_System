@@ -84,9 +84,8 @@ public class CallOperatorController extends Controller {
 			reportedEvent.setPriority(Integer.parseInt(priorityStr));
 
 
-			if(eventType.getId() != 0){
-				IncomingEventHandlerPool.getDefault().handleIncomingEvent(reportedEvent);
-			}
+			IncomingEventHandlerPool.getDefault().handleIncomingEvent(reportedEvent);
+			
 
 		}catch(Exception e){
 				e.printStackTrace();

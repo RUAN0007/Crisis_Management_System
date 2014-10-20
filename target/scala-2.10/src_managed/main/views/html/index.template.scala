@@ -29,14 +29,19 @@ object index extends BaseScalaTemplate[play.api.templates.HtmlFormat.Appendable,
 Seq[Any](format.raw/*1.19*/("""
 
 <h1>"""),_display_(Seq[Any](/*3.6*/message)),format.raw/*3.13*/("""</h1>
-<h2> Log in Administrator</h2>
-<form action="validateAdmin" method="post">
+<form style="text-align:center" action="validateAdmin" method="post">
+	<fieldset>
+	<legend><h2>Log in As System Administrator:</h2></legend>
 <p>UserID: </p>
 <input type="textfield" name="userID"/>
 <p>Password: </p>
-<input type="textfield" name="password"/>
+<input type="password" name="password"/>
 </br>
-<input type="submit">
+</br>
+
+<input type="submit" value="Log in">
+</fieldset>
+
 </form>"""))}
     }
     
@@ -49,9 +54,9 @@ Seq[Any](format.raw/*1.19*/("""
 }
                 /*
                     -- GENERATED --
-                    DATE: Sun Oct 19 18:53:45 CST 2014
+                    DATE: Mon Oct 20 14:39:10 CST 2014
                     SOURCE: /Users/ruanpingcheng/Desktop/CMS/app/views/index.scala.html
-                    HASH: a5656496bbf2148873ce590cffcd43113e5a50db
+                    HASH: f6423ef22bf2c255d9c4b155335ca762c8545400
                     MATRIX: 774->1|885->18|926->25|954->32
                     LINES: 26->1|29->1|31->3|31->3
                     -- GENERATED --

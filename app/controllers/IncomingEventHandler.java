@@ -113,7 +113,9 @@ public class IncomingEventHandler extends Thread{
 		
 		
 		//Broadcast to the public
-		broadcast(event);
+		if(event.getPriority() <= 2){
+			broadcast(event);
+		}
 	}
 	
 	/**
@@ -189,7 +191,7 @@ public class IncomingEventHandler extends Thread{
 	private boolean broadcastEventOnSocialMedia(Event event){
 		String message = eventFormatter.formatSocialMedia(event);
 		return 
-				//fbSender.postMessage(message) &&
+			//	fbSender.postMessage(message) &&
 				twitterSender.postMessage(message);
 	}
 
