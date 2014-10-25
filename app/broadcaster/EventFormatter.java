@@ -31,10 +31,10 @@ public class EventFormatter {
 		String message = null;
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy hh:mm a",Locale.US);
 		Date date = new Date();
-		
+		String type = e.getEventType().getEventType();
 		if (e.getPriority() == 1){
 			message = "URGENT-National Crisis Management Centre "+dateFormat.format(date)+ "\nResidents in "
-			          +e.getLocation() +": ALERT! There is a Dengue case in " + e.getPostalCode() + ". \nDetails of the event: " + e.getDescription() ;
+			          +e.getLocation() +": ALERT! There is a " + type + " case in " + e.getPostalCode() + ". \nDetails of the event: " + e.getDescription() ;
 		}
 		return message;
 	}

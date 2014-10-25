@@ -1,12 +1,17 @@
 @(message: String)
 
 <h1>@message</h1>
-<h2> Log in Administrator</h2>
-<form action="">
+<form style="text-align:center" action="validateAdmin" method="post">
+	<fieldset>
+	<legend><h2>Log in As System Administrator:</h2></legend>
 <p>UserID: </p>
 <input type="textfield" name="userID"/>
 <p>Password: </p>
-<input type="textfield" name="password"/>
+<input type="password" name="password"/>
 </br>
-<input type="submit">
+</br>
+
+<input type="submit" value="Log in">
+</fieldset>
+
 </form>

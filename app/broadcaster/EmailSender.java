@@ -7,6 +7,7 @@ import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -76,11 +77,14 @@ public class EmailSender {
 				message.setSubject(subject);
 				message.setText(text); // message body
 				Multipart multipart = new MimeMultipart();
+				 BodyPart messageBody = new MimeBodyPart();
+		         messageBody.setText(text);
 				MimeBodyPart messageBodyPart = new MimeBodyPart();
 				String filename = file; // file must be in the workspace
 				DataSource source = new FileDataSource(filename);
 				messageBodyPart.setDataHandler(new DataHandler(source));
 				messageBodyPart.setFileName(filename);
+				multipart.addBodyPart(messageBody);
 				multipart.addBodyPart(messageBodyPart);
 
 				// Send the complete message parts
