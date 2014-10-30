@@ -1,6 +1,11 @@
 import com.avaje.ebean.Ebean;
 
+import controllers.CallOperatorController;
+import controllers.IncomingEventHandlerPool;
+import controllers.ServiceOperatorController;
+import controllers.UpdatedEventHandler;
 import models.Agency;
+import models.CallOperator;
 import models.Event;
 
 import org.w3c.dom.Document;
@@ -40,32 +45,50 @@ public class Global extends GlobalSettings {
 		 * This method starst the RoutineEmailSender to send the summary email in a speficied frequency
 		 * @param frequencyInMin The frequenct in minute
 		 */
+		private Timer summaryTimer = new Timer();
+
 		public  void start(int frequencyInMin){
 			//TODO
 			//Finish testing
 			//Comment it out 
-			int periodInMs = frequencyInMin * 60 * 1000;
-			summaryTimer.scheduleAtFixedRate(new RoutineEmailTask(frequencyInMin), 0,periodInMs);
+//			int periodInMs = frequencyInMin * 60 * 1000;
+//			summaryTimer.scheduleAtFixedRate(new RoutineEmailTask(frequencyInMin), 0,periodInMs);
+			
+			ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
 
+			CallOperatorController.setIncomingEventHandlerPool(new IncomingEventHandlerPool(5));
+			
+			UpdatedEventHandler updatedEventHandler = new UpdatedEventHandler(
+					defaultResourceGenerator.getNewEmailSender(), 
+					defaultResourceGenerator.getNewSMSSender(), 
+					new EventFormatter(), 
+					defaultResourceGenerator.getNewReportGenerator());
+
+			ServiceOperatorController.setUpdatedEventHandler(updatedEventHandler);
+			
+			
+		}
+		
+		public void stop(){
+			if(this.summaryTimer != null){
+				this.summaryTimer.cancel();
+			}
 		}
 	}
 	private  int periodForSummaryReportInMin = 30 ;
-	private Timer summaryTimer = new Timer();
-	
+	private RoutineEmailSender rtms = new RoutineEmailSender();
 	@Override
 	public void onStart(Application app) {
 		//System.out.println("I hate YAML!!");
-	//	new RoutineEmailSender().start(periodForSummaryReportInMin);
+	//	rtms.start(periodForSummaryReportInMin);
 	}
 
 	
 	
 	@Override
 	public void onStop(Application app) {
-		if(this.summaryTimer != null){
-			this.summaryTimer.cancel();
-		}
-
+		
+		rtms.stop();
 	}
 
 	

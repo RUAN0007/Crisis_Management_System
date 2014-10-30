@@ -25,6 +25,13 @@ import play.mvc.Security;
  */
 
 public class ServiceOperatorController extends Controller {
+	
+	private static UpdatedEventHandler updateEventHandler;
+	
+	public static void setUpdatedEventHandler(UpdatedEventHandler updateEventHandler){
+		ServiceOperatorController.updateEventHandler = updateEventHandler;
+	}
+	
 	public static Result login(){
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String userID = requestData.get("id");
@@ -100,7 +107,7 @@ public class ServiceOperatorController extends Controller {
 				Agency agency = Agency.find.byId(agencyID);
 				agencies.add(agency);
 			}
-			UpdatedEventHandler.getDefault().dispatch(event,agencies);
+			updateEventHandler.dispatch(event,agencies);
 
 			return ok(ControllerUtil.jsonNodeForSuccess("Update for Event " + eventID + " successfully..."));
 		}catch(Exception e){
@@ -145,7 +152,7 @@ public class ServiceOperatorController extends Controller {
 			if(event.getPriority() != 1){
 				return ok(ControllerUtil.jsonNodeForError("The EventID " + eventID + " is qualified for broadcasting sms..."));
 			}
-			if(UpdatedEventHandler.getDefault().broadcastSMSToPublic(event)){
+			if(updateEventHandler.broadcastSMSToPublic(event)){
 				return ok(ControllerUtil.jsonNodeForSuccess("SMS Event " + eventID + " Succeeded..."));
 			}else{
 				return ok(ControllerUtil.jsonNodeForError("SMS Event " + eventID + " Failed..."));
@@ -168,7 +175,7 @@ public class ServiceOperatorController extends Controller {
 			if(event.getPriority() != 1){
 				return ok(ControllerUtil.jsonNodeForError("The EventID " + eventID + " is qualified for emergent report..."));
 			}
-			if(UpdatedEventHandler.getDefault().sendEventReport(event)){
+			if(updateEventHandler.sendEventReport(event)){
 				return ok(ControllerUtil.jsonNodeForSuccess("Email Event " + eventID + " Succeeded..."));
 			}else{
 				return ok(ControllerUtil.jsonNodeForError("Email Event " + eventID + " Failed..."));

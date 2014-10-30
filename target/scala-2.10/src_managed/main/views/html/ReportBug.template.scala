@@ -35,7 +35,7 @@ Seq[Any](format.raw/*1.1*/("""<form method="post" action="recordBug" id="bugRepo
 Enter detailed bug Descrption here...
   </textarea><br/><br/>
   <input type="submit" value="Submit"/>
-<.fieldset>
+</fieldset>
 </form>
 """))}
     }
@@ -49,9 +49,9 @@ Enter detailed bug Descrption here...
 }
                 /*
                     -- GENERATED --
-                    DATE: Mon Oct 20 14:39:10 CST 2014
+                    DATE: Sun Oct 26 09:58:00 CST 2014
                     SOURCE: /Users/ruanpingcheng/Desktop/CMS/app/views/ReportBug.scala.html
-                    HASH: 263d9f59adf53084d0783c169d493616a53e29e3
+                    HASH: c2c3b90fea6a0d142d0378e61b03ea1b0087076f
                     MATRIX: 859->0
                     LINES: 29->1
                     -- GENERATED --

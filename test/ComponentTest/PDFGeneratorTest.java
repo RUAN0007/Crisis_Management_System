@@ -64,27 +64,28 @@ public class PDFGeneratorTest {
     /**
      * Report-1
      */
+
     @Test
     public void testGenerateReport() {
 
-        assertNotNull("Successful in file creation for List of Events", file = pdfGenerator.generateReport(events, "Report.pdf"));
+        assertNotNull("Unsuccessful in file creation for List of Events", file = pdfGenerator.generateReport(events, "Report.pdf"));
         assertTrue(file.exists());
         file.delete();
 
-        assertNotNull("Successful in file creation for Empty list of Events", file = pdfGenerator.generateReport(noEvents, "EmptyReport.pdf"));
+        assertNotNull("Unsuccessful in file creation for Empty list of Events", file = pdfGenerator.generateReport(noEvents, "EmptyReport.pdf"));
         assertTrue(file.exists());
         file.delete();
     }
-    
     /**
      * Report -2
      */
     @Test
     public void testGenerateEmergencyReport() {
 
-        assertNotNull("Successful in file creation for a single Event", erFile = pdfGenerator.generateEmergencyReport(event, "EReport.pdf"));
+        assertNotNull("Unsuccessful in file creation for a single Event", erFile = pdfGenerator.generateEmergencyReport(event, "EReport.pdf"));
         assertTrue(erFile.exists());
         erFile.delete();
     }
+    
 
 }

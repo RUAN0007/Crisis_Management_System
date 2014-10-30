@@ -21,6 +21,14 @@ import play.mvc.*;
  *
  */
 public class CallOperatorController extends Controller {
+	
+	private static IncomingEventHandlerPool eventHandlerPool;
+	
+	public static void setIncomingEventHandlerPool
+				(IncomingEventHandlerPool eventHandlerPool){
+		CallOperatorController.eventHandlerPool = eventHandlerPool;
+	}
+	
 	public static Result login(){
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String userID = requestData.get("id");
@@ -84,7 +92,7 @@ public class CallOperatorController extends Controller {
 			reportedEvent.setPriority(Integer.parseInt(priorityStr));
 
 
-			IncomingEventHandlerPool.getDefault().handleIncomingEvent(reportedEvent);
+			eventHandlerPool.handleIncomingEvent(reportedEvent);
 			
 
 		}catch(Exception e){

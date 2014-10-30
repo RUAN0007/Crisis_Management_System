@@ -59,20 +59,18 @@ public class EventFormatter {
 			message = "EMERGENCY WARNING " +
 					"\nLocation: " + e.getLocation() + 
 					"\nIncident Name: " + e.getEventType()+ 
-					"\nIssued: "+ dateFormat.format(date) + 
-					"\nEmergency services are attending to this case.  ";
+					"\nIssued: "+ dateFormat.format(date);
 		}
 		else if (e.getPriority() == 2){
 			message = "WATCH AND ACT " +
 					"\nLocation: " + e.getLocation() + 
-					"\nIncident Name: " + e.getEventType()+ 
-					"\nIssued: "+ dateFormat.format(date) + 
-					"\nEmergency services are attending to this case. ";
+					"\nIncident Name: " + e.getEventType().getEventType() + 
+					"\nIssued: "+ dateFormat.format(date);
 		}
 		else if (e.getPriority() == 3){
 			message = "ADVICE " +
 					"\nLocation: " + e.getLocation() + 
-					"\nIncident Name: " + e.getEventType()+ 
+					"\nIncident Name: " + e.getEventType().getEventType()+ 
 					"\nIssued: "+ dateFormat.format(date);
 		}
 		return message;

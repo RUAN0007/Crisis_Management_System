@@ -26,19 +26,19 @@ import com.avaje.ebean.Ebean;
  *
  */
 public class UpdatedEventHandler {
-	private static UpdatedEventHandler defaultUpdatedEventHandler = null;
-	public static UpdatedEventHandler getDefault(){
-		if(defaultUpdatedEventHandler == null){
-			ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
-			defaultUpdatedEventHandler = new UpdatedEventHandler(
-															defaultResourceGenerator.getNewEmailSender(), 
-															defaultResourceGenerator.getNewSMSSender(), 
-															new EventFormatter(), 
-															defaultResourceGenerator.getNewReportGenerator());
-		}
-		assert(defaultUpdatedEventHandler != null);
-		return defaultUpdatedEventHandler;
-	}
+//	private static UpdatedEventHandler defaultUpdatedEventHandler = null;
+//	public static UpdatedEventHandler getDefault(){
+//		if(defaultUpdatedEventHandler == null){
+//			ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
+//			defaultUpdatedEventHandler = new UpdatedEventHandler(
+//															defaultResourceGenerator.getNewEmailSender(), 
+//															defaultResourceGenerator.getNewSMSSender(), 
+//															new EventFormatter(), 
+//															defaultResourceGenerator.getNewReportGenerator());
+//		}
+//		assert(defaultUpdatedEventHandler != null);
+//		return defaultUpdatedEventHandler;
+//	}
 	
 	
 	private static String MEDIA_SMS = "SMS";
@@ -55,7 +55,7 @@ public class UpdatedEventHandler {
 
 
 
-	private UpdatedEventHandler(EmailSender emailSender, SMSSender smsSender,
+	public UpdatedEventHandler(EmailSender emailSender, SMSSender smsSender,
 			EventFormatter eventFormatter, PDFGenerator pdfGenerator) {
 		super();
 		this.emailSender = emailSender;

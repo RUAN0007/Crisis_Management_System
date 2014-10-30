@@ -13,14 +13,14 @@ import broadcaster.ResourceGenerator;
  */
 public class IncomingEventHandlerPool {
 
-	public static IncomingEventHandlerPool defaultIncomingEventHandlerPool = null;
-
-	public synchronized static IncomingEventHandlerPool getDefault(){
-		if(defaultIncomingEventHandlerPool == null){
-			defaultIncomingEventHandlerPool = new IncomingEventHandlerPool(10);
-		}
-		return defaultIncomingEventHandlerPool;
-	}
+//	public static IncomingEventHandlerPool defaultIncomingEventHandlerPool = null;
+//
+//	public synchronized static IncomingEventHandlerPool getDefault(){
+//		if(defaultIncomingEventHandlerPool == null){
+//			defaultIncomingEventHandlerPool = new IncomingEventHandlerPool(10);
+//		}
+//		return defaultIncomingEventHandlerPool;
+//	}
 
 	private  ArrayList<IncomingEventHandler> incomingEventHandlers;
 
