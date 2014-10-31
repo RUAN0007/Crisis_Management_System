@@ -92,7 +92,9 @@ public class CallOperatorController extends Controller {
 			reportedEvent.setPriority(Integer.parseInt(priorityStr));
 
 
-			eventHandlerPool.handleReportedEvent(reportedEvent);
+			if(!eventHandlerPool.handleReportedEvent(reportedEvent)){
+				throw new Exception("The server is overloaded...");
+			}
 			
 
 		}catch(Exception e){

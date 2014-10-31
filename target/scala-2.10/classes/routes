@@ -3,31 +3,32 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.AdminController.index()
 GET 		/logout						controllers.Application.logout()
 POST   /events       			  controllers.Application.getEventsBytypeID()
 GET   /getAgencies					controllers.Application.getAgencies()
 GET   /getEventTypes						controllers.Application.getEventTypes()
-
-GET  /main 								controllers.Application.main()
-
-POST /validateAdmin						controllers.Application.validateAdmin()
-
-GET   /relationship                       controllers.Application.manageAgencyEventTypeRelationship()
-POST /manageRelationShip					controllers.Application.manageRelationship()
-
-GET /manageUser							controllers.Application.renderManageUserView()
-POST /addUser							controllers.Application.addUser()
-POST /deleteUser							controllers.Application.deleteUser()
-
-GET  /manageEventType					controllers.Application.renderManageEventTypesView()
-POST /addEventType							controllers.Application.addEventType()
-POST /deleteEventType						controllers.Application.deleteEventType()
-
 #For Bug Report
 GET 		/bug							controllers.Application.reportBug()
 POST 	/recordBug					controllers.Application.recordBug()
 	
+	
+GET  /main 								controllers.AdminController.main()
+
+POST /validateAdmin						controllers.AdminController.validateAdmin()
+
+GET   /relationship                       controllers.AdminController.manageAgencyEventTypeRelationship()
+POST /manageRelationShip					controllers.AdminController.manageRelationship()
+
+GET /manageUser							controllers.AdminController.renderManageUserView()
+POST /addUser							controllers.AdminController.addUser()
+POST /deleteUser							controllers.AdminController.deleteUser()
+
+GET  /manageEventType					controllers.AdminController.renderManageEventTypesView()
+POST /addEventType							controllers.AdminController.addEventType()
+POST /deleteEventType						controllers.AdminController.deleteEventType()
+
+
 #CallOperator
 POST     /calloperator/login				controllers.CallOperatorController.login()
 POST		/calloperator/report						controllers.CallOperatorController.report()

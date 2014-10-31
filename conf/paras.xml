@@ -20,4 +20,7 @@
 		<sid>AC48a7e73848fc1196696514a9dab0c65e</sid>
 		<token>2257118ecf6cb2e4da4c46d603a9552c</token>
 	</sms>
+	<eventtype name="Dengue">
+		<filter>filter.OutputEventFilter</filter>
+	</eventtype>
 </paras>

@@ -22,8 +22,23 @@ public abstract class EventFilter extends Thread {
 		this.nextFilter = nextFilter;
 	} 
 	
-	public EventFilter(int queueSizeLimit){
+	public EventFilter(Integer queueSizeLimit){
 		this(queueSizeLimit, null);
+	}
+	
+
+	
+	/**
+	 * Get the total the count of events in the pipe
+	 * @return
+	 */
+	public int getEventInPipeCount(){
+		int count = 0;
+		if(this.nextFilter != null){
+			count = this.nextFilter.getEventInPipeCount();
+		}
+		return this.getQueueLength() + count;
+		
 	}
 	
 	/**

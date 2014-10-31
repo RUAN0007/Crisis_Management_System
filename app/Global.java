@@ -55,17 +55,6 @@ public class Global extends GlobalSettings {
 //			int periodInMs = frequencyInMin * 60 * 1000;
 //			summaryTimer.scheduleAtFixedRate(new RoutineEmailTask(frequencyInMin), 0,periodInMs);
 			
-			ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
-
-			CallOperatorController.setEventHandlerPool(new EventHandlerPool(5));
-			
-			UpdatedEventHandler updatedEventHandler = new UpdatedEventHandler(
-					defaultResourceGenerator.getNewEmailSender(), 
-					defaultResourceGenerator.getNewSMSSender(), 
-					defaultResourceGenerator.getEventFormatter(), 
-					defaultResourceGenerator.getNewReportGenerator());
-
-			ServiceOperatorController.setUpdatedEventHandler(updatedEventHandler);
 			
 			
 		}
@@ -82,6 +71,19 @@ public class Global extends GlobalSettings {
 	public void onStart(Application app) {
 		//System.out.println("I hate YAML!!");
 	//	rtms.start(periodForSummaryReportInMin);
+		
+		ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
+
+		CallOperatorController.setEventHandlerPool(new EventHandlerPool(5));
+		UpdatedEventHandler updatedEventHandler = new UpdatedEventHandler(
+				defaultResourceGenerator.getNewEmailSender(), 
+				defaultResourceGenerator.getNewSMSSender(), 
+				defaultResourceGenerator.getEventFormatter(), 
+				defaultResourceGenerator.getNewReportGenerator());
+
+		ServiceOperatorController.setUpdatedEventHandler(updatedEventHandler);
+		
+		
 	}
 
 	

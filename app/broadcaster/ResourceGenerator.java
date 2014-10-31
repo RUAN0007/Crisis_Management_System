@@ -1,5 +1,9 @@
 package broadcaster;
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,6 +14,13 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import scala.collection.generic.BitOperations.Int;
+import filter.EventFilter;
+import filter.RoutingEventFilter;
 
 /**
  * ResourceGenerator construct building blocks based on the parameters in para.xml file,
@@ -29,15 +40,54 @@ public class ResourceGenerator {
 	}
 
 	private Document doc = null;
+	
+	private  Map<String,EventFilter> typeEventFilterMap = new HashMap<String,EventFilter>();
+	
 	private ResourceGenerator(String parasPath) {
 		try{
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			doc = db.parse(parasPath);
 			doc.getDocumentElement().normalize();
-
+			
+			getEventFilterMap();
+						
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+	}
+
+	private void getEventFilterMap() throws Exception{
+		NodeList eventTypeNodes = doc.getElementsByTagName("eventtype");
+		for(int i = 0;i < eventTypeNodes.getLength();i++){
+			Element eventTypeNode = (Element)eventTypeNodes.item(i);
+			String typeName = eventTypeNode.getAttribute("name");
+			
+			NodeList filterNodes = eventTypeNode.getElementsByTagName("filter");
+			
+			EventFilter preEventFilter = null;
+			EventFilter firstEventFilter = null;
+			for(int filterID = 0;filterID < filterNodes.getLength();filterID++){
+				 String filterClassName = filterNodes.item(filterID).getTextContent();
+				 Class<? extends EventFilter> eventFilterClass = (Class<? extends EventFilter>)Class.forName(filterClassName);
+				 Constructor<? extends EventFilter> eventFilterConstructor = eventFilterClass.getConstructor(Integer.class);
+				 EventFilter eventFilter = eventFilterConstructor.newInstance(1000);
+				 
+			//	 EventFilter eventFilter = (EventFilter)Class.forName(filterClassName).newInstance();
+				 eventFilter.start();
+				 if(firstEventFilter == null){
+					 assert(preEventFilter == null);
+					 firstEventFilter = eventFilter;
+					 preEventFilter = eventFilter;
+				 }else{
+					 preEventFilter.setNextFilter(eventFilter);
+				 }		
+			}
+			
+			typeEventFilterMap.put(typeName, firstEventFilter);
+			
 		}
 	}
 
@@ -148,6 +198,11 @@ public class ResourceGenerator {
 	
 	public EventFormatter getEventFormatter(){
 		return new EventFormatter();
+	}
+	
+	public RoutingEventFilter getNewRoutingEventFilter(){
+		RoutingEventFilter routingEventFilter = new RoutingEventFilter(10000, this.typeEventFilterMap);
+		return routingEventFilter;
 	}
 
 }

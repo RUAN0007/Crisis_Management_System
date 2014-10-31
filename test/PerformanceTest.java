@@ -43,67 +43,84 @@ public class PerformanceTest {
 	/**
 	 * Performance-1
 	 */
-	@Test
-	public void Performance1Test(){
-		test(100,1,1000);
-	}
 	
-	/**
-	 * Performance-2
-	 */
-	@Test
-	public void Performance2Test(){
-		test(100,5,500);
-	}
+//	@Test 
+//	public void deleteEvent(){
+//		running(fakeApplication(), new Runnable() {
+//
+//			@Override
+//			public void run() {
+//		//Delete the record
+//		List<Event> testEvents = Event.find.where().eq("postal_code", "666666").findList();
+//		for(Event event:testEvents){
+//			event.delete();
+//		}
+//			
+//			
+//			}});
+//	}
 	
-	/**
-	 * Performance-3
-	 */
-	@Test
-	public void Performance3Test(){
-		test(100,10,250);
-	}
+//	@Test
+//	public void Performance1Test(){
+//		test(100,1,1000);
+//	}
 	
-	/**
-	 * Performance-4
-	 */
-	@Test
-	public void Performance4Test(){
-		test(1000,1,3000);
-	}
+//	/**
+//	 * Performance-2
+//	 */
+//	@Test
+//	public void Performance2Test(){
+//		test(100,5,500);
+//	}
+//	
+//	/**
+//	 * Performance-3
+//	 */
+//	@Test
+//	public void Performance3Test(){
+//		test(100,10,250);
+//	}
+//	
+//	/**
+//	 * Performance-4
+//	 */
+//	@Test
+//	public void Performance4Test(){
+//		test(1000,1,3000);
+//	}
 	
-	/**
-	 * Performance-5
-	 */
-	@Test
-	public void Performance5Test(){
-		test(1000,5,1500);
-	}
-	
-	/**
-	 * Performance-6
-	 */
-	@Test
-	public void Performance6Test(){
-		test(1000,10,1000);
-	}
-	
+//	/**
+//	 * Performance-5
+//	 */
+//	@Test
+//	public void Performance5Test(){
+//		test(1000,5,1500);
+//	}
+//	
+//	/**
+//	 * Performance-6
+//	 */
+//	@Test
+//	public void Performance6Test(){
+//		test(1000,10,1000);
+//	}
+//	
 	/**
 	 * Performance-7
 	 */
-	@Test
-	public void Performance7Test(){
-		test(10000,1,20_000);
-	}
-	
-	/**
-	 * Performance-8
-	 */
-	@Test
-	public void Performance8Test(){
-		test(10000,5,10_000);
-	}
-	
+//	@Test
+//	public void Performance7Test(){
+//		test(10000,1,20_000);
+//	}
+//	
+//	/**
+//	 * Performance-8
+//	 */
+//	@Test
+//	public void Performance8Test(){
+//		test(10000,5,10_000);
+//	}
+//	
 	/**
 	 * Performance-9
 	 */
@@ -120,7 +137,7 @@ public class PerformanceTest {
 
 			@Override
 			public void run() {
-				IncomingEventHandlerPool handlersPool = new IncomingEventHandlerPool(eventHandlerCount);
+				EventHandlerPool handlersPool = new EventHandlerPool(eventHandlerCount);
 							
 				List<Event> incomingEvents = new ArrayList<Event>();
 				for(int i = 0;i < eventCount;i++){
@@ -140,13 +157,17 @@ public class PerformanceTest {
 				
 				
 				long before = System.currentTimeMillis();
+				int count = 0;
 				for(Event incomingEvent:incomingEvents){
-					handlersPool.handleIncomingEvent(incomingEvent);
+					if(!handlersPool.handleReportedEvent(incomingEvent)){
+						count++;
+						System.out.println("" + count + " events is not accepted...");
+					}
 				}
 				while(!handlersPool.isIdle());
 				
 				long after = System.currentTimeMillis();
-				System.out.println("Handling " + eventCount + " Events in ms: " + (after - before));
+				System.out.println("Handling " + eventCount + " Events with " +  eventHandlerCount + " event pipes in ms: " + (after - before));
 				
 				//Delete the record
 				List<Event> testEvents = Event.find.where().eq("postal_code", "666666").findList();

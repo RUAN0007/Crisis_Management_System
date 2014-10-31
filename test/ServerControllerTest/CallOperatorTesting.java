@@ -39,111 +39,111 @@ public class CallOperatorTesting{
 	/**
 	 * CallOpLogin-1
 	 */
-	@Test
-	public void testFailedCallOperatorLogin(){
-
-		running(fakeApplication(), new Runnable() {
-			public void run() {
-				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/login");
-				Map<String,String> paras = new HashMap<>();
-				paras.put("id","5");
-				paras.put("password", "54");
-				Result result = Helpers.routeAndCall(fakeLogOutRequest.withFormUrlEncodedBody(paras));
-
-				String content = contentAsString(result);
-				JsonNode json = Json.parse(content);
-				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(1);
-			}
-		});
-	}
-
-	@Test
-	/**
-	 * CallOpLogin-2
-	 */
-	public void testSuccessfulCallOperatorLogin(){
-
-		running(fakeApplication(), new Runnable() {
-			public void run() {
-				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/login");
-				Map<String,String> paras = new HashMap<>();
-				paras.put("id","4");
-				paras.put("password", "44");
-				Result result = Helpers.routeAndCall(fakeLogOutRequest.withFormUrlEncodedBody(paras));
-				String content = contentAsString(result);
-
-				JsonNode json = Json.parse(content);
-				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
-				assertThat(json.get("name").asText()).isEqualTo("RPC");
-			}
-		});
-	}
-//	
+//	@Test
+//	public void testFailedCallOperatorLogin(){
 //
-	/**
-	 * CallOpReportEvent-1
-	 */
-	@Test
-	public void testReportPrority3Event(){
-
-		running(fakeApplication(), new Runnable() {
-			public void run() {
-				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/report");
-				Map<String,String> paras = new HashMap<>();
-				paras.put("eventTypeID", "1");
-				paras.put("callOperatorID", "4");
-				paras.put("priority", "3");
-				paras.put("location", "Central");
-				paras.put("postalCode", "666666");
-				paras.put("callerPhone", "98989898");
-				paras.put("description", "Hello World");
-
-				Result result = Helpers.routeAndCall(fakeLogOutRequest.withSession("id", "C4")
-														.withFormUrlEncodedBody(paras));
-
-				String content = contentAsString(result);
-				JsonNode json = Json.parse(content);
-				System.out.println("Result = " + json.toString());
-				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
-				
-				Event event = Event.find.where().eq("postalCode", "666666").findUnique();
-				assertThat(event).isNotNull();
-				event.delete();
-			}
-		});
-	}
-	
-	//Test the following method when the facebook api token is ready
+//		running(fakeApplication(), new Runnable() {
+//			public void run() {
+//				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/login");
+//				Map<String,String> paras = new HashMap<>();
+//				paras.put("id","5");
+//				paras.put("password", "54");
+//				Result result = Helpers.routeAndCall(fakeLogOutRequest.withFormUrlEncodedBody(paras));
+//
+//				String content = contentAsString(result);
+//				JsonNode json = Json.parse(content);
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(1);
+//			}
+//		});
+//	}
+//
+//	@Test
+//	/**
+//	 * CallOpLogin-2
+//	 */
+//	public void testSuccessfulCallOperatorLogin(){
+//
+//		running(fakeApplication(), new Runnable() {
+//			public void run() {
+//				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/login");
+//				Map<String,String> paras = new HashMap<>();
+//				paras.put("id","4");
+//				paras.put("password", "44");
+//				Result result = Helpers.routeAndCall(fakeLogOutRequest.withFormUrlEncodedBody(paras));
+//				String content = contentAsString(result);
+//
+//				JsonNode json = Json.parse(content);
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
+//				assertThat(json.get("name").asText()).isEqualTo("RPC");
+//			}
+//		});
+//	}
+////	
+////
+//	/**
+//	 * CallOpReportEvent-1
+//	 */
+//	@Test
+//	public void testReportPrority3Event(){
+//
+//		running(fakeApplication(), new Runnable() {
+//			public void run() {
+//				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/report");
+//				Map<String,String> paras = new HashMap<>();
+//				paras.put("eventTypeID", "1");
+//				paras.put("callOperatorID", "4");
+//				paras.put("priority", "3");
+//				paras.put("location", "Central");
+//				paras.put("postalCode", "666666");
+//				paras.put("callerPhone", "98989898");
+//				paras.put("description", "Hello World");
+//
+//				Result result = Helpers.routeAndCall(fakeLogOutRequest.withSession("id", "C4")
+//														.withFormUrlEncodedBody(paras));
+//
+//				String content = contentAsString(result);
+//				JsonNode json = Json.parse(content);
+//				System.out.println("Result = " + json.toString());
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
+//				
+//				Event event = Event.find.where().eq("postalCode", "666666").findUnique();
+//				assertThat(event).isNotNull();
+//				event.delete();
+//			}
+//		});
+//	}
 //	
-	@Test
-	public void testReportPrority2Event(){
-
-		running(fakeApplication(), new Runnable() {
-			public void run() {
-				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/report");
-				Map<String,String> paras = new HashMap<>();
-				paras.put("eventTypeID", "1");
-				paras.put("callOperatorID", "4");
-				paras.put("priority", "2");
-				paras.put("location", "Central");
-				paras.put("postalCode", "666666");
-				paras.put("callerPhone", "98989898");
-				paras.put("description", "Hello World");
-
-				Result result = Helpers.routeAndCall(fakeLogOutRequest.withSession("id", "C4")
-														.withFormUrlEncodedBody(paras));
-
-				String content = contentAsString(result);
-				JsonNode json = Json.parse(content);
-				System.out.println("Result = " + json.toString());
-				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
-				
-				Event event = Event.find.where().eq("postalCode", "666666").findUnique();
-				assertThat(event).isNotNull();
-				event.delete();
-			}
-		});
-	}
+//	//Test the following method when the facebook api token is ready
+////	
+//	@Test
+//	public void testReportPrority2Event(){
+//
+//		running(fakeApplication(), new Runnable() {
+//			public void run() {
+//				FakeRequest fakeLogOutRequest = new FakeRequest("POST","/calloperator/report");
+//				Map<String,String> paras = new HashMap<>();
+//				paras.put("eventTypeID", "1");
+//				paras.put("callOperatorID", "4");
+//				paras.put("priority", "2");
+//				paras.put("location", "Central");
+//				paras.put("postalCode", "666666");
+//				paras.put("callerPhone", "98989898");
+//				paras.put("description", "Hello World");
+//
+//				Result result = Helpers.routeAndCall(fakeLogOutRequest.withSession("id", "C4")
+//														.withFormUrlEncodedBody(paras));
+//
+//				String content = contentAsString(result);
+//				JsonNode json = Json.parse(content);
+//				System.out.println("Result = " + json.toString());
+//				assertThat(Integer.parseInt(json.get("error").toString())).isEqualTo(0);
+//				
+//				Event event = Event.find.where().eq("postalCode", "666666").findUnique();
+//				assertThat(event).isNotNull();
+//				event.delete();
+//			}
+//		});
+//	}
 
 
 }

@@ -28,24 +28,26 @@ public class EventHandlerPool {
 	}
 	private EventFilter constructEventFilterPipe() {
 		ResourceGenerator resourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
-		DatabaseEventFilter firstEventFilter = new DatabaseEventFilter(10);
+		DatabaseEventFilter firstEventFilter = new DatabaseEventFilter(10000);
 		firstEventFilter.start();
 		
-		BroadcastEventFilter secondEventFilter = new BroadcastEventFilter(10,
+		BroadcastEventFilter secondEventFilter = new BroadcastEventFilter(10000,
 																		resourceGenerator.getEventFormatter(),
 																		resourceGenerator.getNewTwitterSender(),
 																		resourceGenerator.getNewFBSender()
 																		);
 		secondEventFilter.start();
 		
-		DispatchEventFilter thirdEventFilter = new DispatchEventFilter(10,resourceGenerator.getNewSMSSender());
+		DispatchEventFilter thirdEventFilter = new DispatchEventFilter(10000,resourceGenerator.getNewSMSSender());
 		thirdEventFilter.start();
+		
+		EventFilter fourthEventFilter = resourceGenerator.getNewRoutingEventFilter();
+		fourthEventFilter.start();
 		
 		firstEventFilter.setNextFilter(secondEventFilter);
 		secondEventFilter.setNextFilter(thirdEventFilter);
-		
-		//TODO
-		//Add the event type dependent filter later
+		thirdEventFilter.setNextFilter(fourthEventFilter);
+
 		return firstEventFilter;
 	}
 	
@@ -77,6 +79,14 @@ public class EventHandlerPool {
 		
 		assert(filterWithMinQueue != null);
 		return filterWithMinQueue;
+	}
+	public boolean isIdle() {
+		for(EventFilter filterPipe:this.eventFilterPipes){
+			if(filterPipe.getEventInPipeCount() != 0){
+				return false;
+			}
+		}		
+		return true;
 	}
 
 }
