@@ -89,12 +89,18 @@ public abstract class EventFilter extends Thread {
 				
 			}else{
 				this.process(event);
-				while(!this.nextFilter.enqueueEvent(event)){
-					//Do nothing
-				}//End of while
+				if(this.nextFilter != null){
+					while(!this.nextFilter.enqueueEvent(event)){
+						//Do nothing
+					}//End of while
+				}
 			}//End of if
 		}//End of while(true)
 	}//End of method
 	
+	/**
+	 * Implement this method to process the event based on the business logic
+	 * @param event
+	 */
 	protected abstract void process(Event event);
 }
