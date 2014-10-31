@@ -1,7 +1,11 @@
 package filter;
 
 import models.Event;
-
+/**
+ * DatabaseEventFilter is responsible to save the event to database.
+ * @author ruanpingcheng
+ *
+ */
 public class DatabaseEventFilter extends EventFilter {
 
 	public DatabaseEventFilter(int queueSizeLimit, EventFilter nextFilter) {

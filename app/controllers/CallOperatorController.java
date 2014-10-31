@@ -22,10 +22,10 @@ import play.mvc.*;
  */
 public class CallOperatorController extends Controller {
 	
-	private static IncomingEventHandlerPool eventHandlerPool;
+	private static EventHandlerPool eventHandlerPool;
 	
-	public static void setIncomingEventHandlerPool
-				(IncomingEventHandlerPool eventHandlerPool){
+	public static void setEventHandlerPool
+				(EventHandlerPool eventHandlerPool){
 		CallOperatorController.eventHandlerPool = eventHandlerPool;
 	}
 	
@@ -92,7 +92,7 @@ public class CallOperatorController extends Controller {
 			reportedEvent.setPriority(Integer.parseInt(priorityStr));
 
 
-			eventHandlerPool.handleIncomingEvent(reportedEvent);
+			eventHandlerPool.handleReportedEvent(reportedEvent);
 			
 
 		}catch(Exception e){

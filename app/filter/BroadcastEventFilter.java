@@ -33,7 +33,7 @@ public class BroadcastEventFilter extends EventFilter {
 		super(queueSizeLimit);
 	}
 
-	private BroadcastEventFilter(int queueSizeLimit, 
+	public BroadcastEventFilter(int queueSizeLimit, 
 								EventFormatter formatter,
 								TwitterSender twitter, 
 								FacebookSender facebook) {
@@ -61,13 +61,15 @@ public class BroadcastEventFilter extends EventFilter {
 		
 		if(priority <= 2){
 			String message = formatter.formatSocialMedia(event);
-			if(facebook.postMessage(message)){
-				Notification fbNtfc = new Notification();
-				fbNtfc.setEvent(event);
-				fbNtfc.setSendTime(new Timestamp(System.currentTimeMillis()));
-				fbNtfc.setMediaType(MEDIA_FB);
-				notifications.add(fbNtfc);
-			}
+			
+			//TODO Disable facebook sender for testing
+//			if(facebook.postMessage(message)){
+//				Notification fbNtfc = new Notification();
+//				fbNtfc.setEvent(event);
+//				fbNtfc.setSendTime(new Timestamp(System.currentTimeMillis()));
+//				fbNtfc.setMediaType(MEDIA_FB);
+//				notifications.add(fbNtfc);
+//			}
 			if(twitter.postMessage(message)){
 				Notification twNtfc = new Notification();
 				twNtfc.setEvent(event);

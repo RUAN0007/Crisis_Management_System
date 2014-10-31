@@ -37,6 +37,7 @@ public class DispatchEventFilter extends EventFilter {
 		super(queueSizeLimit);
 		this.sms = sms;
 	}
+	
 	@Override
 	protected void process(Event event) {
 		
@@ -53,11 +54,11 @@ public class DispatchEventFilter extends EventFilter {
 			
 		}
 		Ebean.save(dispatches);
-		notifyAgencyOfEven(agencies, event);
+		notifyAgencyOfEvent(agencies, event);
 		
 	}
 	
-	private boolean notifyAgencyOfEven(List<Agency> agencies,Event event){
+	private boolean notifyAgencyOfEvent(List<Agency> agencies,Event event){
 		List<String> phones = new ArrayList<>();
 		String message = "You have a new Event with ID " + event.getId() + ". ";
 		for(Agency agency:agencies){

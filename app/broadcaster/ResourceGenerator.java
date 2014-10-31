@@ -12,8 +12,8 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 
 /**
- * ResourceGenerator consists of many service providers,
- * through which building blocks can be assessed. 
+ * ResourceGenerator construct building blocks based on the parameters in para.xml file,
+ * Other components can reference building blocks through ResourceGenerator. 
  * @author ruanpingcheng
  *
  */
@@ -52,8 +52,8 @@ public class ResourceGenerator {
 			expr = xpath.compile("/paras/facebook/accessTokenSecret");
 			String accessTokenSecret = (String) expr.evaluate(doc,XPathConstants.STRING);
 			//TODO Testing
-			return new FacebookSender(accessToken, accessTokenSecret);
-		//	return null;
+		//	return new FacebookSender(accessToken, accessTokenSecret);
+			return null;
 		}catch(XPathExpressionException e){
 			e.printStackTrace();		
 			return null;
@@ -144,6 +144,10 @@ public class ResourceGenerator {
 			return null;
 
 		}
+	}
+	
+	public EventFormatter getEventFormatter(){
+		return new EventFormatter();
 	}
 
 }

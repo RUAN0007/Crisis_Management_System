@@ -1,6 +1,7 @@
 import com.avaje.ebean.Ebean;
 
 import controllers.CallOperatorController;
+import controllers.EventHandlerPool;
 import controllers.IncomingEventHandlerPool;
 import controllers.ServiceOperatorController;
 import controllers.UpdatedEventHandler;
@@ -56,12 +57,12 @@ public class Global extends GlobalSettings {
 			
 			ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
 
-			CallOperatorController.setIncomingEventHandlerPool(new IncomingEventHandlerPool(5));
+			CallOperatorController.setEventHandlerPool(new EventHandlerPool(5));
 			
 			UpdatedEventHandler updatedEventHandler = new UpdatedEventHandler(
 					defaultResourceGenerator.getNewEmailSender(), 
 					defaultResourceGenerator.getNewSMSSender(), 
-					new EventFormatter(), 
+					defaultResourceGenerator.getEventFormatter(), 
 					defaultResourceGenerator.getNewReportGenerator());
 
 			ServiceOperatorController.setUpdatedEventHandler(updatedEventHandler);
