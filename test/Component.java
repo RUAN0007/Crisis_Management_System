@@ -3,7 +3,7 @@ import models.*;
 
 import org.junit.Test;
 
-import broadcaster.ResourceGenerator;
+import resource.ResourceGenerator;
 
 
 public class Component {

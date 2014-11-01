@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimerTask;
 
+import resource.EmailSender;
+import resource.PDFGenerator;
+import resource.ResourceGenerator;
 import models.Agency;
 import models.Event;
-import broadcaster.EmailSender;
-import broadcaster.PDFGenerator;
-import broadcaster.ResourceGenerator;
 
 /**
  * RoutineEmailTask is a timertask that groups recent events, 

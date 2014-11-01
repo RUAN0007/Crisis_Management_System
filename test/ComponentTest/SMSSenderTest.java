@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import broadcaster.SMSSender;
+import resource.SMSSender;
 
 public class SMSSenderTest {
 	/**

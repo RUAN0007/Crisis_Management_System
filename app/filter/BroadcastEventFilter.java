@@ -3,11 +3,12 @@ package filter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import resource.EventFormatter;
+import resource.FacebookSender;
+import resource.TwitterSender;
+
 import com.avaje.ebean.Ebean;
 
-import broadcaster.EventFormatter;
-import broadcaster.FacebookSender;
-import broadcaster.TwitterSender;
 import models.Event;
 import models.Notification;
 

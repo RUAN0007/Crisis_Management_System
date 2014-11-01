@@ -2,9 +2,9 @@ package controllers;
 
 import java.util.ArrayList;
 
+import resource.EventFormatter;
+import resource.ResourceGenerator;
 import models.Event;
-import broadcaster.EventFormatter;
-import broadcaster.ResourceGenerator;
 /**
  * IncomingEventHandlerPool holds multiple IncomingEventHandlers. 
  * It has the mechanism to dispatch a new event to a incomingEventHandlers

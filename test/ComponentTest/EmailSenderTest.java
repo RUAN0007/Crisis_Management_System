@@ -9,7 +9,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import broadcaster.EmailSender;
+import resource.EmailSender;
 
 public class EmailSenderTest {
 

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import broadcaster.TwitterSender;
+import resource.TwitterSender;
 
 public class TwitterSenderTest {
 

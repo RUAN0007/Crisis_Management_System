@@ -4,9 +4,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import resource.SMSSender;
+
 import com.avaje.ebean.Ebean;
 
-import broadcaster.SMSSender;
 import models.Agency;
 import models.Dispatch;
 import models.Event;

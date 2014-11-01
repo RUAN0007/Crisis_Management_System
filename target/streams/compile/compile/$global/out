@@ -1,3 +1,10 @@
+[0m[[0mdebug[0m] [0mInvalidating /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/PDFGenerator.class: stamp changed from lastModified(1414854170000) to lastModified(1414854197000)[0m
+[0m[[0mdebug[0m] [0mInvalidating /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/EventFormatter.class: stamp changed from lastModified(1414854170000) to lastModified(1414854197000)[0m
+[0m[[0mdebug[0m] [0mInvalidating /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/FacebookSender.class: stamp changed from lastModified(1414854170000) to lastModified(1414854197000)[0m
+[0m[[0mdebug[0m] [0mInvalidating /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/EmailSender.class: stamp changed from lastModified(1414854169000) to lastModified(1414854197000)[0m
+[0m[[0mdebug[0m] [0mInvalidating /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/TwitterSender.class: stamp changed from lastModified(1414854170000) to lastModified(1414854197000)[0m
+[0m[[0mdebug[0m] [0mInvalidating /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/SMSSender.class: stamp changed from lastModified(1414854170000) to lastModified(1414854197000)[0m
+[0m[[0mdebug[0m] [0mInvalidating /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/controllers/ServiceHandler.class: stamp changed from lastModified(1414854170000) to lastModified(1414854197000)[0m
 [0m[[0mdebug[0m] [0m[0m
 [0m[[0mdebug[0m] [0mInitial source changes: [0m
 [0m[[0mdebug[0m] [0m	removed:Set()[0m
@@ -5,11 +12,27 @@
 [0m[[0mdebug[0m] [0m	modified: Set()[0m
 [0m[[0mdebug[0m] [0mRemoved products: Set()[0m
 [0m[[0mdebug[0m] [0mModified external sources: Set()[0m
-[0m[[0mdebug[0m] [0mModified binary dependencies: Set()[0m
+[0m[[0mdebug[0m] [0mModified binary dependencies: Set(/Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/PDFGenerator.class, /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/EventFormatter.class, /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/FacebookSender.class, /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/EmailSender.class, /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/TwitterSender.class, /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/resource/SMSSender.class, /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes/controllers/ServiceHandler.class)[0m
 [0m[[0mdebug[0m] [0mInitial directly invalidated sources: Set()[0m
 [0m[[0mdebug[0m] [0m[0m
 [0m[[0mdebug[0m] [0mSources indirectly invalidated by:[0m
 [0m[[0mdebug[0m] [0m	product: Set()[0m
-[0m[[0mdebug[0m] [0m	binary dep: Set()[0m
+[0m[[0mdebug[0m] [0m	binary dep: Set(/Users/ruanpingcheng/Desktop/CMS/app/RoutineEmailTask.java, /Users/ruanpingcheng/Desktop/CMS/app/resource/ResourceGenerator.java, /Users/ruanpingcheng/Desktop/CMS/app/controllers/IncomingEventHandlerPool.java, /Users/ruanpingcheng/Desktop/CMS/app/Global.java)[0m
 [0m[[0mdebug[0m] [0m	external source: Set()[0m
-[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/Users/ruanpingcheng/Desktop/CMS/app/RoutineEmailTask.java, /Users/ruanpingcheng/Desktop/CMS/app/Global.java, /Users/ruanpingcheng/Desktop/CMS/app/controllers/IncomingEventHandlerPool.java, /Users/ruanpingcheng/Desktop/CMS/app/resource/ResourceGenerator.java)[0m
+[0m[[0minfo[0m] [0mCompiling 4 Java sources to /Users/ruanpingcheng/Desktop/CMS/target/scala-2.10/classes...[0m
+[0m[[0mdebug[0m] [0mAttempting to call javac directly...[0m
+[0m[[0mdebug[0m] [0mcom.sun.tools.javac.Main not found with appropriate method signature; forking javac instead[0m
+[0m[[0mdebug[0m] [0mForking javac: javac @/var/folders/d0/mkmk3y4x6499496tjxmgsphm0000gn/T/sbt_761fe5c7/argfile[0m
+[0m[[33mwarn[0m] [0mPicked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8[0m
+[0m[[33mwarn[0m] [0m注: /Users/ruanpingcheng/Desktop/CMS/app/resource/ResourceGenerator.java使用了未经检查或不安全的操作。[0m
+[0m[[33mwarn[0m] [0m注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。[0m
+[0m[[0mdebug[0m] [0mjavac returned exit code: 0[0m
+[0m[[0mdebug[0m] [0mJava compilation took 2.237474 s[0m
+[0m[[0mdebug[0m] [0mJava analysis took 0.044298 s[0m
+[0m[[0mdebug[0m] [0mInvalidated by transitive public inheritance: Set()[0m
+[0m[[0mdebug[0m] [0mInvalidated by direct dependency: Set()[0m
+[0m[[0mdebug[0m] [0mNew invalidations:[0m
+[0m[[0mdebug[0m] [0m	Set()[0m
+[0m[[0mdebug[0m] [0mPreviously invalidated, but (transitively) depend on new invalidations:[0m
+[0m[[0mdebug[0m] [0m	Set()[0m

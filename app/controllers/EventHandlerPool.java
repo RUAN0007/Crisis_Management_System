@@ -2,8 +2,8 @@ package controllers;
 
 import java.util.ArrayList;
 
+import resource.ResourceGenerator;
 import models.Event;
-import broadcaster.ResourceGenerator;
 import filter.BroadcastEventFilter;
 import filter.DatabaseEventFilter;
 import filter.DispatchEventFilter;

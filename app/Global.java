@@ -2,9 +2,8 @@ import com.avaje.ebean.Ebean;
 
 import controllers.CallOperatorController;
 import controllers.EventHandlerPool;
-import controllers.IncomingEventHandlerPool;
+import controllers.ServiceHandler;
 import controllers.ServiceOperatorController;
-import controllers.UpdatedEventHandler;
 import models.Agency;
 import models.CallOperator;
 import models.Event;
@@ -16,6 +15,7 @@ import play.Application;
 import play.GlobalSettings;
 import play.libs.XML;
 import play.libs.Yaml;
+import resource.ResourceGenerator;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import broadcaster.*;
 import formatter.*;
 
 public class Global extends GlobalSettings {
@@ -75,7 +74,7 @@ public class Global extends GlobalSettings {
 		ResourceGenerator defaultResourceGenerator = ResourceGenerator.getDefaultResourceGenerator();
 
 		CallOperatorController.setEventHandlerPool(new EventHandlerPool(5));
-		UpdatedEventHandler updatedEventHandler = new UpdatedEventHandler(
+		ServiceHandler updatedEventHandler = new ServiceHandler(
 				defaultResourceGenerator.getNewEmailSender(), 
 				defaultResourceGenerator.getNewSMSSender(), 
 				defaultResourceGenerator.getEventFormatter(), 

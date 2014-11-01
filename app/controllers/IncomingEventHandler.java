@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 
-import broadcaster.EventFormatter;
-import broadcaster.FacebookSender;
-import broadcaster.SMSSender;
-import broadcaster.TwitterSender;
+import resource.EventFormatter;
+import resource.FacebookSender;
+import resource.SMSSender;
+import resource.TwitterSender;
 
 import com.avaje.ebean.Ebean;
 
